@@ -1,15 +1,15 @@
 # <center>叮点跑腿小程序</center>
-*本项目持续维护，如有问题请加QQ群：735639943
-*如果对您有帮助，您可以点右上角 "Star" 支持一下 谢谢！
-*部署教程：[https://my.oschina.net/u/4053979/blog/3107481](https://my.oschina.net/u/4053979/blog/3107481)
+- 本项目持续维护，如有问题请加QQ群：735639943
+- 如果对您有帮助，您可以点右上角 "Star" 支持一下 谢谢！
+- 部署教程：[https://my.oschina.net/u/4053979/blog/3107481](https://my.oschina.net/u/4053979/blog/3107481)
 ## 项目介绍
 本项目基于Thinkjs3.0+Vue 开发的一套跑腿下单接单系统。
 ##### 主要功能
 地址解析、配送路程计算、物品重量价格计算、分销、微信支付下单、积分抵扣、优惠券、配送系统(抢单模式/平均分配订单)
 ##### 更新预告
-1.根据跑男位置就近派单
-2.设置每日优惠券赠送
-3.接入公众号服务号更多功能
+- 1.根据跑男位置就近派单
+- 2.设置每日优惠券赠送
+- 3.接入公众号服务号更多功能
 ## 小程序界面
 ![小程序界面](https://upload-images.jianshu.io/upload_images/17329156-39503d35c732378f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 ## 后台管理界面
@@ -43,10 +43,10 @@
 会员领券系统|
 公众号提醒(需付费)|
 ## 特别鸣谢
-ThinkJS: [https://thinkjs.org](https://thinkjs.org)
-Vue: [https://cn.vuejs.org](https://cn.vuejs.org)
-ElementUI: [https://element.eleme.cn/#/zh-CN](https://element.eleme.cn/#/zh-CN)
-Vuetify: [https://vuetifyjs.com/zh-Hans/themes/premium](https://vuetifyjs.com/zh-Hans/themes/premium)
-creative-tim: [https://demos.creative-tim.com/vuetify-material-dashboard/documentation/#getting-started](https://demos.creative-tim.com/vuetify-material-dashboard/documentation/#getting-started)
+- ThinkJS: [https://thinkjs.org](https://thinkjs.org)
+- Vue: [https://cn.vuejs.org](https://cn.vuejs.org)
+- ElementUI: [https://element.eleme.cn/#/zh-CN](https://element.eleme.cn/#/zh-CN)
+- Vuetify: [https://vuetifyjs.com/zh-Hans/themes/premium](https://vuetifyjs.com/zh-Hans/themes/premium)
+- creative-tim: [https://demos.creative-tim.com/vuetify-material-dashboard/documentation/#getting-started](https://demos.creative-tim.com/vuetify-material-dashboard/documentation/#getting-started)
 
 请遵循GPL3.0开源协议发布，并提供免费使用。
