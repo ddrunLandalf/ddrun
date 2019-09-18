@@ -1,0 +1,21 @@
+.city{
+  width: 120rpx;
+}
+.city-text{
+  width: 90rpx;
+}
+.city image{
+  display: block
+}
+.search-panel{
+  width: 540rpx;
+  height: 80rpx;
+  border-radius: 6rpx;
+  background-color: #f3f3f3
+}
+.search-input{
+  width: 430rpx
+}
+.ad-panel{
+  width: 508rpx;
+}

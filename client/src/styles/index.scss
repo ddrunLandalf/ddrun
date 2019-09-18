@@ -1,0 +1,66 @@
+/*!
+
+=========================================================
+* Vuetify Material Dashboard - v1.0.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/vuetify-material-dashboard
+* Copyright 2019 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://github.com/creativetimofficial/vuetify-material-dashboard/blob/master/LICENSE.md)
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+*/
+
+@import "material-dashboard/mixins";
+@import "material-dashboard/variables";
+@import "material-dashboard/typography";
+@import "material-dashboard/sidebar";
+@import "material-dashboard/toolbar";
+@import "material-dashboard/misc";
+@import "material-dashboard/inputs";
+@import "material-dashboard/footer";
+@import "material-dashboard/cards";
+@import "material-dashboard/tables";
+@import "material-dashboard/tabs";
+@import "material-dashboard/checkboxes";
+@import "material-dashboard/tooltips";
+@import "material-dashboard/buttons";
+@import "material-dashboard/alerts";
+@import "material-dashboard/fixed-plugin";
+@import "material-dashboard/dropdown";
+.bold{
+    font-weight: bold
+}
+.w-90{
+    width: 90%
+}
+.login-bg{
+    width: 100%;
+    height: 100vh;
+    background-image: url('https://demos.creative-tim.com/vue-material-dashboard/img/sidebar-2.32103624.jpg');
+    background-size: cover;
+    background-position: center
+}
+.login-container{
+    width: 100%;
+    height: 100vh;
+    background-color: rgba($color: #000000, $alpha: 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+.login-pa{
+    padding: 40px 30px
+}
+.panel-start{
+    display:flex;
+    justify-content: flex-start
+}
+.v-toolbar:not(.v-toolbar--fixed) .v-toolbar__content{
+    margin-left: 0
+}

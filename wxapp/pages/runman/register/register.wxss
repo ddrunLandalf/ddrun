@@ -1,0 +1,7 @@
+.card_img{
+  width: 345rpx;
+  height: 300rpx;
+}
+.panl{
+  width:325rpx;
+}

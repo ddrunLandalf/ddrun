@@ -1,0 +1,9 @@
+<picker range="{{mode}}" range-key="label" value="{{modeFlag}}" bindchange="modeChange">
+<view class="border-t pa-30 border-b panel-between item-center">
+  <view class="fo-30">接单模式</view>
+  <view class="panel-end item-center">
+    <view class="fo-26 ma-r20">{{mode[modeFlag].label}}</view>
+    <image src="/img/right.png" class="icon-30"></image>
+  </view>
+</view>
+</picker>

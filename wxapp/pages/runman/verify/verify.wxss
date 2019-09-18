@@ -1,0 +1,11 @@
+.img{
+  width: 130rpx;
+  height: 130rpx;
+  margin-top: 100rpx
+}
+.btt{
+  width: 200rpx;
+  margin: auto;
+  margin-top: 60rpx;
+  text-align: center
+}

@@ -1,0 +1,9 @@
+page{
+  background-color: #f3f3f3
+}
+.avatar{
+  width: 60rpx;
+  height: 60rpx;
+  background-color: #f3f3f3;
+  border-radius: 60rpx
+}

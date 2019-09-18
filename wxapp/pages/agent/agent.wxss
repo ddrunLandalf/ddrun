@@ -1,0 +1,6 @@
+/* pages/runman/index.wxss */
+.lh-s{
+  height: 50rpx;
+  width: 2rpx;
+  background-color: #e1e1e1
+}

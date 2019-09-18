@@ -1,0 +1,14 @@
+<view class="pa-30">
+  <view class="fo-50">请完善银行卡信息</view>
+
+  <input class="fo-40 border-b ma-t30 h-100" bindinput="accountInput" type="text" value="{{account_name}}" placeholder="输入开户行"></input>
+
+  <input class="fo-40 border-b ma-t30 h-100" bindinput="rnInput" type="text" value="{{realname}}" placeholder="您的真实姓名"></input>
+
+  <input class="fo-40 border-b ma-t30 h-100" bindinput="anInput" type="text" value="{{account_number}}" placeholder="卡号"></input>
+  
+  <view class="pa-t30 pa-b30 fo-26 fo-g">如果要提现到支付宝，开户行请填写“支付宝”，卡号填写支付宝账号</view>
+  <view class="pa-t30 ma-t30">
+    <button class="bg-t fo-30 lh-100 text-center fo-w ra-6 ma-t30 "  bindtap="submit">保存</button>
+  </view>
+</view>

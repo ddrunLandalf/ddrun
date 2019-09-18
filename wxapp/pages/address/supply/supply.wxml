@@ -1,0 +1,49 @@
+<view class="pa-30 bold fo-50">请补充{{text}}地址信息</view>
+
+<view class="pa-l30 ">
+  <view class="panel-between w-100 border-b">
+    <image src="/img/address.png" class="icon-30 ma-t30"></image>
+    <view class="tx-w ">
+      <navigator class="pa-t30 pa-b30 border-b panel-between item-center" url="/pages/address/address?type={{type}}&text={{text}}&page=supply">
+        <view class="fo-26 fo-g" wx:if="{{!address.city}}">点击搜索地址</view>
+        <view wx:if="{{address.city}}">
+          <view class="fo-28 " >{{address.formatted_addresse}}</view>
+          <view class="fo-26 fo-g " >{{address.province + address.city + address.district + address.street_number}}</view>
+        </view>
+        <image src="/img/right.png" class="icon-30 ma-r30"></image>
+      </navigator>
+      <view class="pa-t30 pa-b30 pa-r30">
+        <input class="fo-26" placeholder="请补充具体门牌号码" value="{{address.address_detail}}" data-name="address_detail" bindinput="bindInput" placeholder-class="fo-g"></input>
+      </view>
+    </view>
+  </view>
+  <view class="panel-between item-center w-100 border-b">
+    <image src="/img/tel.png" class="icon-30 "></image>
+    <view class="tx-w ">
+      <view class="pa-t30 pa-b30 pa-r30">
+        <input class="fo-26" placeholder="请补充{{text}}人手机号码(必填)" value="{{address.phone}}" data-name="phone" bindinput="bindInput" placeholder-class="fo-g"></input>
+      </view>
+    </view>
+  </view>
+  <view class="panel-between item-center w-100 border-b">
+    <image src="/img/me.png" class="icon-30 "></image>
+    <view class="tx-w ">
+      <view class="pa-t30 pa-b30 pa-r30">
+        <input class="fo-26" placeholder="请填写联系人姓名" value="{{address.name}}" data-name="name" bindinput="bindInput" placeholder-class="fo-g"></input>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="pa-30 ma-t10">
+  <view class="fo-30 fo-t">智能填写</view>
+  <view class="border pa-20 ma-t20">
+    <textarea class="textarea" bindinput="smartInput" placeholder="粘贴地址信息，自动拆分姓名、电话和地址"></textarea>
+    <view class="panel-end">
+      <view class="discerm {{textarea == '' ? 'bg-g2':'bg-t'}} fo-w" bindtap="{{textarea == '' ? '':'doParse'}}">识别</view>
+    </view>
+  </view>
+</view>
+
+<view class="pa-30 ma-t30">
+  <view class="bg-t lh-100 text-center fo-w fo-28" bindtap="submit">确认</view>
+</view>

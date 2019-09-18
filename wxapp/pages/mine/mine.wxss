@@ -1,0 +1,22 @@
+page{
+  background-color: #ffffff
+}
+.avatar{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 120rpx;
+  background-color: #ffffff;
+  box-shadow: 0 0 10rpx 0 #f3f3f3;
+  overflow: hidden;
+  border: 4rpx solid #fff
+}
+.vip-btn{
+  padding: 0 10rpx;
+  line-height: 50rpx;
+  background-color: #ff6633;
+  border-radius: 50rpx 
+}
+.box-t{
+  width: 344rpx;
+  height: 120rpx
+}

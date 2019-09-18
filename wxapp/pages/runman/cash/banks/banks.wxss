@@ -1,0 +1,8 @@
+.add{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 100rpx;
+  position: fixed;
+  bottom: 30rpx;
+  right: 30rpx
+}

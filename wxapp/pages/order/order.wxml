@@ -1,0 +1,72 @@
+<view class="nom fo-26 fo-g" wx:if="{{ing.length > 0}}">进行中的订单</view>
+<view class="pa-l30 pa-r30 pa-t30" wx:if="{{ing.length > 0}}">
+  <navigator class="pa-30 shadow ra-6 bg-w ma-b20" wx:for="{{ing}}" url="/pages/order/detail/detail?order_no={{item.order_no}}">
+    <view class="panel-between item-center">
+      <view class="fo-26">{{item.service_type}}</view>
+      <view class="panel-end item-center">
+        <view class="fo-p fo-28">进行中</view>
+        <image src="/img/right.png" class="icon-25 ma-l10"></image>
+      </view>
+    </view>
+    <view class="panel-start item-center ma-t20">
+      <image src="/img/clock.png" class="icon-20"></image>
+      <view class=" fo-28 ma-l10 fo-t">{{item.create_time}}</view>
+    </view>
+    <view class="panel-start item-center ma-t10">
+      <image src="/img/des.png" class="icon-20"></image>
+      <view class="fo-t fo-28 ma-l10 w-600 ell ">{{item.goods_des}}</view>
+    </view>
+    <view class="panel-start item-center ma-t10">
+      <view class="point-green"></view>
+      <view class="fo-t ma-l10 w-600 ell fo-26" wx:if="{{item.start_address != 'nearby'}}">{{item.start_address.formatted_addresse}} {{item.start_address.street_number}} {{item.start_address.address_detail}}</view>
+      <view class="fo-t ma-l10 w-600 ell fo-26" wx:if="{{item.start_address == 'nearby'}}">就近购买</view>
+    </view>
+    <view class="panel-start item-center ma-t10">
+      <view class="point-ori"></view>
+      <view class="fo-t ma-l10 w-600 ell fo-26">{{item.end_address.formatted_addresse}} {{item.end_address.street_number}} {{item.end_address.address_detail}}</view>
+    </view>
+  </navigator>
+  <view class="pa-30 text-center" wx:if="{{ing.length == 0}}">
+    <text class="fo-26 fo-g"> ---- 暂无进行中的订单 ---- </text>
+  </view>
+</view>
+
+<view class="nom fo-26 fo-g">已完成的订单</view>
+<view class="pa-30">
+  <navigator class="pa-30 shadow ra-6 bg-w ma-b20" wx:for="{{list}}" url="/pages/order/detail/detail?order_no={{item.order_no}}">
+    <view class="panel-between item-center">
+      <view class="fo-26">{{item.service_type}}</view>
+      <view class="panel-end item-center">
+        <view class="fo-g fo-28" wx:if="{{item.status == -2}}">已取消</view>
+        <view class="fo-g fo-28" wx:elif="{{item.status == -1}}">已关闭</view>
+        <view class="fo-g fo-28" wx:elif="{{item.status == 0}}">待付款</view>
+        <view class="fo-g fo-28" wx:elif="{{item.status == 3}}">配送完成</view>
+        <view class="fo-g fo-28" wx:elif="{{item.status == 4}}">已完成</view>
+        <image src="/img/right.png" class="icon-25 ma-l10"></image>
+      </view>
+    </view>
+    <view class="panel-start item-center ma-t20">
+      <image src="/img/clock.png" class="icon-20"></image>
+      <view class=" fo-28 ma-l10 fo-t">{{item.create_time}}</view>
+    </view>
+    <view class="panel-start item-center ma-t10">
+      <image src="/img/des.png" class="icon-20"></image>
+      <view class="fo-t fo-28 ma-l10 w-600 ell ">{{item.goods_des}}</view>
+    </view>
+    <view class="panel-start item-center ma-t10">
+      <view class="point-green"></view>
+      <view class="fo-t ma-l10 w-600 ell fo-26" wx:if="{{item.start_address != 'nearby'}}">{{item.start_address.formatted_addresse}} {{item.start_address.street_number}} {{item.start_address.address_detail}}</view>
+      <view class="fo-t ma-l10 w-600 ell fo-26" wx:if="{{item.start_address == 'nearby'}}">就近购买</view>
+    </view>
+    <view class="panel-start item-center ma-t10">
+      <view class="point-ori"></view>
+      <view class="fo-t ma-l10 w-600 ell fo-26">{{item.end_address.formatted_addresse}} {{item.end_address.street_number}} {{item.end_address.address_detail}}</view>
+    </view>
+  </navigator>
+  <view class="pa-30 text-center" wx:if="{{list.length == total && list.length > 0}}">
+    <text class="fo-26 fo-g"> ---- 已展示全部订单 ---- </text>
+  </view>
+  <view class="pa-30 text-center" wx:if="{{list.length == 0}}">
+    <text class="fo-26 fo-g"> ---- 暂无订单 ---- </text>
+  </view>
+</view>

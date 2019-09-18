@@ -1,0 +1,24 @@
+<view class="border-t"></view>
+<view class="pa-30 border-b panel-between" wx:for="{{list}}">
+  <view data-index="{{index}}" bindtap="chooseIt">
+    <view class="fo-30">{{item.msg}}</view>
+    <view class="fo-28 fo-g">
+      {{item.score == 1 ? '非常不满意，各方面都很差':''}}
+      {{item.score == 2 ? '不满意，比较差':''}}
+      {{item.score == 3 ? '一般，需要改善':''}}
+      {{item.score == 4 ? '比较满意，但仍可改善':''}}
+      {{item.score == 5 ? '非常满意无可挑剔':''}}
+    </view>
+  </view>
+  <view class="text-right">
+    <view class="fo-28 fo-g">{{item.score}}分</view>
+    <view class="fo-24 fo-g">{{item.create_time}}</view>
+  </view>
+</view>
+
+<view class="pa-30 text-center" wx:if="{{list.length == total && list.length > 0}}">
+  <text class="fo-26 fo-g"> ---- 已展示全部评价 ---- </text>
+</view>
+<view class="pa-30 text-center" wx:if="{{list.length == 0}}">
+  <text class="fo-26 fo-g"> ---- 暂无评价信息 ---- </text>
+</view>

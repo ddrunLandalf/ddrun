@@ -1,0 +1,134 @@
+<view class="pa-30">
+  <view class="panel-between">
+    <view class="fo-50">
+      {{order.status == -2 ? '订单已取消':''}}
+      {{order.status == -1 ? '交易关闭':''}}
+      {{order.status == 0 ? '订单未支付':''}}
+      {{order.status == 1 ? '订单已支付/等待接单':''}}
+      {{order.status == 2 ? '订单已接单/服务中':''}}
+      {{order.status == 3 ? '服务完成/待确认':''}}
+      {{order.status == 4 ? '订单已完成':''}}
+    </view>
+    <view class="fo-50 ">{{order.filterDistance}}<text class="fo-34 fo-g">公里</text></view>
+  </view>
+  <view class="pa-l30 pa-r30 pa-b30 shadow ra-6 ma-t20 bg-w">
+    <!-- 起点 -->
+    <view class="panel-between item-center pa-t20 ">
+      <view class="panel-start">
+      </view>
+      <view class="panel-end">
+        <view  class="panel-center item-center bg-g lh-60 fo-26 text-center ra-30 pa-l30 pa-r30 ma-l20" data-type="1" bindtap="openlocation">
+          <view>导航</view>
+        </view>
+        <view wx:if="{{order.ws_id}}" class="ma-l20 panel-center item-center bg-green lh-60 fo-26 text-center ra-30 fo-w pa-l30 pa-r30" bindtap="makePhoneCall2"  data-type="1">
+          <image src="/img/tel_w.png" class="icon-25 ma-r10"></image>
+          <view>打电话</view>
+        </view>
+      </view>
+    </view>
+    <view class="panel-between item-center">
+      <view class="point-green"></view>
+      <view class="address-panel pa-t30 pa-b30 border-b panel-between item-center">
+        <view class="address-content" style="width:580rpx" wx:if="{{order.start_address != 'nearby'}}" >
+          <view class="fo-30 fo-t">{{order.start_address.formatted_addresse}} {{order.start_address.street_number}} {{order.start_address.address_detail}}</view>
+          <view class="fo-26 fo-t">{{order.start_address.phone}} {{order.start_address.name || ''}}</view>
+        </view>
+        <view class="address-content" style="width:580rpx" wx:if="{{order.start_address == 'nearby'}}" >
+          <view class="fo-40 fo-t">就近购买</view>
+        </view>
+      </view>
+    </view>
+    <!-- 终点 -->
+    <view class="panel-between item-center ma-t20 ">
+      <view class="panel-start">
+      </view>
+      <view class="panel-end">
+        <view  class="panel-center item-center bg-g lh-60 fo-26 text-center ra-30 pa-l30 pa-r30 ma-l20" data-type="2" bindtap="openlocation">
+          <view>导航</view>
+        </view>
+        <view wx:if="{{order.ws_id}}" class="ma-l20 panel-center item-center bg-green lh-60 fo-26 text-center ra-30 fo-w pa-l30 pa-r30" bindtap="makePhoneCall2"  data-type="2">
+          <image src="/img/tel_w.png" class="icon-25 ma-r10"></image>
+          <view>打电话</view>
+        </view>
+      </view>
+    </view>
+    
+    <view class="panel-between item-center">
+      <view class="point-ori"></view>
+      <view class="address-panel pa-t30 pa-b30 panel-between item-center">
+        <view class="address-content" style="width:580rpx" data-type="end" bindtap="getAddress">
+          <view class="fo-30 fo-t">{{order.end_address.formatted_addresse}} {{order.end_address.street_number}} {{order.end_address.address_detail}}</view>
+          <view class="fo-26 fo-t">{{order.end_address.phone}} {{order.end_address.name || ''}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="bg-g pa-20 ra-6 fo-28">
+      {{order.goods_des}}
+    </view>
+  </view>
+  <view class="pa-30 shadow ra-6 ma-t20 bg-w">
+    <view class="panel-between">
+      <view class="panel-start item-center">
+        <image class="avatar" src="{{avatar_url}}"></image>
+        <view class="ma-l20">
+          <view class="fo-26">{{service.realname || '-- -- --'}}</view>
+        </view>
+        <view class="panel-start item-center ma-l30">
+          <image src="/img/star.png" class="icon-30 "></image>
+          <view class="fo-26 ma-l10 fo-g">{{service.score || '0'}}</view>
+        </view>
+      </view>
+      <view class="panel-end item-center">
+        <view class="fo-40">{{order.pay_amount || 0}} <text class="fo-22 fo-g">元</text></view>
+      </view>
+    </view>
+    <view class="panel-between item-center ma-t20 ">
+      <view class="panel-start">
+        <view class="panel-center item-center bg-g lh-60 fo-26 fo-g text-center ra-30 pa-l30 pa-r30" wx:if="{{order.status == 0 || order.status == 1 || order.status == 2}}" bindtap="cancelOrder">
+          <view>取消订单</view>
+        </view>
+      </view>
+      <view class="panel-end">
+        <button open-type="contact" class="panel-center item-center bg-g lh-60 fo-26 text-center ra-30 pa-l30 pa-r30 ma-l20">
+          <view>客服</view>
+        </button>
+      </view>
+    </view>
+  </view>
+
+
+  <view class="pa-30 shadow ra-6 ma-t20 bg-w">
+  <view class="panel-between item-center">
+      <view class="fo-24">订单编号</view>
+      <view class="fo-24">{{order.order_no}}</view>
+    </view>
+    <view class="panel-between item-center ma-t10">
+      <view class="fo-24">起步费</view>
+      <view class="fo-24">{{order.start_distance_amount}}元</view>
+    </view>
+    <view class="panel-between item-center ma-t10">
+      <view class="fo-24">超出起步路程费用</view>
+      <view class="fo-24">{{order.exceed_distance_amount}}元</view>
+    </view>
+    <view class="panel-between item-center ma-t10">
+      <view class="fo-24">优惠券</view>
+      <view class="fo-24">-{{order.discount_amount}}元</view>
+    </view>
+    <view class="panel-between item-center ma-t10">
+      <view class="fo-24">积分抵扣</view>
+      <view class="fo-24">-{{order.interal_amount}}元</view>
+    </view>
+    <view class="panel-between item-center ma-t10">
+      <view class="fo-24">合计支付</view>
+      <view class="fo-24">{{order.pay_amount}}元</view>
+    </view>
+    <view class="panel-between item-center ma-t10">
+      <view class="fo-24">支付时间</view>
+      <view class="fo-24">2019-08-22 13:02:15</view>
+    </view>
+    <view class="panel-between item-center ma-t10">
+      <view class="fo-24">订单完成时间</view>
+      <view class="fo-24">2019-08-22 16:02:15</view>
+    </view>
+  </view>
+</view>

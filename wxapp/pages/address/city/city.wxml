@@ -1,0 +1,39 @@
+<scroll-view scroll-y class="h-100" scroll-into-view="{{scrollIntoView}}" >
+<view class="pa-l30 pa-r30">
+  <view class="fo-26 pa-t30 pa-b30 border-b" id="top">当前选择: 湖州市</view>
+  <view class="pa-t30 pa-b30 fo-28 fo-g">定位城市</view>
+  <view class="city-item panel-center item-center">
+    <image src="/img/location.png" class="icon-25"></image>
+    <view class="fo-26 ma-l10 w-s ell">湖州市</view>
+  </view>
+  <view class="pa-t30 pa-b30 fo-28 fo-g">热门城市</view>
+  <!-- 热门城市 -->
+  <view class="panel-between item-center wrap pa-r70">
+    <view class="city-item panel-center item-center ma-b30" wx:for="{{hotCity}}" wx:key="hot_{{index}}" data-name="{{item.name}}" bindtap="chooseCity">
+      <view class="fo-26 ma-l10 w-s2 ell">{{item.name}}</view>
+    </view>
+  </view>
+
+</view>
+
+<!-- 城市列表 -->
+<block wx:for="{{cityData}}" wx:for-item="citem" wx:for-index="cindex" wx:key="l_{{cindex}}">
+  <view class="pa-l30 pa-r30 pa-t10 pa-b10 bg-g fo-26 fo-g" id="{{citem.name}}">{{citem.name}}</view>
+  <view class="pa-l30 pa-r30">
+    <view class="pa-t30 pa-b30 border-b bg-w fo-26" wx:for="{{citem.cities}}" wx:for-item="ccitem" wx:for-index="ccindex" wx:key="lcc_{{ccindex}}" data-name="{{ccitem.name}}" bindtap="chooseCity">
+      {{ccitem.name}}
+    </view>
+  </view>
+</block>
+
+<!-- 右侧悬浮字母列表 -->
+<view class="panel-center item-center fix-right">
+  <view class="right-bar">
+    <view class="right-bar-item fo-g" wx:for="{{letters}}" wx:key="le_{{index}}" data-index="{{index}}" bindtap="clickIntoView" bindtouchmove="moveIntoView">{{item}}</view>
+  </view>
+</view>
+
+</scroll-view>
+
+<!-- 展示选中的字母 -->
+<view class="show-letter" wx:if="{{showLetter}}">{{letters[lettersFlag]}}</view>

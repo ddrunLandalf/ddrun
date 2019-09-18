@@ -1,0 +1,114 @@
+<view class="border-t bg-w pa-l30 pa-r30 pa-t20 pa-b20 panel-center">
+  <view class="service-options-item  panel-center item-center fo-30  {{serviceOptionsFlag == index ? 'fo-t border bold':'fo-g'}}" wx:for="{{serviceOptions}}" wx:key="so{{index}}" data-index="{{index}}" bindtap="changeService">{{item.label}}</view>
+</view>
+
+<view class="pa-30">
+  <view class="bg-w pa-l30 pa-r30 shadow">
+    <view class=" pa-t30 panel-start item-center">
+      <image src="/img/run.png" class="icon-30"></image>
+      <view class="ma-l10 fo-26">{{serviceOptions[serviceOptionsFlag].status == 1 ? '最快'+serviceOptions[serviceOptionsFlag].time+'分钟内接单':'该服务已暂停'}}</view>
+    </view>
+    <!-- 选择购买商品方式 -->
+    <view class="panel-center item-center ma-t30" wx:if="{{serviceOptionsFlag == 2}}">
+      <view class="tags {{tagBuyFlag == 0 ? 'fo-w bg-p':'fo-g bg-g'}} " style="margin:0;" data-index="0" bindtap="tagBuy">指定地点购买</view>
+      <view class="tags  ma-l20 {{tagBuyFlag == 1 ? 'fo-w bg-p':'fo-g bg-g'}}" style="margin-bottom:0;" data-index="1" bindtap="tagBuy">就近{{serviceStatus.buy_meter || 1}}公里内购买</view>
+    </view>
+    <!-- 起点 -->
+    <view class="panel-between item-center">
+      <view class="point-green"></view>
+      <view class="address-panel pa-t30 pa-b30 border-b panel-between item-center">
+        <view class="address-content ma-l20" wx:if="{{startAddress.city}}" data-type="start" bindtap="getAddress">
+          <view class="fo-30 fo-t">{{startAddress.formatted_addresse }}{{ startAddress.address_detail}}</view>
+          <view class="fo-26 fo-t">{{startAddress.name}} {{startAddress.phone}}</view>
+        </view>
+        <view wx:if="{{!startAddress.city}}" data-type="start" bindtap="getAddress">
+          <view class="address-content fo-40 fo-g ma-l20">{{serviceOptions[serviceOptionsFlag].startAddressNoticeText}}
+          </view>
+        </view>
+        <view class="panel-end item-center">
+          <view class="vertical-line"></view>
+          <navigator class="choose-address-btn ma-l20" url="/pages/address/address?type=start&text={{serviceOptions[serviceOptionsFlag].editStartAddressTitle}}">常用</navigator>
+        </view>
+      </view>
+    </view>
+    <!-- 终点 -->
+    <view class="panel-between item-center">
+      <view class="point-ori"></view>
+      <view class="address-panel pa-t30 pa-b30 panel-between item-center">
+        <view class="address-content ma-l20" wx:if="{{endAddress.city}}" data-type="end" bindtap="getAddress">
+          <view class="fo-30 fo-t">{{endAddress.formatted_addresse}}{{ endAddress.address_detail}}</view>
+          <view class="fo-26 fo-t">{{endAddress.name}} {{endAddress.phone}}</view>
+        </view>
+        <view class="address-content fo-40 fo-g ma-l20" wx:if="{{!endAddress.city}}" data-type="end" bindtap="getAddress">{{serviceOptions[serviceOptionsFlag].endAddressNoticeText}}</view>
+        <view class="panel-end item-center">
+          <view class="vertical-line"></view>
+          <navigator class="choose-address-btn ma-l20" url="/pages/address/address?type=end&text={{serviceOptions[serviceOptionsFlag].editEndAddressTitle}}">常用</navigator>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="pa-l30 pa-r30 pa-b30" wx:if="{{serviceOptionsFlag != 3}}">
+  <form bindsubmit="wsubmit" report-submit="{{true}}">
+    <picker range="{{weights}}" range-key="des" value="{{weightsFlag}}" bindchange="weightsChange">
+      <button class="filter-btn" form-type="submit">
+        <view class="bg-w pa-30 shadow panel-between item-center">
+          <view class="panel-start item-center">
+            <image src="/img/weight.png" class="icon-30"></image>
+            <view class="fo-t fo-26 ma-l20">物品重量</view>
+          </view>
+          <view class="panel-end item-center">
+            <view class="fo-g ma-r20 fo-26">{{weightsTitle}}</view>
+            <image src="/img/right.png" class="icon-30"></image>
+          </view>
+        </view>
+      </button>
+    </picker>
+  </form>
+</view>
+<form bindsubmit="desform" report-submit="{{true}}">
+  <button class="filter-btn" form-type="submit">
+    <view class="pa-l30 pa-r30 pa-b30" wx:if="{{serviceOptionsFlag != 3}}">
+      <view class="bg-w pa-30 shadow">
+        <view class=" panel-start item-center">
+          <image src="/img/edit.png" class="icon-25"></image>
+          <view class="ma-l10 fo-26">描述物品内容</view>
+        </view>
+        <textarea class="textarea" bindinput="textInput" value="{{textarea}}" placeholder="描述您的商品"></textarea>
+        <view class="panel-start wrap">
+          <view wx:for="{{serviceOptions[serviceOptionsFlag].tags}}" class="tags bg-g fo-g" data-tag="{{item}}" bindtap="clickTag">+ {{item}}</view>
+        </view>
+      </view>
+    </view>
+  </button>
+</form>
+
+<form bindsubmit="nextform" report-submit="{{true}}">
+  <button class="filter-btn" form-type="submit">
+    <view class="pa-l30 pa-r30 pa-b30">
+      <view class="text-center bg-t fo-w lh-120" bindtap="nextStep">{{serviceOptionsFlag == 3 ? '立即呼叫':'下一步'}}</view>
+    </view>
+  </button>
+</form>
+
+
+<!-- 我的页面 -->
+<navigator class="fix-user shadow panel-center item-center" url="/pages/mine/mine">
+  <image src="/img/mine.png" class="icon-40"></image>
+</navigator>
+
+
+<!-- 显示优惠券 -->
+<view class="coupon_show panel-center item-center" wx:if="{{coupon_show}}">
+  <view class="coupon-panel" bindtap="closeCoupon">
+    <image src="/img/show.png" class="show-img" bindtap="closeCoupon"></image>
+    <view class="content-panel" bindtap="closeCoupon">
+      <view class="price-etxt red">{{showCoupon.coupon.discount_amount}}
+        <text class="fo-40">元</text>
+      </view>
+      <view class="red fo-36 text-center">{{showCoupon.coupon.conditions_amount == 0 && showCoupon.coupon.limit_service == 0 ? '无门槛使用':''}} {{showCoupon.coupon.conditions_amount > 0 ? '满'+showCoupon.coupon.conditions_amount+'元使用':''}} {{showCoupon.coupon.conditions_amount == 0 && showCoupon.coupon.limit_service
+        == 1 ? '限“'+showCoupon.coupon.condition_service+'”使用':''}}
+      </view>
+    </view>
+  </view>
+</view>

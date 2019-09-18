@@ -1,0 +1,32 @@
+<view class="pa-30 ">
+  <view class="fo-50">请您确认取消订单</view>
+  <view  wx:if="{{ordertime.dif_minute > config.freeCancelTime}}">
+    <view class="fo-30 fo-g ma-t20" wx:if="{{type==1}}">该订单接单已超过{{config.freeCancelTime}}分钟，仅退款<text class="fo-p">{{(order.pay_amount-order.pay_amount*config.bearCostRate) || 0}}</text>元</view>
+    <view class="fo-g fo-26 ma-t10" wx:if="{{type==1}}">平台将收取您的超时服务费<text class="fo-p">{{order.pay_amount*config.bearCostRate || 0}}元</text></view>
+    <view class="fo-g fo-26 ma-t10" wx:if="{{type==2}}">该订单接单已超过{{config.freeCancelTime}}分钟，平台将从您的余额自动扣除<text class="fo-p">{{order.pay_amount*config.bearCostRate || 0}}元</text></view>
+  </view>
+
+  <view  wx:if="{{ordertime.dif_minute <= config.freeCancelTime || type == 2}}">
+    <view class="fo-30 fo-g ma-t20">该订单全额退款<text class="fo-p">{{order.pay_amount || 0}}</text>元</view>
+  </view>
+
+  <view class="fo-50 ma-t30">为何取消订单？</view>
+  <view class="fo-28 fo-g pa-t30 pa-b30 border-b panel-between item-center" wx:for="{{type == 1 ? config.userReasons:config.runmanReasons}}" bindtap="chooseReason" data-index="{{index}}">
+    <view>{{item}}</view>
+    <view class="cri" wx:if="{{chooseFlag != index}}"></view>
+    <icon type="success" wx:if="{{chooseFlag == index}}" color="#46495f" size="20"/>
+  </view>
+
+  <view class="fo-28 fo-g pa-t30 pa-b30 border-b "  bindtap="chooseReason" data-index="-2">
+    <view class="panel-between item-center">
+      <view>其他</view>
+      <view class="cri" wx:if="{{chooseFlag != -2}}"></view>
+      <icon type="success" wx:if="{{chooseFlag == -2}}" color="#46495f" size="20"/>
+    </view>
+    <view class="bg-g pa-20 ma-t20">
+      <input class="fo-28 " bindinput="inputSeason" placeholder="请填写理由"></input>
+    </view>
+  </view>
+
+  <view class="pa-l40 pa-r40  fo-30 lh-100 text-center bg-t fo-w ma-t30" bindtap="refundIt">确认取消</view>
+</view>

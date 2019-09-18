@@ -1,0 +1,19 @@
+page{
+  background-color: #f3f3f3
+}
+.pcontent{
+  width: 520rpx;
+}
+.show-x{
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0
+}
+.mx-panel{
+  width: 660rpx;
+  min-height: 200rpx;
+  background-color: #ffffff;
+  border-radius: 10rpx
+}

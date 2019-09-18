@@ -1,0 +1,55 @@
+<view class="pa-30">
+  <view class="fo-50">
+    请认真填写资料
+  </view>
+</view>
+<view class="pa-30 border-t panel-between item-center border-b">
+  <view class="fo-30">真实姓名</view>
+  <input class="fo-30 text-right" value="{{realname}}" bindinput="realnameInput" placeholder="输入姓名"></input>
+</view>
+<view class="pa-30 panel-between item-center border-b">
+  <view class="fo-30">身份证号码</view>
+  <input class="fo-30 text-right" value="{{id_number}}" bindinput="numberInput" placeholder="输入18位身份证号码"></input>
+</view>
+<view class="pa-30 border-b">
+  <view class="fo-30">身份证正面</view>
+  <view class="panel-between item-center">
+    <image src="{{card_z_img? url+card_z_img : '/img/cz.png'}}" class="card_img" mode="aspectFill"></image>
+    <view class="panl panel-center item-center">
+      <view>
+        <button class="bg-t fo-w ra-6 fo-30" data-type="1" bindtap="uploadImg">点击上传</button>
+        <view class="fo-26 fo-g text-center ma-t20">
+          请上传字迹清晰的照片
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="pa-30 border-b">
+  <view class="fo-30">身份证反面</view>
+  <view class="panel-between item-center">
+    <image src="{{card_f_img? url+card_f_img : '/img/cf.png'}}" class="card_img" mode="aspectFill"></image>
+    <view class="panl panel-center item-center">
+      <view>
+        <button class="bg-t fo-w ra-6 fo-30" data-type="0" bindtap="uploadImg">点击上传</button>
+        <view class="fo-26 fo-g text-center ma-t20">
+          请上传字迹清晰的照片
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="pa-30 fo-26">
+  <checkbox-group bindchange="checkboxChange">
+    <checkbox checked="{{is_watch}}" bin />我已阅读  <navigator class="fo-lan inline" url="/pages/text/text?title=跑男指南&url=run_rule">《申请跑男协议》</navigator> ,勾选表示同意协议
+  </checkbox-group>
+</view>
+
+<form bindsubmit="nextform" report-submit="{{true}}" >
+  <button class="filter-btn" form-type="submit">
+    <view class="pa-l30 pa-r30 pa-b30">
+      <view class="text-center  lh-120 {{is_watch ? 'bg-t fo-w':'bg-g fo-g'}}" bindtap="{{is_watch ? 'submit':''}}">提交资料</view>
+    </view>
+  </button>
+</form>

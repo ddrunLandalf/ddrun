@@ -1,0 +1,23 @@
+<view class="border-t"></view>
+<view class="pa-30 border-b panel-between" wx:for="{{list}}">
+  <view data-index="{{index}}" bindtap="chooseIt">
+    <view class="fo-30">卡号 {{item.account_number}}</view>
+    <view class="fo-28 fo-g">{{item.account_name}} {{item.realname}}</view>
+    <view class="fo-28 fo-g">{{item.status_season || ''}}</view>
+  </view>
+  <view class="text-right">
+  
+    <view wx:if="{{item.status == 0}}" class="fo-28 fo-p">审核中</view>
+    <view wx:if="{{item.status == 1}}" class="fo-28 fo-green">已提现</view>
+    <view wx:if="{{item.status == 2}}" class="fo-28 fo-g">提现失败</view>
+    <view class="fo-28">{{item.cash_amount}}元</view>
+    <view class="fo-24 fo-g">{{item.create_time}}</view>
+  </view>
+</view>
+
+<view class="pa-30 text-center" wx:if="{{list.length == total && list.length > 0}}">
+  <text class="fo-26 fo-g"> ---- 已展示全部 ---- </text>
+</view>
+<view class="pa-30 text-center" wx:if="{{list.length == 0}}">
+  <text class="fo-26 fo-g"> ---- 暂无提现记录 ---- </text>
+</view>

@@ -1,0 +1,70 @@
+<view class="fix-top bg-w">
+  <view class="pa-30 border-b panel-between item-center">
+    <view class="panel-center item-center city" bindtap="chooseCity">
+      <view class="fo-26 ma-r10 city-text ell text-right">{{cityName}}</view>
+      <image src="/img/dropdown.png" class="icon-20"></image>
+    </view>
+    <view class="search-panel panel-start item-center">
+      <image src="/img/search.png" class="icon-30 ma-l30"></image>
+      <input class="fo-30 ma-l20 search-input" placeholder="输入关键字搜索地址" bindinput="searchAddress" placeholder-class="fo-30"></input>
+    </view>
+  </view>
+</view>
+<view style="height:140rpx;"></view>
+<view wx:if="{{query.keyword == '' && page != 'supply'}}">
+  <view class="pa-l30 border">
+    <view class="pa-r30 pa-t30 pa-b30 border-b panel-between item-center">
+      <view class="panel-start item-center" bindtap="chooseHomeAddress">
+        <image src="/img/home.png" class="icon-50"></image>
+        <view class="ma-l30 ad-panel">
+          <view class="fo-30">家</view>
+          <view class="fo-26 {{home.city ? '':'fo-g'}} ma-t10">{{home.formatted_addresse || '设置公司的地址'}}</view>
+          <view class="fo-26 {{home.city ? '':'fo-g'}} ma-t10">{{home.phone ? home.phone + ' '+home.name:'设置联系方式'}}</view>
+        </view>
+      </view>
+      <view class="panel-end item-center" bindtap="editHome">
+        <view class="vertical-line"></view>
+        <image src="/img/ed.png" class="icon-40 ma-l30"></image>
+      </view>
+    </view>
+
+    <view class="pa-r30 pa-t30 pa-b30  panel-between item-center">
+      <view class="panel-start item-center" bindtap="chooseCompanyAddress">
+        <image src="/img/comp.png" class="icon-50"></image>
+        <view class="ma-l30 ad-panel">
+          <view class="fo-30">公司</view>
+          <view class="fo-26 {{company.city ? '':'fo-g'}} ma-t10">{{company.formatted_addresse || '设置公司的地址'}}</view>
+          <view class="fo-26 {{company.city ? '':'fo-g'}} ma-t10">{{company.phone ? home.phone + ' '+home.name:'设置联系方式'}}</view>
+        </view>
+      </view>
+      <view class="panel-end item-center" bindtap="editCompany">
+        <view class="vertical-line"></view>
+        <image src="/img/ed.png" class="icon-40 ma-l30"></image>
+      </view>
+    </view>
+  </view>
+
+  <view class="nom fo-26 fo-g">常用地址</view>
+
+  <view class="pa-30 border-b panel-between item-center" wx:for="{{recent}}">
+    <view class="panel-start item-center" data-index="{{index}}" bindtap="chooseAddress">
+      <view class=" ad-panel">
+        <view class="fo-30">{{item.recent_use || item.create_time}}</view>
+        <view class="fo-26 fo-g ma-t10">{{item.formatted_addresse}} {{item.address_detail}}</view>
+        <view class="fo-26 fo-g ma-t10">{{item.phone}} {{item.name}}</view>
+      </view>
+    </view>
+    <view class="panel-end item-center" data-index="{{index}}" bindtap="editAddress">
+      <view class="vertical-line"></view>
+      <image src="/img/ed.png" class="icon-40 ma-l30"></image>
+    </view>
+  </view>
+  <view class="pa-30 text-center fo-g fo-26" wx:for="{{recent.length == 0}}">暂无常用地址</view>
+</view>
+
+<view wx:if="{{query.keyword != ''}}">
+  <view class="pa-30 border-b" wx:for="{{addressList}}" wx:key="wk-{{index}}" data-index="{{index}}" bindtap="takeThisAddress">
+    <view class="fo-28">{{item.title}}</view>
+    <view class="fo-26 fo-g">{{item.address}}</view>
+  </view>
+</view>

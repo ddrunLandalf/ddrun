@@ -1,0 +1,6 @@
+.cri{
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 30rpx;
+  border: 1px solid #e1e1e1
+}

@@ -1,0 +1,48 @@
+<view class="pa-t20 pa-b20 pa-l30 pa-r30">
+  <view class="fo-50">代理城市：{{agent.city_name}}</view>
+  <view class="bg-t pa-30 ra-6 panel-center item-center ma-t30">
+    <view class="text-center w-33">
+      <view class="fo-32 fo-w">{{agent.surplus_amount}}<text class="fo-22">元</text></view>
+      <view class="fo-24 fo-w ma-t10">余额</view>
+    </view>
+    <view class="lh-s"></view>
+    <view class="text-center w-33">
+      <view class="fo-32 fo-w">{{agent.cash_amount}}<text class="fo-22">元</text></view>
+      <view class="fo-24 fo-w ma-t10">已提现</view>
+    </view>
+    <view class="lh-s"></view>
+    <view class="text-center w-33">
+      <view class="fo-32 fo-w">{{agent.grand_amount}}<text class="fo-22">元</text></view>
+      <view class="fo-24 fo-w ma-t10">累计收益</view>
+    </view>
+  </view>
+</view>
+
+<view class="pa-b20 pa-l30 pa-r30">
+  <view class="bg-p pa-30 ra-6 panel-center item-center">
+    <view class="text-center w-33">
+      <view class="fo-32 fo-w">{{comDaily || 0}}</view>
+      <view class="fo-24 fo-w ma-t10">今日成单</view>
+    </view>
+    <view class="lh-s"></view>
+    <view class="text-center w-33">
+      <view class="fo-32 fo-w">{{comMonth || 0}}</view>
+      <view class="fo-24 fo-w ma-t10">本月成单</view>
+    </view>
+    <view class="lh-s"></view>
+    <view class="text-center w-33">
+      <view class="fo-32 fo-w">{{com || 0}}</view>
+      <view class="fo-24 fo-w ma-t10">累计成单</view>
+    </view>
+  </view>
+</view>
+
+<view class="pa-40" style="padding-top:0">
+  <navigator class="pa-t40 pa-b40 panel-between item-center border-b" wx:for="{{navigator}}" wx:key="na{{index}}" url="{{item.url+'?mode='+msg.take_mode}}" bindtap="{{item.change ? 'changePage':''}}">
+    <view class="panel-start item-center">
+      <image src="{{item.icon}}" class="icon-30"></image>
+      <view class="fo-28 fo-t ma-l20">{{item.label}}</view>
+    </view>
+    <image src="/img/right.png" class="icon-30"></image>
+  </navigator>
+</view>

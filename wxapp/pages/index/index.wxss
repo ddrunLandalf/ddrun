@@ -1,0 +1,51 @@
+page{
+  background-color: #f3f3f3
+}
+.service-options-item{
+  width: 157.5rpx;
+  height: 80rpx;
+  border-radius: 80rpx;
+}
+.address-panel{
+  width: 605rpx;
+}
+.textarea{
+  width: 100%;
+  height: 150rpx;
+  margin-top: 30rpx
+}
+
+.coupon_show{
+  width: 750rpx;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0
+}
+.coupon-panel{
+  width: 600rpx;
+  height: 600rpx;
+  overflow: hidden
+}
+.show-img{
+  width: 600rpx;
+  height: 600rpx;
+  display: block;
+  z-index: 1
+}
+.content-panel{
+  width: 600rpx;
+  height: 600rpx;
+  position: relative;
+  top: -600rpx;
+  z-index: 2
+}
+.red{
+  color: #ff2742
+}
+.price-etxt{
+  text-align: center;
+  padding-top: 120rpx;
+  font-size: 100rpx;
+  font-weight: bold;
+}

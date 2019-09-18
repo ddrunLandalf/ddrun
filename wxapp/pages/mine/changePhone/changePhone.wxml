@@ -1,0 +1,15 @@
+<view class="pa-30">
+  <view class="fo-50">请输入需要更换的手机号码</view>
+
+  <input class="fo-40 border-b ma-t30 h-100" bindinput="phoneInput" type="number" placeholder="输入11位手机号码"></input>
+  
+  <view class="panel-between ma-t20 border-b">
+    <input class="fo-40  h-100 " placeholder="输入验证码" bindinput="codeInput"></input>
+    <view class="{{notbind ? 'bg-g2':'bg-t'}} getcode-btn ra-6" bindtap="{{notbind ? '':'getCode'}}">{{notbind ? second+'s':'获取验证码'}}</view>
+  </view>
+
+  <view class="pa-t30 ma-t30">
+    <button class="bg-t fo-30 lh-100 text-center fo-w ra-6 ma-t30 " open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="submit">确认更换</button>
+  </view>
+
+</view>

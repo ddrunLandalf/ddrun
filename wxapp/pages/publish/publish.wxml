@@ -1,0 +1,122 @@
+<view class="pa-20">
+  <view class="bg-w pa-l30 pa-r30 shadow ra-6">
+    <view class=" pa-t30 panel-start item-center">
+      <view class="fo-50 bold">{{title}}</view>
+    </view>
+    
+    <!-- 起点 -->
+    <view class="panel-between item-center">
+      <view class="point-green"></view>
+      <view class="address-panel pa-t30 pa-b30 border-b panel-between item-center">
+        <view class="address-content" style="width:600rpx" wx:if="{{startAddress != 'nearby'}}">
+          <view class="fo-30 fo-t">{{startAddress.formatted_addresse}} {{startAddress.street_number}}</view>
+          <view class="fo-26 fo-t">{{startAddress.phone}} {{startAddress.name}}</view>
+        </view>
+        <view class="address-content" style="width:600rpx" wx:if="{{startAddress == 'nearby'}}">
+          <view class="fo-40 fo-t">就近购买</view>
+        </view>
+      
+      </view>
+    </view>
+    <!-- 终点 -->
+    <view class="panel-between item-center">
+      <view class="point-ori"></view>
+      <view class="address-panel pa-t30 pa-b30 panel-between item-center">
+        <view class="address-content" style="width:600rpx" data-type="end" bindtap="getAddress">
+          <view class="fo-30 fo-t">{{endAddress.formatted_addresse}} {{endAddress.street_number}}</view>
+          <view class="fo-26 fo-t">{{endAddress.phone}} {{endAddress.name}}</view>
+        </view>
+
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="pa-l20 pa-r20">
+  <view class="bg-w ra-6 pa-l30 pa-r30">
+    <view class="pa-t30 pa-b30 border-b panel-between" wx:if="{{title != '代驾'}}">
+      <view class="fo-26">物品描述:</view>
+      <view class="pcontent fo-26">{{textarea}}</view>
+    </view>
+    <view class="pa-t30 pa-b30 border-b panel-between" wx:if="{{title != '代驾'}}">
+      <view class="fo-26">物品重量:</view>
+      <view class="pcontent fo-26">{{weight.des}}</view>
+    </view>
+    <picker range="{{times}}" range-key="label" value="{{timeFlag}}" bindchange="timeChange">
+      <view class="pa-t30 pa-b30 border-b panel-between">
+        <view class="fo-26">发货时间:</view>
+        <view class="pcontent panel-between item-center">
+          <view class="fo-26">{{times[timeFlag].label}}</view>
+          <image src="/img/right.png" class="icon-25"></image>
+        </view>
+      </view>
+    </picker>
+   
+    <picker range="{{litFee}}" range-key="label" value="{{litFeeFlag}}" bindchange="feeChange">
+      <view class="pa-t30 pa-b30 panel-between item-center">
+        <view class="fo-26">
+          <text space="nbsp">小      费:</text>
+        </view>
+        <view class="pcontent panel-between item-center">
+          <view class="fo-26 {{litFeeFlag == 0 ? 'fo-g':'fo-p'}}">{{litFeeFlag == 0 ? '添加小费，接单更快哦':litFee[litFeeFlag].label}}</view>
+          <image src="/img/right.png" class="icon-25"></image>
+        </view>
+      </view>
+    </picker>
+  </view>
+</view>
+
+<view class="pa-20 fo-22 fo-g">
+  温馨提示：根据相关法律法规要求，跑男将在取货时对您所寄物品进行检查，请不要将物品外包装封口。感谢您的配合！
+</view>
+<view style="height:120rpx"></view>
+<view class="fix-bot bg-w panel-between item-center">
+  <view class="panel-start item-center">
+    <view wx:if="{{calculation.totalPrice}}" class="fo-p ma-l30 fo-40">
+      <text class="fo-24">￥</text>{{totalPrice}}</view>
+    <view wx:if="{{calculation.totalPrice}}" class="panel-start item-center ma-l30" bindtap="feeDetail">
+      <view class="fo-26">费用明细</view>
+      <image src="/img/right.png" class="icon-20 ma-l10"></image>
+    </view>
+    <view class="ma-l30 fo-36" wx:if="{{!calculation.totalPrice}}">计算费用...</view>
+  </view>
+  <form bindsubmit="desform" report-submit="{{true}}">
+    <button class="filter-btn" form-type="submit">
+      <view class="pa-l40 pa-r40  fo-30 lh-100 text-center {{calculation.totalPrice ? 'bg-t fo-w':'bg-g fo-g'}}" bindtap="{{calculation.totalPrice ? 'doPay':''}}">立即下单</view>
+    </button>
+  </form>
+</view>
+
+<view class="show-x panel-center item-center" wx:if="{{showDetail}}">
+  <view class="mx-panel">
+    <view class="fo-34 ma-l30 pa-t30">费用明细</view>
+    <view class="panel-between pa-30 border-b">
+      <view class="fo-26">起步价</view>
+      <view class="fo-26">{{calculation.start.startPrice}}元</view>
+    </view>
+    <view class="panel-between pa-30 border-b" wx:if="{{calculation.excced.exccedDistance > 0}}">
+      <view class="fo-26">超出起步路程{{calculation.excced.exccedDistance}}米</view>
+      <view class="fo-26">{{calculation.excced.exccedPrice}}元</view>
+    </view>
+    <view class="panel-between pa-30 border-b" wx:if="{{weight.price > 0}}">
+      <view class="fo-26">重量{{weight.des}}</view>
+      <view class="fo-26">{{weight.price}}元</view>
+    </view>
+    
+    <view class="panel-between pa-30 border-b" wx:if="{{couponFlag > 0}}">
+      <view class="fo-26">优惠券</view>
+      <view class="fo-26">-{{calculation.coupon[couponFlag].coupon.discount_amount}}元</view>
+    </view>
+    <view class="panel-between pa-30 border-b" wx:if="{{interalCheck}}">
+      <view class="fo-26">积分抵扣</view>
+      <view class="fo-26">-{{calculation.interal.exchange}}元</view>
+    </view>
+    <view class="panel-between pa-30 border-b" wx:if="{{nightPrice > 0}}">
+      <view class="fo-26">夜间服务</view>
+      <view class="fo-26">{{nightPrice}}元</view>
+    </view>
+    <view class="pa-30 text-center" bindtap="feeDetail">
+      关闭
+    </view>
+  </view>
+</view>

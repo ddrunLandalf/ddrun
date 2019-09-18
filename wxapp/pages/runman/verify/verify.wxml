@@ -1,0 +1,20 @@
+<view class="text-center">
+  <image wx:if="{{msg.status == 1}}" class="img" src="/img/s1.png"></image>
+  <image wx:elif="{{msg.status == 0}}" class="img" src="/img/s2.png"></image>
+  <image wx:elif="{{msg.status == 2}}" class="img" src="/img/s3.png"></image>
+</view>
+
+<view class="text-center fo-40 ma-t20" wx:if="{{msg.status == 1}}">审核失败</view>
+<view class="text-center fo-40 ma-t20" wx:elif="{{msg.status == 0}}">待审核</view>
+<view class="text-center fo-40 ma-t20" wx:else="{{msg.status == 2}}">已通过审核</view>
+
+<view class="text-center fo-28 fo-g ma-t20" wx:if="{{msg.status == 1}}">请修改并重新提交资料</view>
+<view class="text-center fo-28 fo-g ma-t20" wx:elif="{{msg.status == 0}}">工作人员将在1-3个工作日内审核完成</view>
+<view class="text-center fo-28 fo-g ma-t20" wx:elif="{{msg.status == 2}}">{{msg.verify.create_time}}</view>
+
+<view class="pa-30" wx:if="{{msg.status == 1}}">
+  <view class="fo-30 fo-g">未通过原因</view>
+  <view class="fo-26 ma-t20">{{msg.verify.refuse_des}}</view>
+  <view class="lh-80 bg-t fo-w pa-l30 pa-r30 ra-6 fo-30 btt" bindtap="update">去修改</view>
+</view>
+

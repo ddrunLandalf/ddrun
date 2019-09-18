@@ -1,0 +1,230 @@
+{
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"coverView": true,
+		"autoAudits": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.8.0",
+	"appid": "wx20af16de914f1154",
+	"projectname": "%E5%90%8C%E5%9F%8E%E8%B7%91%E8%85%BFfree",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 24,
+			"list": [
+				{
+					"id": -1,
+					"name": "pages/mine/mine",
+					"pathName": "pages/mine/mine",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "地址补充",
+					"pathName": "pages/address/supply/supply",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 2,
+					"name": "地址",
+					"pathName": "pages/address/address",
+					"query": "type=start&text=%E6%8B%BF%E8%B4%A7&page=supply",
+					"scene": null
+				},
+				{
+					"id": 3,
+					"name": "发布",
+					"pathName": "pages/publish/publish",
+					"query": "data={\"startAddress\":{\"street_number\":\"千秋东街1号\",\"formatted_addresse\":\"德清县人民政府(云岫北路西)\",\"province\":\"浙江省\",\"city\":\"湖州市\",\"district\":\"德清县\",\"phone\":\"18267173607\",\"latitude\":30.54269,\"longitude\":119.97754},\"endAddress\":{\"id\":7,\"formatted_addresse\":\"D Iinx酒吧\",\"province\":\"浙江省\",\"city\":\"湖州市\",\"district\":\"德清县\",\"latitude\":30.539268,\"longitude\":119.967952,\"phone\":\"17858959662\",\"name\":\"我地妈呀\",\"street_number\":\"余英坊7幢1-10号1楼\",\"address_detail\":\"诸事\",\"recent_use\":\"2019-08-29 20:52:25\",\"wx_id\":1,\"create_time\":\"0000-00-00 00:00:00\"},\"textarea\":\" 老铁 家家乐 文件\",\"weight\":{\"id\":2,\"agent_id\":13,\"min_weight\":1001,\"max_weight\":4000,\"price\":1,\"is_recover\":0,\"des\":\"1~4kg\"},\"title\":\"帮我送\",\"formId\":[\"the formId is a mock one\",\"the formId is a mock one\",\"the formId is a mock one\",\"\"]}",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的订单",
+					"pathName": "pages/order/order",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 5,
+					"name": "订单详情",
+					"pathName": "pages/order/detail/detail",
+					"query": "order_no=6b4ab316edcd48a68fb74e480b7a2045",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "优惠券",
+					"pathName": "pages/coupon/coupon",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 7,
+					"name": "login",
+					"pathName": "pages/login/login",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "更换手机号",
+					"pathName": "pages/mine/changePhone/changePhone",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "用户指南",
+					"pathName": "pages/mine/pointer/pointer",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "会员中心",
+					"pathName": "pages/vip/vip",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "城市",
+					"pathName": "pages/address/city/city",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/address/supply/supply",
+					"pathName": "pages/address/supply/supply",
+					"query": "type=start&text=%E6%8B%BF%E8%B4%A7&address=%7B%22address_detail%22%3A%22%E5%8D%83%E7%A7%8B%E4%B8%9C%E8%A1%971%E5%8F%B7%22%2C%22formatted_addresse%22%3A%22%E5%BE%B7%E6%B8%85%E5%8E%BF%E4%BA%BA%E6%B0%91%E6%94%BF%E5%BA%9C(%E4%BA%91%E5%B2%AB%E5%8C%97%E8%B7%AF%E8%A5%BF)%22%2C%22province%22%3A%22%E6%B5%99%E6%B1%9F%E7%9C%81%22%2C%22city%22%3A%22%E6%B9%96%E5%B7%9E%E5%B8%82%22%2C%22phone%22%3A%2218267173607%22%7D",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "成为服务者",
+					"pathName": "pages/runman/register/register",
+					"query": "order_no=8239f12b2f064096b0c1eda48c33879f",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "服务者中心",
+					"pathName": "pages/runman/index",
+					"query": "order_no=8239f12b2f064096b0c1eda48c33879f",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "审核状态",
+					"pathName": "pages/runman/verify/verify",
+					"query": "order_no=8239f12b2f064096b0c1eda48c33879f",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "跑男状态",
+					"pathName": "pages/runman/status/status",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 17,
+					"name": "取消订单",
+					"pathName": "pages/order/cancel/cancel",
+					"query": "order_id=8&type=1&order_no=8239f12b2f064096b0c1eda48c33879f",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "订单列表",
+					"pathName": "pages/order/order",
+					"query": "order_no=7e64d811f6404d6ba91f1aa6de4d7d84",
+					"scene": null
+				},
+				{
+					"id": 19,
+					"name": "邀请有礼",
+					"pathName": "pages/mine/retail/retail",
+					"query": "data={\"id\":1,\"openid\":\"onVC15CntPlNlXZyVxxwQJubmt5s\",\"nick_name\":\"Landalf\",\"avatar_url\":\"https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTL1BpUSPDuTFUspib80XQPibKeGAWhu6sltbEtwKGHibM1ThldXYXke9PMarFU4hI693c1aQRu9ibMN9w/132\",\"gender\":1,\"province\":\"浙江\",\"city\":\"湖州\",\"create_time\":\"2019-08-27 14:07:08\",\"status\":1,\"home_address_id\":6,\"company_address_id\":7,\"surplus_integral\":0,\"grand_integral\":800,\"grand_fee\":12,\"grand_cash\":0,\"grand_amount\":0,\"surplus_amount\":0,\"f_no\":0,\"s_no\":0,\"qr_code\":\"static/qrcode/2e5659cf-9e1f-40d7-828e-0f130089ee7f.png\"}",
+					"scene": null
+				},
+				{
+					"id": 20,
+					"name": "提现",
+					"pathName": "pages/runman/cash/cash",
+					"query": "type=2",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "银行卡",
+					"pathName": "pages/runman/cash/banks/banks",
+					"query": "type=2",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的评价",
+					"pathName": "pages/runman/evaluate/evaluate",
+					"query": "order_no=6b4ab316edcd48a68fb74e480b7a2045",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "会员中心",
+					"pathName": "pages/vip/vip",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "代理中心",
+					"pathName": "pages/agent/agent",
+					"scene": null
+				}
+			]
+		}
+	}
+}

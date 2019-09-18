@@ -1,0 +1,19 @@
+.tx-w{
+  width: 670rpx
+}
+.textarea{
+  width: 100%;
+  height: 150rpx
+}
+.discerm{
+  width: 80rpx;
+  height: 50rpx;
+  font-size: 24rpx;
+  text-align: center;
+  line-height: 50rpx;
+  color: #ffffff;
+  border-radius: 4rpx
+}
+.bg-g2{
+  background-color: #e1e1e1
+}

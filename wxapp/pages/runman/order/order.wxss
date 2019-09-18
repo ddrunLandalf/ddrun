@@ -1,0 +1,13 @@
+.item{
+  width: 33.33%;
+  line-height: 80rpx;
+  text-align: center
+}
+page{
+  background-color: #f3f3f3
+}
+.bots{
+  width: 40%;
+  margin: auto;
+  border-bottom: 4rpx solid #444
+}

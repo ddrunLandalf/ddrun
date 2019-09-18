@@ -1,0 +1,93 @@
+<template>
+  <v-container>
+    <v-form v-loading="tload" style="max-width:600px;margin:auto">
+      <p class="mt-4">状态</p>
+      <v-radio-group v-model="formData.status" :mandatory="false" row>
+        <v-radio label="开启" :value="1"></v-radio>
+        <v-radio label="关闭" :value="0"></v-radio>
+      </v-radio-group>
+      <v-text-field v-model="formData.ids" label="输入优惠券ID（可输入多个ID，并用英文逗号隔开）" :disabled="formData.status == 0"></v-text-field>
+
+      <v-btn class="mt-3 dark" :loading="tload" @click="submit()">保存</v-btn>
+    </v-form>
+  </v-container>
+</template>
+
+<script>
+let _this;
+export default {
+  props: {
+    load: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data() {
+    return {
+      formData: {
+        ids: "",
+        status: 0
+      },
+      pageLoad: this.load,
+      tload: false
+    };
+  },
+  watch: {
+    load(val) {
+      if (val) {
+        this.pageLoad = val;
+      }
+    },
+    pageLoad(val) {
+      if (val) {
+        this.getConfig();
+      }
+    }
+  },
+
+  mounted() {
+    _this = this;
+    _this.getConfig();
+  },
+  methods: {
+    //获取配置
+    getConfig() {
+      _this.tload = true;
+      this.$post(
+        "config/get",
+        {
+          config_key: "coupon_newuser"
+        },
+        function(res) {
+          _this.tload = false;
+          if (res.errno == 0) {
+            if (res.data.config_content) {
+              _this.formData = JSON.parse(res.data.config_content);
+            }
+          }
+        }
+      );
+    },
+    submit() {
+      this.tload = true;
+      this.$post(
+        "config/update",
+        {
+          config_key: "coupon_newuser",
+          config_content: JSON.stringify(this.formData)
+        },
+        function(res) {
+          _this.tload = false;
+          if (res.errno === 0) {
+            _this.$message({
+              showClose: true,
+              message: res.errmsg,
+              type: "success"
+            });
+          }
+        }
+      );
+    }
+  }
+};
+</script>

@@ -1,0 +1,19 @@
+<view class="pa-30">
+  <view class="fo-50">请输入手机号码</view>
+  <view class="fo-g fo-28 ma-t10 pa-b30">为了方便联系，请输入您的常用手机号码</view>
+
+  <input class="fo-40 border-b ma-t30 h-100" maxlength="11" data-name="phone_number" bindinput="bindInput" type="number" placeholder="输入11位手机号码"></input>
+  
+  <view class="panel-between ma-t20 border-b">
+    <input class="fo-40  h-100 " data-name="code" bindinput="bindInput" type="number" placeholder="输入验证码"></input>
+    <view class="{{notbind ? 'bg-g2':'bg-t'}} getcode-btn ra-6" bindtap="{{notbind ? '':'getCode'}}">{{notbind ? second+'s':'获取验证码'}}</view>
+  </view>
+
+  <view class="pa-t30 ma-t30">
+    <button class="bg-t fo-30 lh-100 text-center fo-w ra-6 ma-t30 " open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="submit">登录 / 注册</button>
+  </view>
+
+  <button class="lh-100 shadow text-center fo-p ma-t30 ra-6 fo-30 bg-w" open-type="getUserInfo" open-type="getPhoneNumber"  bindgetuserinfo="getWxphone" bindgetphonenumber="getWxphone">
+    使用微信手机号登录
+  </button>
+</view>

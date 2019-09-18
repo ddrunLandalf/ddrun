@@ -1,0 +1,25 @@
+<navigator class="add bg-t fo-w panel-center item-center" url="/pages/runman/cash/banks/edit?url=add">+</navigator>
+<view class="border-t"></view>
+<view class="pa-30 border-b panel-between" wx:for="{{list}}">
+  <view data-index="{{index}}" bindtap="chooseIt">
+    <view class="fo-30">卡号 {{item.account_number}}</view>
+    <view class="fo-28 fo-g">{{item.account_name}} {{item.realname}}</view>
+  </view>
+  <view class="panel-end">
+    <view class="panel-start item-center" data-index="{{index}}" bindtap="update">
+      <image src="/img/edit2.png" class="icon-30"></image>
+      <view class="fo-26 ma-l10">编辑</view>
+    </view>
+    <view class="panel-start item-center ma-l30" data-index="{{index}}" bindtap="del">
+      <image src="/img/del.png" class="icon-30"></image>
+      <view class="fo-26 ma-l10">删除</view>
+    </view>
+  </view>
+</view>
+
+<view class="pa-30 text-center" wx:if="{{list.length == total && list.length > 0}}">
+  <text class="fo-26 fo-g"> ---- 已展示全部 ---- </text>
+</view>
+<view class="pa-30 text-center" wx:if="{{list.length == 0}}">
+  <text class="fo-26 fo-g"> ---- 暂无银行卡信息 ---- </text>
+</view>

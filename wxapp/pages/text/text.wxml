@@ -1,0 +1,3 @@
+<view class="pa-30 border-t fo-30">
+  <rich-text type="text" nodes="{{htmlData.config_content}}"></rich-text>
+</view>

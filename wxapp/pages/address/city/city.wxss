@@ -1,0 +1,57 @@
+.city-item{
+  width: 190rpx;
+  height: 70rpx;
+  background-color: #f3f3f3
+}
+.h-100{
+  height: 100vh
+}
+.right-bar{
+  width: 40rpx;
+  min-height: 300rpx;
+  background-color: #f7f7f7;
+  border-radius: 40rpx;
+  position: fixed;
+  right: 20rpx;
+}
+.fix-right{
+  height: 100vh;
+  position: fixed;
+  right: 20rpx;
+  top: 0
+}
+.right-bar-item{
+  width: 40rpx;
+  height: 40rpx;
+  text-align: center;
+  line-height: 40rpx;
+  font-size: 26rpx
+}
+.right-bar-item:first-child{
+  margin-top: 10rpx
+}
+.right-bar-item:last-child{
+  margin-bottom: 10rpx
+}
+.w-s{
+  max-width: 120rpx
+}
+.w-s2{
+  max-width: 170rpx
+}
+.pa-r70{
+  padding-right: 70rpx
+}
+.show-letter{
+  width: 150rpx;
+  height: 150rpx;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 300rpx;
+  left: 100rpx;
+  border-radius: 8rpx;
+  font-size: 80rpx;
+  color: #fff;
+  line-height: 150rpx;
+  text-align: center
+}

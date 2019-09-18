@@ -1,0 +1,56 @@
+<view class="fix-top panel-start item-center border-t bg-w">
+  <view wx:for="{{tags}}" class="item fo-30 {{tagFlag == index ? 'fo-t':'fo-g'}}" data-index="{{index}}" bindtap="changeTag">
+    <view>{{item}}</view>
+    <view class="bots" wx:if="{{tagFlag == index}}"></view>
+  </view>
+</view>
+<view style="height:80rpx"></view>
+
+<view class="pa-l30 pa-r30 pa-t30">
+  <view class="pa-30 shadow ra-6 bg-w ma-b20" wx:for="{{list}}">
+    <view class="panel-between item-center">
+      <view class="fo-26">{{item.service_type}}</view>
+      <view class="panel-end item-center">
+        <view class="fo-p fo-28">{{item.filterDistance}} {{tagFlag == 0 ? '待配送':''}} {{item.status == 2 ? '待送达':''}} {{item.status == 3 ? '待确认':''}} {{item.status == 4 ? '已完成':''}}</view>
+      </view>
+    </view>
+    <view class="panel-start item-center ma-t20">
+      <image src="/img/clock.png" class="icon-20"></image>
+      <view class=" fo-28 ma-l10 fo-t">配送时间 {{item.send_time}}</view>
+    </view>
+    <view class="panel-start item-center ma-t10">
+      <image src="/img/des.png" class="icon-20"></image>
+      <view class="fo-t fo-28 ma-l10 w-600 ell ">{{item.goods_des}}</view>
+    </view>
+    <view class="panel-start item-center ma-t10">
+      <view class="point-green"></view>
+      <view class="fo-t ma-l10 w-600 ell fo-26" wx:if="{{item.start_address != 'nearby'}}">{{item.start_address.formatted_addresse}} {{item.start_address.street_number}} {{item.start_address.address_detail}}</view>
+      <view class="fo-t ma-l10 w-600 ell fo-26" wx:if="{{item.start_address == 'nearby'}}">就近购买</view>
+    </view>
+    <view class="panel-start item-center ma-t10">
+      <view class="point-ori"></view>
+      <view class="fo-t ma-l10 w-600 ell fo-26">{{item.end_address.formatted_addresse}} {{item.end_address.street_number}} {{item.end_address.address_detail}}</view>
+    </view>
+    <view class="panel-end ma-t10">
+      <navigator class="btn bg-g fo-g fo-26 ma-l20 pa-l30 pa-r30 lh-70 ra-6" wx:if="{{tagFlag == 1 }}" url="/pages/order/cancel/cancel?order_id={{item.id}}&order_no={{item.order_no}}&type=2">取消订单</navigator>
+      <view class="btn bg-t fo-w fo-26 ma-l20 pa-l30 pa-r30 lh-70 ra-6" wx:if="{{tagFlag == 1 }}" data-order_id="{{item.id}}" bindtap="confirmSend">确认送达</view>
+      <view class="btn bg-g fo-g fo-26 ma-l20 pa-l30 pa-r30 lh-70 ra-6" wx:if="{{item.ws_id != 0 && tagFlag == 0 }}">转单</view>
+      <view class="btn bg-t fo-w fo-26 ma-l20 pa-l30 pa-r30 lh-70 ra-6" wx:if="{{tagFlag == 0}}" data-order_id="{{item.id}}" bindtap="receive">接单</view>
+      <view class="btn bg-t fo-w fo-26 ma-l20 pa-l30 pa-r30 lh-70 ra-6" wx:if="{{tagFlag == 2 && item.status == 3}}" data-order_id="{{item.id}}" bindtap="confirmRun">确认完成</view>
+      <navigator class="btn bg-g fo-g fo-26 ma-l20 pa-l30 pa-r30 lh-70 ra-6" wx:if="{{item.status != 1 }}" url="/pages/runman/order/detail/detail?order_no={{item.order_no}}">查看订单</navigator>
+    </view>
+  </view>
+</view>
+
+<view class="pa-30 text-center" wx:if="{{total == list.length && list.length>0}}">
+  <text class="fo-26 fo-g"> ---- 已展示全部订单 ---- </text>
+</view>
+<view class="pa-30 text-center" wx:if="{{list.length == 0}}">
+  <text class="fo-26 fo-g"> ---- 暂无订单 ---- </text>
+</view>
+
+
+<!-- 跑男中心页面 -->
+<navigator class="fix-user shadow panel-center item-center" url="/pages/runman/index">
+  <image src="/img/mine.png" class="icon-40"></image>
+</navigator>

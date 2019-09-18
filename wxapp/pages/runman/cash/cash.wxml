@@ -1,0 +1,35 @@
+<view class='pa-30'>
+  <view class='panel ra-10 shadow'>
+    <view class='pa-20'>
+      <view class='panel-start item-center'>
+        <view class='fo-28'>账户余额</view>
+        <view class='fo-50 ' style='margin-left:100rpx'>{{showFee}} <text class='fo-26'>元</text></view>
+      </view>
+      <view class='fo-28 ma-t30'>提现现金</view>
+      <view class='pa-b10 pa-t30 border-b'>
+        <view class='panel-between item-center'>
+          <view class='fo-50'>￥</view>
+          <input placeholder='输入提现金额' type='digit' bindinput='cashInput' value='{{cashFee}}' placeholder-class='fo-28'></input>
+          <view class='fo-t fo-28' bindtap='cashAll'>全部</view>
+        </view>
+      </view>
+      <navigator class="pa-t30 pa-b30 panel-between item-center border-b" url="/pages/runman/cash/banks/banks?cash=true">
+        <view class="fo-30">
+          <view class="fo-g" wx:if="{{!bankCard.id}}">选择一张银行卡</view>
+          <view  wx:if="{{bankCard.id}}">{{bankCard.account_number}}</view>
+           <view class="fo-26 fo-g" wx:if="{{bankCard.id}}">{{bankCard.account_name}} {{bankCard.realname}}</view>
+        </view>
+        <image class="icon-30" src="/img/right.png"></image>
+      </navigator>
+      <view class="pa-t30 fo-g fo-26">
+        单笔提现最少{{cashConfig[typeFilter+'_min_cash']}}元，最多{{cashConfig[typeFilter+'_max_cash']}}元。
+        {{cashConfig.cash_time == 1 ? '每天':''}}{{cashConfig.cash_time == 2 ? '每周':''}}{{cashConfig.cash_time == 3 ? '每月':''}}可提现{{cashConfig.cash_number}}次
+      </view>
+      <button type='primary' class='ma-t30'  bindtap='cashIt'>提现</button>
+    </view>
+  </view>
+</view>
+<view class='pa-30 text-center fo-30'>提现申请将在1-3个工作日内到账</view>
+<view class=" pa-30 panel-center">
+  <button class='filter-btn fo-30 fo-t'  open-type='contact'>联系客服</button>
+</view>
