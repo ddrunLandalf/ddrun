@@ -122,7 +122,9 @@ Page({
     _this.setData({
       serviceOptionsFlag: index,
       startAddress:{},
-      endAddress:{}
+      endAddress:{},
+      weightsFlag:-1,
+      textarea:''
     })
     _this.initMyLocation()
   },
