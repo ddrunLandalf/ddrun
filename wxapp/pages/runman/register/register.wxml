@@ -17,7 +17,9 @@
     <image src="{{card_z_img? url+card_z_img : '/img/cz.png'}}" class="card_img" mode="aspectFill"></image>
     <view class="panl panel-center item-center">
       <view>
-        <button class="bg-t fo-w ra-6 fo-30" data-type="1" bindtap="uploadImg">点击上传</button>
+        <form bindsubmit="uploadImg" report-submit="{{true}}" >
+          <button class="bg-t fo-w ra-6 fo-30" data-type="1" form-type="submit">点击上传</button>
+        </form>
         <view class="fo-26 fo-g text-center ma-t20">
           请上传字迹清晰的照片
         </view>

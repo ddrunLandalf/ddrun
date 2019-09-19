@@ -42,6 +42,11 @@ Page({
   },
   //上传图片
   uploadImg(e){
+    if (e.detail.formId) {
+      this.setData({
+        'formId': e.detail.formId
+      })
+    }
     let type = e.currentTarget.dataset.type;
     wx.chooseImage({
       count:1,
