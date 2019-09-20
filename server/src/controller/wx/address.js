@@ -69,7 +69,7 @@ module.exports = class extends BaseRest {
     async recentAction () {
         let userInfo = this.post('userInfo');
         let rs = await this.model('wxapp_address')
-            .where({id:['NOTIN',[userInfo.home_address_id,userInfo.company_address_id]]})
+            .where({id:['NOTIN',[userInfo.home_address_id,userInfo.company_address_id]],wx_id:userInfo.id})
             .page(1,10)
             .order('recent_use desc,create_time desc').select()
         return this.success(rs)
