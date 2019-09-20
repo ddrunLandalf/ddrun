@@ -10,7 +10,6 @@
           <view class="fo-26 fo-w">{{phone.phone_number || '--- --- ---'}}</view>
         </view>
       </view>
-     
     </view>
   </view>
 </view>
@@ -24,4 +23,15 @@
     </view>
     <image src="/img/right.png" class="icon-30"></image>
   </navigator>
+
+  <button class="filter-btn " open-type="contact">
+    <view class=" pa-t40 pa-b40 panel-between item-center border-b">
+      <view class="panel-start item-center">
+        <image src="/img/service.png" class="icon-30"></image>
+        <view class="fo-28 fo-t ma-l20">联系客服</view>
+      </view>
+
+      <image src="/img/right.png" class="icon-30"></image>
+    </view>
+  </button>
 </view>
