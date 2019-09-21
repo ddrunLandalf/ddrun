@@ -58,22 +58,25 @@ Page({
         _this.setData(res.data)
         let show = true;
         let url = '/pages/runman/register/register';
-        let title = '成为跑男'
+        let title = '成为跑男';
+        let showQ = false;
         if(res.data.isRunman.id){
-          show = true
+          show = true;
           if (res.data.isRunman.status >= 2){
             title = '跑男中心';
             url = '/pages/runman/index';
+            showQ = true;
           }else{
             title = '已申请为跑男，审核中';
             url = '/pages/runman/verify/verify';
+            showQ = false;
           }
         }else{
           show = true
         }
         _this.setData({
           'navigator[3]': { icon: '/img/runman.png', label: title, url: url, show: show},
-          'navigator[6].show': show,
+          'navigator[6].show': showQ,
           'navigator[7].show': res.data.agent.id ? true:false
         })
       }
