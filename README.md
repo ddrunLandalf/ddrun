@@ -15,7 +15,7 @@
 ## 小程序界面
 ![小程序界面](https://api.hbhzdtn.com/images/d2ed81c672a8f2242391e9e5fa80e8a2.png)
 ## 后台管理界面
-- 商业版后台演示地址：[https://cli.run.landalf.cn](https://cli.run.landalf.cn)
+- 商业版后台演示地址：[http://cli.run.landalf.cn](http://cli.run.landalf.cn)
 - 访客账号：landalf 密码：landalf.cn
 ![后台管理界面](https://api.hbhzdtn.com/images/0a4b427ed5594aa38a02ae1ec682c358.png)
 ## 小程序体验版
