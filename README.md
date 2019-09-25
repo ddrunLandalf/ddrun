@@ -3,6 +3,7 @@
 - 如果对您有帮助，您可以点右上角 "Star" 支持一下 谢谢！
 - 部署教程：[点击查看](https://juejin.im/post/5d845fec6fb9a06ada54eb05)
 - 配置文档(部署完成后请阅读配置文档)：[点击查看](https://juejin.im/post/5d8460735188250f871b9afd)
+- 更新日志：[点击查看](./update.md)
 ## 项目介绍
 本项目基于Thinkjs3.0+Vue 开发的一套跑腿下单接单系统。
 ##### 主要功能
@@ -14,6 +15,8 @@
 ## 小程序界面
 ![小程序界面](https://api.hbhzdtn.com/images/d2ed81c672a8f2242391e9e5fa80e8a2.png)
 ## 后台管理界面
+- 商业版后台演示地址：[cli.run.landalf.cn](cli.run.landalf.cn)
+- 访客账号：landalf 密码：landalf.cn
 ![后台管理界面](https://api.hbhzdtn.com/images/0a4b427ed5594aa38a02ae1ec682c358.png)
 ## 小程序体验版
 ![体验版小程序](https://api.hbhzdtn.com/images/bf99dc150222a849105c624987eddeaf.png)
