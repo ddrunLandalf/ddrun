@@ -6,4 +6,6 @@ module.exports = class extends BaseRest {
     async payAction () {
         
     }  
+
+    async receiveAction(){}
 }
