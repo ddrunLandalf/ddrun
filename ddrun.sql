@@ -223,6 +223,7 @@ CREATE TABLE `erd_authority` (
   `cate_id` int(11) NOT NULL DEFAULT '0',
   `auth_name` varchar(30) NOT NULL DEFAULT '',
   `auth_url` varchar(100) NOT NULL DEFAULT '' COMMENT '路径',
+  `auth_type` int(1) NOT NULL DEFAULT '1' COMMENT '权限类型',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT COMMENT='权限';
