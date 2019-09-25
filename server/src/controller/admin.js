@@ -50,7 +50,7 @@ module.exports = class extends BaseRest {
         const telNumber = this.post('tel_number');  //手机号
         const realname  = this.post('realname');    //真实姓名
         const role_id   = this.post('role_id');     //角色ID*
-        const id = this.post('userInfo').id;
+        const id =this.post('id') || this.post('userInfo').id;
         let model = this.model('admin');
         let result = await model.updateMsg(telNumber,realname,role_id,id);
         if(result == 1){

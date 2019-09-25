@@ -36,7 +36,7 @@ module.exports = class extends think.Model {
         ") as a "+
         "left join erd_anlysis_order as b "+
         "on a._date = DATE_FORMAT(b.data_time,'%Y-%m-%d') order by a._date asc";
-        let res = this.query(sql);
+        let res = await this.query(sql);
         return res
     }
 }

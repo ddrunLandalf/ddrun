@@ -72,10 +72,25 @@ module.exports = class extends think.Controller {
   }
 
   /**
-   * 检查是否有权限（待完善）
+   * 检查是否有权限
    */
   async checkAuth (userInfo) {
-    return true
+    if(userInfo.id == 1){
+      return true
+    }
+    let role = await this.model('role').where({id: userInfo.role_id}).find();
+    if(!role.id){
+      
+      return false
+    }
+    let auth_api = this.ctx.request.url;
+    let auth_type =1;
+    if(auth_api.indexOf('/config/') > -1){
+      auth_api = this.post('config_key');
+      auth_type = 2; 
+    }
+    let res = await this.model('auth_give').checkAuth(role.id,this.ctx.request.url,auth_type);
+    return res
   }
   /**
    * get resource
