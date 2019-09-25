@@ -88,7 +88,8 @@ export default {
         {
           id: this.thisMsg.id,
           tel_number: this.thisMsg.tel_number,
-          realname: this.thisMsg.realname
+          realname: this.thisMsg.realname,
+          role_id:this.thisMsg.role_id
         },
         function(res) {
           _this.loading = false;

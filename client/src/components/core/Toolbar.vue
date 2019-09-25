@@ -30,7 +30,6 @@
         layout
         py-2
       >
-        <!-- <a href="http://www.baidu.com" class="mr-3 dark--text" target="_blank">操作文档</a> -->
         <router-link
           v-ripple
           class="toolbar-items"
@@ -38,42 +37,7 @@
         >
           <v-icon color="tertiary">mdi-view-dashboard</v-icon>
         </router-link>
-        <v-menu
-          bottom
-          left
-          content-class="dropdown-menu"
-          offset-y
-          transition="slide-y-transition">
-          <router-link
-            v-ripple
-            slot="activator"
-            class="toolbar-items"
-            to="/notifications"
-          >
-            <v-badge
-              color="error"
-              overlap
-            >
-              <template slot="badge">
-                {{ notifications.length }}
-              </template>
-              <v-icon color="tertiary">mdi-bell</v-icon>
-            </v-badge>
-          </router-link>
-          <v-card>
-            <v-list dense>
-              <v-list-tile
-                v-for="notification in notifications"
-                :key="notification"
-                @click="onClick"
-              >
-                <v-list-tile-title
-                  v-text="notification"
-                />
-              </v-list-tile>
-            </v-list>
-          </v-card>
-        </v-menu>
+        
         <v-menu
           bottom
           left
