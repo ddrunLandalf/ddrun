@@ -47,6 +47,7 @@ Page({
         'formId': e.detail.formId
       })
     }
+    console.log(e)
     let type = e.currentTarget.dataset.type;
     wx.chooseImage({
       count:1,
@@ -67,13 +68,13 @@ Page({
             wx.hideLoading()
             res = JSON.parse(res.data)
             if(res.errno === 0) {
-              if(type == 1){
+              if(type == 2){
                 _this.setData({
-                  card_z_img:  res.data.url,
+                  card_f_img: res.data.url,
                 })
               }else{
                 _this.setData({
-                  card_f_img: res.data.url,
+                  card_z_img: res.data.url,
                 })
               }
             }

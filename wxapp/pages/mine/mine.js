@@ -13,7 +13,7 @@ Page({
       { icon: '/img/runman.png', label: '成为跑男', url: '/pages/runman/register/register', show: true},
       { icon: '/img/invoice.png', label: '开票与报销', show: false },
       { icon: '/img/cphone.png', label: '变更手机号', url: '/pages/mine/changePhone/changePhone', show: true},
-      { icon: '/img/change.png', label: '切换为跑男版', change: true, show: true},
+      { icon: '/img/change.png', label: '切换为跑男版', change: true, show: false},
       { icon: '/img/agent.png', label: '平台中心', url: '/pages/agent/agent', show: false },
     ]
   },

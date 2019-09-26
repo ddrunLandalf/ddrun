@@ -34,7 +34,7 @@
     <image src="{{card_f_img? url+card_f_img : '/img/cf.png'}}" class="card_img" mode="aspectFill"></image>
     <view class="panl panel-center item-center">
       <view>
-        <button class="bg-t fo-w ra-6 fo-30" data-type="0" bindtap="uploadImg">点击上传</button>
+        <button class="bg-t fo-w ra-6 fo-30" data-type="2" bindtap="uploadImg">点击上传</button>
         <view class="fo-26 fo-g text-center ma-t20">
           请上传字迹清晰的照片
         </view>
