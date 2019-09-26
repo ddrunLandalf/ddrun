@@ -109,6 +109,9 @@ module.exports = class extends BaseRest {
      */
     async anlysisAction () {
         let ws = await this.model('wxapp_service').where({wx_id: this.post('userInfo').id}).find();
+        if(!ws.id){
+            return this.fail('您不是接单员')
+        }
         let comDaily = await this.model('order').orderComDailyData(ws.id);
         let comMonth = await this.model('order').orderComMonthData(ws.id);
         let com = await this.model('order').orderComData(ws.id);
