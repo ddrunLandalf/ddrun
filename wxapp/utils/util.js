@@ -83,6 +83,20 @@ const util = {
               title: res.data.errmsg + '',
               icon: 'none'
             })
+            if (res.data.errmsg == '您还没开启接单') {
+              wx.showModal({
+                title: '您还没开启接单',
+                content: '您可以前往跑男中心设置接单',
+                confirmText: '立即前往',
+                success(res) {
+                  if (res.confirm) {
+                    wx.navigateTo({
+                      url: '/pages/runman/status/status',
+                    })
+                  }
+                }
+              })
+            }
           }else if(res.data.errno == -1){
             that.login(function (res) {
               that.http(method, url, data, success, fail)
