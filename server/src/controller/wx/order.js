@@ -300,7 +300,13 @@ module.exports = class extends BaseRest {
 
     //接单
     async receiveAction(){
-        let {ws,order,appConfig} = await this.checkRunman();
+        let check = await this.checkRunman();
+        if(!check.check){
+            return this.fail(check.msg)
+        }
+        let ws = check.ws;
+        let order = check.order;
+        let appConfig = check.appConfig;
         if(order.status == 1 && (order.ws_id == 0 || order.ws_id == ws.id)){
             let update = await this.model('order').where({id: order.id}).update({
                 ws_id: ws.id,
@@ -330,7 +336,13 @@ module.exports = class extends BaseRest {
     
     //跑男确认送达
     async confirmSendAction (){
-        let {ws,order,appConfig} = await this.checkRunman();
+        let check = await this.checkRunman();
+        if(!check.check){
+            return this.fail(check.msg)
+        }
+        let ws = check.ws;
+        let order = check.order;
+        let appConfig = check.appConfig;
         if(order.status == 2 &&  order.ws_id == ws.id) {
             let update = await this.model('order').where({id: order.id}).update({
                 ws_id: ws.id,
@@ -357,7 +369,13 @@ module.exports = class extends BaseRest {
 
     //跑男确认完成
     async confirmRunAction () {
-        let {ws,order} = await this.checkRunman();
+        let check = await this.checkRunman();
+        if(!check.check){
+            return this.fail(check.msg)
+        }
+        let ws = check.ws;
+        let order = check.order;
+        let appConfig = check.appConfig;
         if(order.status == 3 &&  order.ws_id == ws.id) {
             let update = await this.model('order').where({id: order.id}).update({
                 ws_id: ws.id,
