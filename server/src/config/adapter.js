@@ -41,8 +41,8 @@ exports.model = {
     encoding: 'utf8',
     host: '129.28.89.58',
     port: '',
-    user: 'root',
-    password: 'Qwe123..',
+    user: 'errands_free',
+    password: 'errands_free',
     dateStrings: true
   }
 };
