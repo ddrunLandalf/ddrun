@@ -9,12 +9,12 @@ module.exports = class extends BaseRest {
         if(order.id){
             if(ws.id){
                 if(ws.take_mode == 0){
-                    return this.fail('您还没开启接单')
+                    return {check:false,msg:'您还没开启接单'}
                 }
                 if(ws.status == 3 || ws.status == 4){
-                    return this.fail('您的服务已被暂停')
+                    return {check:false,msg:'您的服务已被暂停'}
                 }else if(ws.status == 0 || ws.status == 1){
-                    return this.fail('您还没有通过审核')
+                    return {check:false,msg:'您还没有通过审核'}
                 }else{
                     return {
                         ws:ws,

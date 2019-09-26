@@ -74,7 +74,13 @@ module.exports = class extends BaseRest {
      * 跑男取消订单
      */
     async runmanAction(){
-        let {ws,order,appConfig} = await this.checkRunman();
+        let check = await this.checkRunman();
+        if(!check.check){
+            return this.fail(check.msg)
+        }
+        let ws = check.ws;
+        let order = check.order;
+        let appConfig = check.appConfig;
         if(order.status != 4 && order.status != 3 && (order.ws_id == 0 || order.ws_id == ws.id)){
             let refund_fee = order.pay_amount;
             let res = await this.model('order_ope').where({order_id: order.id}).field('*,(UNIX_TIMESTAMP(now()) - UNIX_TIMESTAMP(status_time2))/60 dif_minute').find();
