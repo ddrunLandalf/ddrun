@@ -4,6 +4,7 @@
 - 部署教程：[点击查看](https://juejin.im/post/5d845fec6fb9a06ada54eb05)
 - 配置文档(部署完成后请阅读配置文档)：[点击查看](https://juejin.im/post/5d8460735188250f871b9afd)
 - 更新日志：[点击查看](./update.md)
+- 第三方接入文档：[点击查看](https://juejin.im/post/5d905a7e6fb9a04e3731596e)
 ## 项目介绍
 本项目基于Thinkjs3.0+Vue 开发的一套跑腿下单接单系统。
 ##### 主要功能
