@@ -65,5 +65,10 @@ export default [
     path: '/pwd',
     name: '修改密码',
     view: 'pages/admin/UpdatePwd'
+  },
+  {
+    path: '/opentp',
+    name: '第三方应用',
+    view: 'pages/opentp/Opentp'
   }
 ]

@@ -25,7 +25,7 @@ module.exports = class extends think.Controller {
     let userIdentity = this.ctx.header.token;
     //访问的API
     let visitApi = this.ctx.request.url;
-    if(visitApi != '/admin/login' && visitApi != '/wx/user/login'  && visitApi.indexOf('/wxp/') == -1 && visitApi.indexOf('cron/') == -1 && visitApi != '/'){
+    if(visitApi != '/admin/login' && visitApi != '/wx/user/login'  && visitApi.indexOf('/wxp/') == -1 && visitApi.indexOf('cron/') == -1 && visitApi != '/' && visitApi.indexOf('opentp/v') == -1){
       let user = await jwt.verify(userIdentity,global.jwtSecret, (err, decoded) => {
         if (err) {
           return -1 //会输出123，如果过了60秒，则有错误。

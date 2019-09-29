@@ -124,6 +124,11 @@ export default {
         to: '/wxappset',
         icon: 'el-icon-paperclip',
         text: '小程序设置'
+      },
+      {
+        to: '/opentp',
+        icon: 'el-icon-connection',
+        text: '第三方应用'
       }
     ],
     responsive: false

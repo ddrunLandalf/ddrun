@@ -37,11 +37,10 @@ Page({
     _this = this;
     _this.getServiceStatus();
     if(options.wx_id){
-      console.log(123)
       wx.setStorageSync("superior_id", options.wx_id)
     }
   },
-
+  
   onShow(){
   },
   closeCoupon(){

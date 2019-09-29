@@ -24,14 +24,23 @@ module.exports = class extends BaseRest {
                 await this.userPayGrant(order,order.wx_id)
                 await this.cents(order,order.wx_id)
             }
-            /**发送模板消息 */
-            await this.templateNotice(appConfig.appid,appConfig.app_secert,'wxapp_token',order.openid,await this.getWxappTemplateId('AT0257'),order.form_ids.split(',')[2],'/pages/order/detail/detail?order_no='+order.order_no,{
-                keyword1: {value:'订单已完成'},
-                keyword2: {value:order.order_no},
-                keyword3: {value:time},
-                keyword4: {value:order.pay_amount}
-            })
-            /**发送模板消息 */
+            if(order.order_type == 1){
+                let appli = await this.model('opentp_app').where({app_key: order.opentp_key}).find();
+                let http = await this.$http(appli.cb_url, 'POST', {
+                    errmsg: '订单已完成',
+                    status: 4,
+                    order_no: order.order_no
+                });
+            }else{
+                /**发送模板消息 */
+                await this.templateNotice(appConfig.appid,appConfig.app_secert,'wxapp_token',order.openid,await this.getWxappTemplateId('AT0257'),order.form_ids.split(',')[2],'/pages/order/detail/detail?order_no='+order.order_no,{
+                    keyword1: {value:'订单已完成'},
+                    keyword2: {value:order.order_no},
+                    keyword3: {value:time},
+                    keyword4: {value:order.pay_amount}
+                })
+                /**发送模板消息 */
+            }
             return this.success({},'已确认完成')
         }else{
             return this.fail('订单状态有误')

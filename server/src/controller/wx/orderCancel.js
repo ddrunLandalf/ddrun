@@ -56,16 +56,25 @@ module.exports = class extends BaseRest {
             refund_fine: fineAmount
         })
 
-        await this.backDiscount(order.wx_id,order.interal_value,order.wxcoupon_id)
-        /**发送模板消息 */
-        let appConfig = JSON.parse((await this.getSysConfig('mwx_id_key')).config_content)
-        await this.templateNotice(appConfig.appid,appConfig.app_secert,'wxapp_token',order.openid,await this.getWxappTemplateId('AT0024'),order.form_ids.split(',')[3],'/pages/order/detail/detail?order_no='+order.order_no,{
-            keyword1: {value:order.order_no},
-            keyword2: {value: order.status==0 ? 0:refund_fee},
-            keyword3: {value:this.post('seasonInput')},
-            keyword4: {value:'下单用户'}
-        })
-        /**发送模板消息 */
+        await this.backDiscount(order.wx_id,order.interal_value,order.wxcoupon_id);
+        if(order.order_type == 1){
+            let appli = await this.model('opentp_app').where({app_key: order.opentp_key}).find();
+            let http = await this.$http(appli.cb_url, 'POST', {
+                errmsg: '退款成功',
+                status: order.status==0?-1:-2,
+                order_no: order.order_no
+            });
+        }else{
+            /**发送模板消息 */
+            let appConfig = JSON.parse((await this.getSysConfig('mwx_id_key')).config_content)
+            await this.templateNotice(appConfig.appid,appConfig.app_secert,'wxapp_token',order.openid,await this.getWxappTemplateId('AT0024'),order.form_ids.split(',')[3],'/pages/order/detail/detail?order_no='+order.order_no,{
+                keyword1: {value:order.order_no},
+                keyword2: {value: order.status==0 ? 0:refund_fee},
+                keyword3: {value:this.post('seasonInput')},
+                keyword4: {value:'下单用户'}
+            })
+            /**发送模板消息 */
+        }
         return this.success({},'退款成功')
 
     }
@@ -123,14 +132,25 @@ module.exports = class extends BaseRest {
                 }
 
                 await this.backDiscount(order.wx_id,order.interal_value,order.wxcoupon_id)
-                /**发送模板消息 */
-                await this.templateNotice(appConfig.appid,appConfig.app_secert,'wxapp_token',order.openid,await this.getWxappTemplateId('AT0024'),order.form_ids.split(',')[3],'/pages/order/detail/detail?order_no='+order.order_no,{
-                    keyword1: {value:order.order_no},
-                    keyword2: {value: refund_fee},
-                    keyword3: {value:this.post('seasonInput')},
-                    keyword4: {value:'下单用户'}
-                })
-                /**发送模板消息 */
+
+                if(order.order_type == 1){
+                    let appli = await this.model('opentp_app').where({app_key: order.opentp_key}).find();
+                    let http = await this.$http(appli.cb_url, 'POST', {
+                        errmsg: '退款成功',
+                        status: order.status==0?-1:-2,
+                        order_no: order.order_no
+                    });
+                }else{
+
+                    /**发送模板消息 */
+                    await this.templateNotice(appConfig.appid,appConfig.app_secert,'wxapp_token',order.openid,await this.getWxappTemplateId('AT0024'),order.form_ids.split(',')[3],'/pages/order/detail/detail?order_no='+order.order_no,{
+                        keyword1: {value:order.order_no},
+                        keyword2: {value: refund_fee},
+                        keyword3: {value:this.post('seasonInput')},
+                        keyword4: {value:'下单用户'}
+                    })
+                    /**发送模板消息 */
+                }
                 return this.success({},'退款成功')
 
             }else{

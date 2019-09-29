@@ -316,16 +316,24 @@ module.exports = class extends BaseRest {
                 status_time2: think.datetime(new Date().valueOf(), 'YYYY-MM-DD HH:mm:ss')
             })
             let end = JSON.parse(order.end_address)
-
-            /**发送模板消息 */
-            await this.templateNotice(appConfig.appid,appConfig.app_secert,'wxapp_token',order.openid,await this.getWxappTemplateId('AT0177'),order.form_ids.split(',')[0],'/pages/order/detail/detail?order_no='+order.order_no,{
-                keyword1: {value:'配送中'},
-                keyword2: {value:order.order_no},
-                keyword3: {value:order.create_time},
-                keyword4: {value:end.formatted_addresse + end.street_number + (end.address_detail || '')},
-                keyword5: {value:ws.realname.substring(0,1) + '师傅'}
-            })
-            /**发送模板消息 */
+            if(order.order_type == 1){
+                let appli = await this.model('opentp_app').where({app_key: order.opentp_key}).find();
+                let http = await this.$http(appli.cb_url, 'POST', {
+                    errmsg: '接单成功',
+                    status: 2,
+                    order_no: order.order_no
+                });
+            }else{
+                /**发送模板消息 */
+                await this.templateNotice(appConfig.appid,appConfig.app_secert,'wxapp_token',order.openid,await this.getWxappTemplateId('AT0177'),order.form_ids.split(',')[0],'/pages/order/detail/detail?order_no='+order.order_no,{
+                    keyword1: {value:'配送中'},
+                    keyword2: {value:order.order_no},
+                    keyword3: {value:order.create_time},
+                    keyword4: {value:end.formatted_addresse + end.street_number + (end.address_detail || '')},
+                    keyword5: {value:ws.realname.substring(0,1) + '师傅'}
+                })
+                /**发送模板消息 */
+            }
 
             return this.success({},'接单成功')
         }else{
@@ -352,14 +360,23 @@ module.exports = class extends BaseRest {
                 status_time3: think.datetime(new Date().valueOf(), 'YYYY-MM-DD HH:mm:ss')
             })
             let end = JSON.parse(order.end_address)
-            /**发送模板消息 */
-            await this.templateNotice(appConfig.appid,appConfig.app_secert,'wxapp_token',order.openid,await this.getWxappTemplateId('AT1853'),order.form_ids.split(',')[1],'/pages/order/detail/detail?order_no='+order.order_no,{
-                keyword1: {value:order.service_type},
-                keyword2: {value:order.order_no},
-                keyword3: {value:end.formatted_addresse + end.street_number + (end.address_detail || '')},
-                keyword4: {value:ws.realname.substring(0,1) + '师傅'}
-            })
-            /**发送模板消息 */
+            if(order.order_type == 1){
+                let appli = await this.model('opentp_app').where({app_key: order.opentp_key}).find();
+                let http = await this.$http(appli.cb_url, 'POST', {
+                    errmsg: '确认送达',
+                    status: 3,
+                    order_no: order.order_no
+                });
+            }else{
+                /**发送模板消息 */
+                await this.templateNotice(appConfig.appid,appConfig.app_secert,'wxapp_token',order.openid,await this.getWxappTemplateId('AT1853'),order.form_ids.split(',')[1],'/pages/order/detail/detail?order_no='+order.order_no,{
+                    keyword1: {value:order.service_type},
+                    keyword2: {value:order.order_no},
+                    keyword3: {value:end.formatted_addresse + end.street_number + (end.address_detail || '')},
+                    keyword4: {value:ws.realname.substring(0,1) + '师傅'}
+                })
+                /**发送模板消息 */
+            }
 
             return this.success({},'已确认送达')
         }else{
@@ -389,14 +406,24 @@ module.exports = class extends BaseRest {
             if(order.pay_amount > 0){
                 await this.userPayGrant(order,order.wx_id)
             }
-            /**发送模板消息 */
-            await this.templateNotice(appConfig.appid,appConfig.app_secert,'wxapp_token',order.openid,await this.getWxappTemplateId('AT0257'),order.form_ids.split(',')[2],'/pages/order/detail/detail?order_no='+order.order_no,{
-                keyword1: {value:'订单已完成'},
-                keyword2: {value:order.order_no},
-                keyword3: {value:time},
-                keyword4: {value:order.pay_amount}
-            })
-            /**发送模板消息 */
+            if(order.order_type == 1){
+                let appli = await this.model('opentp_app').where({app_key: order.opentp_key}).find();
+                let http = await this.$http(appli.cb_url, 'POST', {
+                    errmsg: '确认完成',
+                    status: 4,
+                    order_no: order.order_no
+                });
+            }else{
+
+                /**发送模板消息 */
+                await this.templateNotice(appConfig.appid,appConfig.app_secert,'wxapp_token',order.openid,await this.getWxappTemplateId('AT0257'),order.form_ids.split(',')[2],'/pages/order/detail/detail?order_no='+order.order_no,{
+                    keyword1: {value:'订单已完成'},
+                    keyword2: {value:order.order_no},
+                    keyword3: {value:time},
+                    keyword4: {value:order.pay_amount}
+                })
+                /**发送模板消息 */
+            }
             return this.success({},'已确认完成')
         }else{
             return this.fail('订单状态有误')
