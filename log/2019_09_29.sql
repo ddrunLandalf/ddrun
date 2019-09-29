@@ -18,3 +18,8 @@ CREATE TABLE `erd_opentp_app` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `app_key` (`app_key`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='第三方应用';
+
+# 更新第三方管理权限
+INSERT INTO `erd_authority_category` (`cate_name`,`sort`) VALUES ('第三方管理',10);
+INSERT INTO `erd_authority` (`cate_id`,`auth_name`,`auth_url`,`auth_type`) VALUES(10,'新增应用','/admin/opentp/add',1),(10,'修改应用','/admin/opentp/upadte',1)
+,(10,'修改应用状态','/admin/opentp/status',1),(10,'删除应用','/admin/opentp/recover',1),(10,'获取应用列表','/admin/opentp/list',1);
