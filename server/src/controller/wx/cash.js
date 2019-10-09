@@ -4,7 +4,6 @@ module.exports = class extends BaseRest {
      * 跑男提现
      */
     async runAction () {
-        let userInfo = this.post('userInfo');
         let ws = await this.runcheck()
         let cashConfig = await this.getSysConfig('cash');
         if(cashConfig.config_content){
@@ -27,7 +26,7 @@ module.exports = class extends BaseRest {
             account_id: this.post('account_id')
         })
         await this.model('wxapp_service').where({
-            id: userInfo.id,
+            id: ws.id,
         }).update({
             surplus_amount: ['exp','surplus_amount-'+cashfee]
         })

@@ -71,7 +71,7 @@ module.exports = class extends BaseRest {
             if(distance > distanceRule.start_distance){
                 exccedDistance = parseInt(distance)-parseInt(distanceRule.start_distance);
                 // 超出部分计价规则  (超出的距离/固定超出距离)向上取整 * 固定超出价格
-                exccedPrice = parseInt(Math.ceil(exccedDistance/parseInt(distanceRule.exceed_everyone_distance)))*parseInt(distanceRule.exceed_everyone_price)
+                exccedPrice = parseInt(Math.ceil(exccedDistance/parseInt(distanceRule.exceed_everyone_distance)))*parseFloat(distanceRule.exceed_everyone_price)
             }
             let totalPrice = parseFloat(exccedPrice) + parseFloat(distanceRule.start_price);
             let weightRule = await this.model('agent_weight_ruls').where({id:weight_id}).find();
