@@ -4,6 +4,7 @@ module.exports = class extends BaseRest {
      * 跑男提现
      */
     async runAction () {
+        let userInfo = this.post('userInfo');
         let ws = await this.runcheck()
         let cashConfig = await this.getSysConfig('cash');
         if(cashConfig.config_content){
