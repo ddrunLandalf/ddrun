@@ -239,19 +239,28 @@ module.exports = class extends think.Controller {
     let http = await this.$http(urlStr,'POST',bodyData.bodyData);
     if(typeof http == 'string'){
       let result = await wxpay.parseString(http);
-      return {
-        out_trade_no:bodyData.out_trade_no,
-        nonceStr:result.xml.nonce_str[0],
-        timestamp:timestamp.toString(),
-        package:"prepay_id=" + result.xml.prepay_id[0],
-        paySign: wxpay.paysignjs(
-          appConfig.appid,
-          result.xml.nonce_str[0],
-          "prepay_id=" + result.xml.prepay_id[0],
-          "MD5",
-          timestamp,
-          mchConfig.mch_secert
-        )
+      if(result.xml.return_code[0] == 'FAIL'){
+        return {
+          code:false,
+          msg: result.xml.return_msg[0]
+        }
+      }else{
+          
+        return {
+          code:true,
+          out_trade_no:bodyData.out_trade_no,
+          nonceStr:result.xml.nonce_str[0],
+          timestamp:timestamp.toString(),
+          package:"prepay_id=" + result.xml.prepay_id[0],
+          paySign: wxpay.paysignjs(
+            appConfig.appid,
+            result.xml.nonce_str[0],
+            "prepay_id=" + result.xml.prepay_id[0],
+            "MD5",
+            timestamp,
+            mchConfig.mch_secert
+          )
+        }
       }
     }else{
       return this.fail(result.xml.return_msg[0])

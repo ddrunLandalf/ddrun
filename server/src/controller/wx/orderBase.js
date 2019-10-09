@@ -17,17 +17,17 @@ module.exports = class extends BaseRest {
                     return {check:false,msg:'您还没有通过审核'}
                 }else{
                     return {
+                        check:true,
                         ws:ws,
                         order:order,
                         appConfig: JSON.parse((await this.getSysConfig('mwx_id_key')).config_content)
                     }
                 }
             }else{
-                return this.fail('对不起您不是跑男')
+                return {check:false,msg:'对不起您不是跑男'}
             }
         }else{
-            return this.fail('订单不存在')
+            return {check:false,msg:'订单不存在'}
         }
     }
-
 }
