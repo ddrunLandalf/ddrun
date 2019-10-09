@@ -133,6 +133,9 @@ module.exports = class extends BaseRest {
             let pay;
             if(totalFee > 0){
                 pay = await this.unifiedorder(service_type,totalFee);
+                if(!pay.code){
+                    return this.fail(pay.msg)
+                }
             }else{
                 pay.totalFee = 0;
                 pay.out_trade_no = think.uuid('v4').replace(/-/g,"");
@@ -301,7 +304,7 @@ module.exports = class extends BaseRest {
     //接单
     async receiveAction(){
         let check = await this.checkRunman();
-        if(!check.check){
+        if(check.check == false){
             return this.fail(check.msg)
         }
         let ws = check.ws;
