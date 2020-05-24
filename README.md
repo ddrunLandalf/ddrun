@@ -9,18 +9,16 @@
 本项目基于Thinkjs3.0+Vue 开发的一套跑腿下单接单系统。
 ##### 主要功能
 地址解析、配送路程计算、物品重量价格计算、分销、微信支付下单、积分抵扣、优惠券、配送系统(抢单模式/平均分配订单)
-##### 更新预告
-- 1.根据跑男位置就近派单
-- 2.设置每日优惠券赠送
-- 3.接入公众号服务号更多功能
+##### 商业版限时活动价格
+￥399元 - 全部源码
 ## 小程序界面
-![小程序界面](https://user-gold-cdn.xitu.io/2019/9/20/16d4d134548f9828?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+![小程序界面](https://ddrun.oss-cn-beijing.aliyuncs.com/%E6%9C%AA%E6%A0%87%E9%A2%98-1.png)
 ## 后台管理界面
 - 商业版后台演示地址：[http://demo.runbac.landalf.cn](http://demo.runbac.landalf.cn)
 - 访客账号：landalf 密码：landalf.cn
-![后台管理界面](https://user-gold-cdn.xitu.io/2019/9/20/16d4d13455ef926a?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+![后台管理界面](https://ddrun.oss-cn-beijing.aliyuncs.com/sss.png)
 ## 小程序体验版
-![体验版小程序](https://user-gold-cdn.xitu.io/2019/9/20/16d4d134562fbd93?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+![体验版小程序](https://ddrun.oss-cn-beijing.aliyuncs.com/16d4d134562fbd93.png)
 
 ## 版本功能介绍
 功能项|开源版|商业版
