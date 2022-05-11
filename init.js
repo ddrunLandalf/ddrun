@@ -41,7 +41,7 @@ const initMysql = async () => {
 };
 
 // 初始化配置
-const initConfig = (port) => {
+const initConfig = () => {
   console.info("【开始初始化配置文件】......");
   const read = fs.readFileSync(
     path.join(__dirname, "server", "src", "config", "config.prod.ts.bak"),
@@ -60,7 +60,7 @@ const initConfig = (port) => {
     .replace("{redis_port}", config.redis.client.port)
     .replace("{redis_host}", config.redis.client.host)
     .replace("{redis_password}", config.redis.client.password)
-    .replace("{server_port}", port);
+    .replace("{server_port}", config.serverPort);
 
   fs.writeFileSync(
     path.join(__dirname, "server", "src", "config", "config.prod.ts"),
@@ -105,7 +105,7 @@ const startServer = () => {
 };
 
 // 初始化后台配置
-const initAdminConfig = (port) => {
+const initAdminConfig = () => {
   console.info("【后台配置文件】......");
   const read = fs.readFileSync(
     path.join(__dirname, "admin", "nuxt.config.js.bak"),
@@ -114,7 +114,7 @@ const initAdminConfig = (port) => {
     }
   );
   const wirteStr = read
-    .replace("{server_port}", port)
+    .replace("{server_port}", config.serverPort)
     .replace("{domain}", config.domain)
     .replace("{opName}", config.opName);
   fs.writeFileSync(path.join(__dirname, "admin", "nuxt.config.js"), wirteStr);
@@ -181,13 +181,13 @@ const initMiniappConfig = () => {
 };
 
 // 初始化nginx配置
-const initNginx = (port) => {
+const initNginx = () => {
   console.info("【nginx配置文件】......");
   const read = fs.readFileSync(path.join(__dirname, "nginx.conf.bak"), {
     encoding: "utf8",
   });
   let wirteStr = read
-    .replace(/{port}/g, port)
+    .replace(/{port}/g, config.serverPort)
     .replace(/{server_name}/g, config.domain)
     .replace(/{root_path}/g, path.join(__dirname, "admin", "dist"));
 
@@ -232,16 +232,16 @@ const initPort = async () => {
 };
 
 const init = async () => {
-  const port = await initPort();
-  initConfig(port);
+  // const port = await initPort();
+  initConfig();
   await initMysql();
   await installServer();
   await buildServer();
   await startServer();
-  initAdminConfig(port);
+  initAdminConfig();
   await installAdmin();
   await buildAdmin();
-  initNginx(port);
+  initNginx();
   initMiniappConfig();
 };
 init();

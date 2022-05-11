@@ -3,6 +3,7 @@
   "opName": "叮点跑腿后台管理系统",
   "domain": "xxx.xxx.com",
   "perfix": "http",
+  "serverPort": "8001",
   "mysql": {
     "host": "xxx.xxx.com",
     "port": 3306,
