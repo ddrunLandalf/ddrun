@@ -117,6 +117,7 @@ const initAdminConfig = (port) => {
     .replace("{domain}", config.domain)
     .replace("{opName}", config.opName);
   fs.writeFileSync(path.join(__dirname, "nginx.conf"), wirteStr);
+  console.info("【后台配置文件】完成！");
 };
 
 // 管理系统依赖安装
