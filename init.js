@@ -206,7 +206,7 @@ const init = async () => {
   await installServer();
   await buildServer();
   await startServer();
-  startServer(port);
+  initAdminConfig(port);
   await installAdmin();
   await buildAdmin();
   initNginx(port);
