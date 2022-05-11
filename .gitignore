@@ -18,7 +18,6 @@ config.prod.ts
 ecosysytem.config.js
 
 .DS_Store
-.husky/
 .nuxt/
 
 logs
