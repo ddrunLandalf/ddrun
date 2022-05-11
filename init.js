@@ -150,6 +150,36 @@ const judgeServerOpen = (port) => {
   });
 };
 
+// 初始化小程序配置
+const initMiniappConfig = () => {
+  console.info("【小程序配置文件】......");
+  const read = fs.readFileSync(
+    path.join(__dirname, "miniapp", "pages.json.bak"),
+    {
+      encoding: "utf8",
+    }
+  );
+  const wirteStr = read.replace("{name}", config.name);
+
+  fs.writeFileSync(path.join(__dirname, "miniapp", "pages.json"), wirteStr);
+
+  const read2 = fs.readFileSync(
+    path.join(__dirname, "miniapp", "util", "constant.js.bak"),
+    {
+      encoding: "utf8",
+    }
+  );
+  const wirteStr2 = read2
+    .replace("{domain}", config.domain)
+    .replace("{perfix}", config.perfix);
+
+  fs.writeFileSync(
+    path.join(__dirname, "miniapp", "util", "constant.js"),
+    wirteStr2
+  );
+  console.info("【小程序配置文件】完成！");
+};
+
 // 初始化nginx配置
 const initNginx = (port) => {
   console.info("【nginx配置文件】......");
@@ -212,5 +242,6 @@ const init = async () => {
   await installAdmin();
   await buildAdmin();
   initNginx(port);
+  initMiniappConfig();
 };
 init();

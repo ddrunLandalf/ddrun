@@ -1,0 +1,178 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 3270760 */
+  src: url('//at.alicdn.com/t/font_3270760_fn4ywjozyl.woff2?t=1651817436329') format('woff2'),
+       url('//at.alicdn.com/t/font_3270760_fn4ywjozyl.woff?t=1651817436329') format('woff'),
+       url('//at.alicdn.com/t/font_3270760_fn4ywjozyl.ttf?t=1651817436329') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-call:before {
+  content: "\e680";
+}
+
+.icon-navigation:before {
+  content: "\e640";
+}
+
+.icon-local:before {
+  content: "\e6c5";
+}
+
+.icon-verify-refuse:before {
+  content: "\e6b5";
+}
+
+.icon-verify-wait:before {
+  content: "\e61a";
+}
+
+.icon-verify-success:before {
+  content: "\e622";
+}
+
+.icon-status:before {
+  content: "\e6bf";
+}
+
+.icon-setting:before {
+  content: "\e63c";
+}
+
+.icon-cash:before {
+  content: "\e7e4";
+}
+
+.icon-tel:before {
+  content: "\e969";
+}
+
+.icon-rider:before {
+  content: "\e6d8";
+}
+
+.icon-idcard2:before {
+  content: "\e600";
+}
+
+.icon-idcard1:before {
+  content: "\e602";
+}
+
+.icon-send:before {
+  content: "\e6c0";
+}
+
+.icon-change:before {
+  content: "\e691";
+}
+
+.icon-guide:before {
+  content: "\e667";
+}
+
+.icon-share:before {
+  content: "\e664";
+}
+
+.icon-change-user:before {
+  content: "\e893";
+}
+
+.icon-order:before {
+  content: "\e8ae";
+}
+
+.icon-avatar:before {
+  content: "\e673";
+}
+
+.icon-order-empty:before {
+  content: "\e63b";
+}
+
+.icon-clock:before {
+  content: "\e8c5";
+}
+
+.icon-desc:before {
+  content: "\e775";
+}
+
+.icon-location-empty:before {
+  content: "\e606";
+}
+
+.icon-edit:before {
+  content: "\e601";
+}
+
+.icon-home:before {
+  content: "\e7d8";
+}
+
+.icon-company:before {
+  content: "\e769";
+}
+
+.icon-coupon2:before {
+  content: "\e6f1";
+}
+
+.icon-overdue:before {
+  content: "\e75d";
+}
+
+.icon-coupon:before {
+  content: "\e61f";
+}
+
+.icon-search:before {
+  content: "\e63f";
+}
+
+.icon-location:before {
+  content: "\e6f9";
+}
+
+.icon-mobile:before {
+  content: "\e68d";
+}
+
+.icon-user:before {
+  content: "\e8c8";
+}
+
+.icon-arrow-right:before {
+  content: "\e637";
+}
+
+.icon-arrow-left:before {
+  content: "\e638";
+}
+
+.icon-arrow-bottom:before {
+  content: "\e639";
+}
+
+.icon-arrow-top:before {
+  content: "\e63a";
+}
+
+.icon-weight:before {
+  content: "\ece3";
+}
+
+.icon-text:before {
+  content: "\e6cd";
+}
+
+.icon-run:before {
+  content: "\e64d";
+}

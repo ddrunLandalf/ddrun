@@ -1,0 +1,167 @@
+{
+  "pages": [
+    {
+      "path": "pages/index/index"
+    },
+    {
+      "path": "pages/mine/mine",
+      "style": {
+        "navigationBarTitleText": "个人中心",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/mine/address/supply/supply",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/login/login",
+      "style": {
+        "navigationBarTitleText": "请先登录",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/mine/address/search/search",
+      "style": {
+        "navigationBarTitleText": "搜索地址",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/mine/address/city/city",
+      "style": {
+        "navigationBarTitleText": "选择城市",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/publish/publish",
+      "style": {
+        "navigationBarTitleText": "发布",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/mine/coupon/coupon",
+      "style": {
+        "navigationBarTitleText": "我的优惠券",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/order/order",
+      "style": {
+        "navigationBarTitleText": "我的订单",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/order/detail/detail",
+      "style": {
+        "navigationBarTitleText": "订单详情",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/mine/address/address",
+      "style": {
+        "navigationBarTitleText": "常用地址",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/rider/rider",
+      "style": {
+        "navigationBarTitleText": "骑手中心",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/rider/register/register",
+      "style": {
+        "navigationBarTitleText": "注册为骑手",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/rider/order/order",
+      "style": {
+        "navigationBarTitleText": "接单中心",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/rider/cash/cash",
+      "style": {
+        "navigationBarTitleText": "提现",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/rider/setting/setting",
+      "style": {
+        "navigationBarTitleText": "骑手设置",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/rider/city/city",
+      "style": {
+        "navigationBarTitleText": "开通运营的城市",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/rider/status/status",
+      "style": {
+        "navigationBarTitleText": "骑手状态",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/order/reason/reason",
+      "style": {
+        "navigationBarTitleText": "取消订单理由",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/text/text",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/rider/cash/banks/banks",
+      "style": {
+        "navigationBarTitleText": "我的银行卡",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/rider/cash/banks/edit/edit",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/rider/cash/record/record",
+      "style": {
+        "navigationBarTitleText": "提现记录",
+        "enablePullDownRefresh": true
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "{name}",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "backgroundColor": "#ffffff"
+  }
+}
