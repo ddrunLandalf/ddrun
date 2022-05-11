@@ -5,6 +5,8 @@ const getProxyTarget = () => {
     return 'http://localhost:{server_port}';
   } else if (isProd) {
     return '{domain}';
+  } else {
+    return 'http://localhost:{server_port}';
   }
 };
 export default {
