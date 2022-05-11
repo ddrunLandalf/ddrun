@@ -54,7 +54,7 @@ const initConfig = (port) => {
     .replace("{mysql_port}", config.mysql.port)
     .replace("{mysql_username}", config.mysql.username)
     .replace("{mysql_password}", config.mysql.password)
-    .repeat("{mysql_database}", config.mysql.database)
+    .replace("{mysql_database}", config.mysql.database)
     .replace("{mysql_synchronize}", config.mysql.synchronize)
     .replace("{jwt_key}", nanoid(16))
     .replace("{redis_port}", config.redis.client.port)
@@ -204,13 +204,13 @@ const initPort = async () => {
 const init = async () => {
   const port = await initPort();
   initConfig(port);
-  await initMysql();
-  await installServer();
-  await buildServer();
-  await startServer();
-  initAdminConfig(port);
-  await installAdmin();
-  await buildAdmin();
-  initNginx(port);
+  // await initMysql();
+  // await installServer();
+  // await buildServer();
+  // await startServer();
+  // initAdminConfig(port);
+  // await installAdmin();
+  // await buildAdmin();
+  // initNginx(port);
 };
 init();
