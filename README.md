@@ -14,6 +14,7 @@
 #### 如何使用
 
 - [服务器部署教程](./text/build-server.md)
+- [开发教程](./text/dev.md)
 
 ## 小程序界面
 
@@ -42,4 +43,4 @@
 - Uniapp:[https://uniapp.dcloud.io/](https://uniapp.dcloud.io/)
 - Ant G2 可视化引擎: [https://g2.antv.vision/zh/](https://g2.antv.vision/zh/)
 
-请遵循 GPL3.0 开源协议发布，并提供免费使用。
+请遵循 MIT 开源协议发布，并提供免费使用。

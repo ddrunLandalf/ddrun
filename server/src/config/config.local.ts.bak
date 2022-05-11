@@ -12,9 +12,6 @@ export type DefaultConfig = PowerPartial<EggAppConfig>;
  */
 export default {
   keys: '_1647247784657_5669',
-  security: {
-    csrf: false,
-  },
   egg: {
     port: 8001,
   },
