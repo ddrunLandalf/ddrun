@@ -1,0 +1,133 @@
+<template>
+  <div class="config-content">
+    <a-form-model ref="ruleForm" :model="formData" :rules="rules">
+      <div class="flex flex-between item-center">
+        <div class="bold">阿里云配置</div>
+        <a
+          href="https://help.aliyun.com/document_detail/100624.htm?spm=a2c4g.11186623.0.0.75565b78xKNESY#concept-xzh-nzk-2gb"
+          target="_blank"
+          >帮助</a
+        >
+      </div>
+      <a-form-model-item ref="accessKeyId" label="AccessKey ID" prop="accessKeyId">
+        <a-input
+          v-model="formData.accessKeyId"
+          placeholder="请输入accessKeyId"
+          @blur="
+            () => {
+              $refs.accessKeyId.onFieldBlur();
+            }
+          "
+        />
+      </a-form-model-item>
+
+      <a-form-model-item ref="accessKeySecret" label="秘钥 Secret" prop="accessKeySecret">
+        <a-input
+          v-model="formData.accessKeySecret"
+          placeholder="请输入秘钥 Secret"
+          @blur="
+            () => {
+              $refs.accessKeySecret.onFieldBlur();
+            }
+          "
+        />
+      </a-form-model-item>
+
+      <a-form-model-item ref="arn" label="ARN" prop="arn">
+        <a-input
+          v-model="formData.arn"
+          placeholder="请输入ARN"
+          @blur="
+            () => {
+              $refs.arn.onFieldBlur();
+            }
+          "
+        />
+      </a-form-model-item>
+
+      <a-form-model-item ref="ossRegion" label="对象存储Oss Region" prop="ossRegion">
+        <a-input
+          v-model="formData.ossRegion"
+          placeholder="请输入对象存储Oss Region"
+          @blur="
+            () => {
+              $refs.ossRegion.onFieldBlur();
+            }
+          "
+        />
+      </a-form-model-item>
+
+      <a-form-model-item ref="ossBucket" label="对象存储Oss Bucket" prop="ossBucket">
+        <a-input
+          v-model="formData.ossBucket"
+          placeholder="请输入对象存储Oss Bucket"
+          @blur="
+            () => {
+              $refs.ossBucket.onFieldBlur();
+            }
+          "
+        />
+      </a-form-model-item>
+
+      <a-form-model-item>
+        <a-button type="primary" size="large" :loading="loading" @click="submit">提交保存</a-button>
+      </a-form-model-item>
+    </a-form-model>
+  </div>
+</template>
+<script lang="ts">
+import Vue from 'vue';
+export default Vue.extend({
+  data() {
+    return {
+      formData: {
+        accessKeyId: '',
+        accessKeySecret: '',
+        arn: '',
+        ossRegion: '',
+        ossBucket: ''
+      },
+      rules: {
+        accessKeyId: [{ required: true, message: '请输入AccessKey ID', trigger: 'blur' }],
+        accessKeySecret: [{ required: true, message: '请输入秘钥 Secret', trigger: 'blur' }],
+        arn: [{ required: true, message: '请输入ARN', trigger: 'blur' }],
+        ossRegion: [{ required: true, message: '请输入Region', trigger: 'blur' }],
+        ossBucket: [{ required: true, message: '请输入Bucket', trigger: 'blur' }]
+      },
+      loading: false
+    };
+  },
+  mounted() {
+    this.getauth();
+  },
+  methods: {
+    async getauth() {
+      const result = await (this as any).$api.adminAliGet();
+      if (result.code === 200) {
+        this.formData = result.data;
+      }
+    },
+    submit() {
+      (this.$refs as any).ruleForm.validate(async (valid: boolean) => {
+        if (valid) {
+          this.loading = true;
+          const result = await (this as any).$api.adminAliPost(this.formData);
+          this.loading = false;
+          if (result.code === 200) {
+            (this as any).$message.success(result.msg);
+          }
+        } else {
+          return false;
+        }
+      });
+    }
+  }
+});
+</script>
+<style lang="less" scoped>
+.config-content {
+  width: 500px;
+  margin: auto;
+  padding-top: 80px;
+}
+</style>

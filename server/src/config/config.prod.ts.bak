@@ -1,0 +1,39 @@
+import { EggAppConfig, PowerPartial } from 'egg';
+import { MidwayConfig } from '@midwayjs/core';
+import { CustomConfig } from '../interface';
+
+export type DefaultConfig = PowerPartial<EggAppConfig>;
+
+export default {
+  // security: {
+  //   csrf: true,
+  // },
+  orm: {
+    /**
+     * 单数据库实例
+     */
+    type: 'mysql',
+    host: '{mysql_host}',
+    port: '{mysql_port}',
+    username: '{mysql_username}',
+    password: '{mysql_password}',
+    database: '{mysql_database}',
+    synchronize: {mysql_synchronize}, // 如果第一次使用，不存在表，有同步的需求可以写 true
+    logging: false,
+  },
+  redis: {
+    client: {
+      port: '{redis_port}', // Redis port
+      host: '{redis_host}', // Redis host
+      password: '{redis_password}',
+      db: 0,
+    },
+  },
+  jwt: {
+    privateKey: '{jwt_key}', //秘钥
+    expiresIn: '168h', // 过期时间
+  },
+  egg: {
+    port: {server_port},
+  },
+} as unknown as MidwayConfig & DefaultConfig & CustomConfig;

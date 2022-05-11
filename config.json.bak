@@ -1,0 +1,24 @@
+{
+  "name": "叮点跑腿",
+  "mysql": {
+    "host": "xxx.xxx.com",
+    "port": 3306,
+    "username": "xxx",
+    "password": "xxxxxx",
+    "database": "ddrunv2",
+    "synchronize": true,
+    "logging": false
+  },
+  "redis": {
+    "client": {
+      "port": 6379,
+      "host": "xxx.xxx.com",
+      "password": "xxxxxx",
+      "db": 0
+    }
+  },
+  "nginx": {
+    "server_name": "xxx.xxx.com",
+    "server_port": "8001"
+  }
+}
