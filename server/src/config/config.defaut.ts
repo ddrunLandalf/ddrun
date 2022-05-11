@@ -2,6 +2,11 @@ import { MidwayConfig, MidwayAppInfo } from '@midwayjs/core';
 
 export default (appInfo: MidwayAppInfo) => {
   return {
+    security: {
+      csrf: {
+        enable: false,
+      },
+    },
     // use for cookie sign key, should change to your own and keep security
     keys: appInfo.name + '_1647247784657_5669',
     egg: {
@@ -16,9 +21,6 @@ export default (appInfo: MidwayAppInfo) => {
       whitelist: ['jpg', 'jpeg', 'png', 'webp'],
       // cleanTimeout: number，上传的文件在临时目录中多久之后自动删除，默认为 5 分钟
       cleanTimeout: 5 * 60 * 1000,
-    },
-    security: {
-      csrf: true,
     },
   } as MidwayConfig;
 };

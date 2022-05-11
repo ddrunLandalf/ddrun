@@ -1,12 +1,13 @@
 const isLocal = process.env.NODE_ENV === 'local';
 const isProd = process.env.NODE_ENV === 'prod';
 const getProxyTarget = () => {
+  const localUrl = 'http://localhost:{server_port}';
   if (isLocal) {
-    return 'http://localhost:{server_port}';
+    return localUrl;
   } else if (isProd) {
     return '{domain}';
   } else {
-    return 'http://localhost:{server_port}';
+    return localUrl;
   }
 };
 export default {
