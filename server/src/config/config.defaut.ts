@@ -2,13 +2,13 @@ import { MidwayConfig, MidwayAppInfo } from '@midwayjs/core';
 
 export default (appInfo: MidwayAppInfo) => {
   return {
-    security: {
-      csrf: {
-        enable: false,
-      },
-    },
     // use for cookie sign key, should change to your own and keep security
     keys: appInfo.name + '_1647247784657_5669',
+    security: {
+      csrf: {
+        headerName: 'x-csrf-token',
+      },
+    },
     egg: {
       port: 8001,
     },

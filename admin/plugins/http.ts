@@ -10,8 +10,12 @@ interface Result {
 }
 const axios_instance = axios.create({
   baseURL: '',
-  timeout: 120000
+  timeout: 120000,
+  headers: {
+    'x-csrf-token': jsCookie.get('csrfToken')
+  }
 });
+
 axios.defaults.withCredentials = true;
 
 axios_instance.interceptors.response.use(
