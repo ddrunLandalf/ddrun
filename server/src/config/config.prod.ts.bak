@@ -8,6 +8,7 @@ export default {
   // security: {
   //   csrf: true,
   // },
+  keys: '_1647247784657_5669',
   orm: {
     /**
      * 单数据库实例
