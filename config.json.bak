@@ -18,8 +18,5 @@
       "password": "xxxxxx",
       "db": 0
     }
-  },
-  "nginx": {
-    "server_name": "xxx.xxx.com"
   }
 }
