@@ -17,5 +17,8 @@ export default (appInfo: MidwayAppInfo) => {
       // cleanTimeout: number，上传的文件在临时目录中多久之后自动删除，默认为 5 分钟
       cleanTimeout: 5 * 60 * 1000,
     },
+    security: {
+      csrf: true,
+    },
   } as MidwayConfig;
 };

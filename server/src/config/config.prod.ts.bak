@@ -5,9 +5,6 @@ import { CustomConfig } from '../interface';
 export type DefaultConfig = PowerPartial<EggAppConfig>;
 
 export default {
-  // security: {
-  //   csrf: true,
-  // },
   keys: '_1647247784657_5669',
   orm: {
     /**
