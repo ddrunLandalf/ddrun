@@ -1,5 +1,7 @@
 {
   "name": "叮点跑腿",
+  "opName": "叮点跑腿后台管理系统",
+  "domain": "xxx.xxx.com",
   "mysql": {
     "host": "xxx.xxx.com",
     "port": 3306,
@@ -18,7 +20,6 @@
     }
   },
   "nginx": {
-    "server_name": "xxx.xxx.com",
-    "server_port": "8001"
+    "server_name": "xxx.xxx.com"
   }
 }
