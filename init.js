@@ -116,7 +116,7 @@ const initAdminConfig = (port) => {
     .replace("{server_port}", port)
     .replace("{domain}", config.domain)
     .replace("{opName}", config.opName);
-  fs.writeFileSync(path.join(__dirname, "nginx.conf"), wirteStr);
+  fs.writeFileSync(path.join(__dirname, "admin", "nuxt.config.js"), wirteStr);
   console.info("【后台配置文件】完成！");
 };
 
