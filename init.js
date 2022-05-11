@@ -204,13 +204,13 @@ const initPort = async () => {
 const init = async () => {
   const port = await initPort();
   initConfig(port);
-  // await initMysql();
-  // await installServer();
-  // await buildServer();
-  // await startServer();
-  // initAdminConfig(port);
-  // await installAdmin();
-  // await buildAdmin();
-  // initNginx(port);
+  await initMysql();
+  await installServer();
+  await buildServer();
+  await startServer();
+  initAdminConfig(port);
+  await installAdmin();
+  await buildAdmin();
+  initNginx(port);
 };
 init();
