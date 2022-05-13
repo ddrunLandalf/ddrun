@@ -13,8 +13,9 @@
 
 #### 如何使用
 
-- [服务器部署教程](https://gitee.com/yaozy717/ddrun/blob/master/text/buid-server.md)
-- [开发教程](https://gitee.com/yaozy717/ddrun/blob/master/text/dev.md)
+- [服务器部署教程](https://gitee.com/yaozy717/ddrun/blob/master/doc/buid-server.md)
+- [开发教程](https://gitee.com/yaozy717/ddrun/blob/master/doc/dev.md)
+- [运营参考](https://gitee.com/yaozy717/ddrun/blob/master/doc/op.md)
 
 ## 小程序界面
 
