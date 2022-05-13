@@ -13,8 +13,8 @@
 
 #### 如何使用
 
-- [服务器部署教程](./text/build-server.md)
-- [开发教程](./text/dev.md)
+- [服务器部署教程](https://gitee.com/yaozy717/ddrun/blob/master/text/buid-server.md)
+- [开发教程](https://gitee.com/yaozy717/ddrun/blob/master/text/dev.md)
 
 ## 小程序界面
 
