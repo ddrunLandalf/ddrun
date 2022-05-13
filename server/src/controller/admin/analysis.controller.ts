@@ -55,17 +55,12 @@ export class AnalysisController extends BaseController {
     const yesterdayTradeSum = await await this.orderService.orderEntity.query(
       yesterdayTradeSumSql
     );
-    // 昨日优惠券支出
-    const yesterdayDiscountSumSql = `select sum(distancePrice) as value from orders where status=4 and DATE_FORMAT(createTime, '%Y%c%e') = '${dateStr}'`;
-    const yesterdayDiscountSum = await this.orderService.orderEntity.query(
-      yesterdayDiscountSumSql
-    );
+
     // 昨日盈利
     const yesterdayIncomeTotalSql = `select sum(platformIncome) as value from balanceSheet where DATE_FORMAT(createTime, '%Y%c%e') = '${dateStr}'`;
     const yesterdayIncomeTotalResult =
       await this.orderService.orderEntity.query(yesterdayIncomeTotalSql);
-    const yesterdayIncomeTotal =
-      yesterdayIncomeTotalResult[0].value - yesterdayDiscountSum[0].value;
+    const yesterdayIncomeTotal = yesterdayIncomeTotalResult[0].value;
 
     return this.responseSuccess('ok', {
       userTotal: Math.floor(Math.round(userTotal * 100)) / 100,
