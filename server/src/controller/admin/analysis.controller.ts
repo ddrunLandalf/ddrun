@@ -26,19 +26,14 @@ export class AnalysisController extends BaseController {
     const tradeSumSql =
       'select sum(payAmount) as value from orders where status=4';
     const tradeTotal = await this.orderService.orderEntity.query(tradeSumSql);
-    // 总支出优惠券
-    const discountSumSql =
-      'select sum(distancePrice) as value from orders where status=4';
-    const discountSum = await this.orderService.orderEntity.query(
-      discountSumSql
-    );
+
     // 总盈利
     const incomeTotalSql =
       'select sum(platformIncome) as value from balanceSheet';
     const incomeTotalResult = await this.orderService.orderEntity.query(
       incomeTotalSql
     );
-    const incomeTotal = incomeTotalResult[0].value - discountSum[0].value;
+    const incomeTotal = incomeTotalResult[0].value;
 
     // 昨日日期
     const date = new Date(Date.now() - 1000 * 60 * 60 * 24);
