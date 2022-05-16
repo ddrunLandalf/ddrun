@@ -34,7 +34,7 @@
 
 ## 小程序体验版
 
-![体验版小程序](https://ddrun.oss-cn-beijing.aliyuncs.com/16d4d134562fbd93.png)
+![体验版小程序](https://landalf.oss-cn-beijing.aliyuncs.com/ddrun/gh_05cd71b00741_344.jpg)
 
 ## 特别鸣谢
 
