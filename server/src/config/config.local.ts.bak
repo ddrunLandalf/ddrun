@@ -41,4 +41,7 @@ export default {
     privateKey: 'rn89yfhfHFF59H8df4', //秘钥
     expiresIn: '168h', // 过期时间
   },
+  security: {
+    csrf: false,
+  },
 } as MidwayConfig & DefaultConfig & CustomConfig;

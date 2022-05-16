@@ -34,4 +34,7 @@ export default {
   egg: {
     port: {server_port},
   },
+  security: {
+    csrf: false,
+  },
 } as unknown as MidwayConfig & DefaultConfig & CustomConfig;
