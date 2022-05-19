@@ -13,8 +13,10 @@
 
 #### 如何使用
 
+(建议先走通 本地开发流程 再去 服务器部署)
+
 - [服务器部署教程](https://gitee.com/yaozy717/ddrun/blob/master/doc/buid-server.md)
-- [开发教程](https://gitee.com/yaozy717/ddrun/blob/master/doc/dev.md)
+- [本地开发教程](https://gitee.com/yaozy717/ddrun/blob/master/doc/dev.md)
 - [运营参考](https://gitee.com/yaozy717/ddrun/blob/master/doc/op.md)
 
 ## 小程序界面

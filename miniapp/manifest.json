@@ -79,5 +79,10 @@
         "sdkConfigs" : {
             "maps" : {}
         }
+    },
+    "mp-qq" : {
+        "setting" : {
+            "urlCheck" : true
+        }
     }
 }

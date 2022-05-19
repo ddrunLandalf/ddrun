@@ -2,9 +2,12 @@
 
 ### 1.开发环境(自行百度安装)
 
-- nodejs 版本 16.x
+(请严格检查版本)
+
+- nodejs 版本 16.x.x
 - redis 版本 5.x
 - mysql 版本 8.x
+- git 版本 2.x
 
 ### 2.开发工具
 
@@ -50,12 +53,18 @@ git clone https://gitee.com/yaozy717/ddrun.git
 ```
 # 执行以下命令
 npm install
+# 或
+yarn
 ```
 
 #### 4.3 启动服务
 
+启动服务的过程中会自动更新数据库表
+
 ```
 npm run local
+# 或
+yarn local
 ```
 
 - 输出以下内容 说明启动成功
