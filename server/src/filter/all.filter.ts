@@ -1,5 +1,4 @@
 import { Catch } from '@midwayjs/decorator';
-import { Context } from 'egg';
 import { ResultResponse } from '../interface';
 interface ErrorFilter extends Error {
   status?: number;
@@ -7,7 +6,7 @@ interface ErrorFilter extends Error {
 @Catch()
 export class AllErrorFilter {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async catch(err: ErrorFilter, _ctx: Context): Promise<ResultResponse> {
+  async catch(err: ErrorFilter): Promise<ResultResponse> {
     const result = {
       code: err.status || 1001,
       msg: err.message,

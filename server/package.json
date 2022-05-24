@@ -27,9 +27,7 @@
     "query-string": "^7.1.1",
     "svg-captcha": "^1.4.0",
     "typeorm": "^0.2.45",
-    "xml2js": "^0.4.23"
-  },
-  "devDependencies": {
+    "xml2js": "^0.4.23",
     "@midwayjs/cli": "^1.0.0",
     "@midwayjs/egg-ts-helper": "^1.0.1",
     "@midwayjs/mock": "^3.0.0",
