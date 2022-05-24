@@ -39,9 +39,7 @@
     "uuid": "^8.3.0",
     "vue-color": "^2.8.1",
     "vue-scrollbar-live": "^5.7.1",
-    "vuedraggable": "^2.24.3"
-  },
-  "devDependencies": {
+    "vuedraggable": "^2.24.3",
     "@babel/eslint-parser": "^7.14.7",
     "@nuxt/types": "^2.15.7",
     "@nuxt/typescript-build": "^2.1.0",
