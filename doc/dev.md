@@ -20,7 +20,7 @@
 - 克隆远程代码
 
 ```
-git clone https://gitee.com/yaozy717/ddrun.git
+git clone https://gitee.com/landalfyao/ddrun.git
 ```
 
 - 目录接口介绍

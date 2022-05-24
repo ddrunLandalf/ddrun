@@ -13,7 +13,7 @@
 
 ```
 # 执行克隆
-git clone https://gitee.com/yaozy717/ddrun.git
+git clone https://gitee.com/landalfyao/ddrun.git
 ```
 
 结果：
