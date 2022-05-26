@@ -1,4 +1,3 @@
-const child_process = require("child_process");
 const fs = require("fs");
 const path = require("path");
 const config = require("./config.json");
@@ -69,41 +68,6 @@ const initConfig = () => {
   console.info("【初始化配置文件】结束");
 };
 
-const execRrocess = (script, label) => {
-  console.info(`【${label}】......`);
-  return new Promise((resolve) => {
-    const spawn = child_process.spawn("npm", ["run", script]);
-    spawn.stdout.on("data", (data) => {
-      console.info(`【${label}】`, data.toString());
-    });
-
-    spawn.stderr.on("data", (data) => {
-      console.error(`【${label}】`, data.toString());
-      resolve(false);
-    });
-
-    spawn.on("exit", (code) => {
-      console.log(`【${label}完成】 ${code}`);
-      resolve(true);
-    });
-  });
-};
-
-// 安装
-const installServer = () => {
-  return execRrocess("server-install", "服务安装");
-};
-
-// 构建服务
-const buildServer = () => {
-  return execRrocess("server-build", "服务构建");
-};
-
-// 启动服务
-const startServer = () => {
-  return execRrocess("server-start", "服务启动");
-};
-
 // 初始化后台配置
 const initAdminConfig = () => {
   console.info("【后台配置文件】......");
@@ -119,35 +83,6 @@ const initAdminConfig = () => {
     .replace("{opName}", config.opName);
   fs.writeFileSync(path.join(__dirname, "admin", "nuxt.config.js"), wirteStr);
   console.info("【后台配置文件】完成！");
-};
-
-// 管理系统依赖安装
-const installAdmin = () => {
-  return execRrocess("admin-install", "后台安装");
-};
-
-// 后台构建
-const buildAdmin = () => {
-  return execRrocess("admin-build", "后台构建");
-};
-
-const judgeServerOpen = (port) => {
-  return new Promise((resolve) => {
-    // 创建服务并监听该端口
-    var server = net.createServer().listen(port);
-    server.on("listening", () => {
-      // 执行这块代码说明端口未被占用
-      server.close(); // 关闭服务
-      resolve(false);
-    });
-    server.on("error", (err) => {
-      if (err.code === "EADDRINUSE") {
-        // 端口已经被使用
-        resolve(true);
-      }
-      server.close();
-    });
-  });
 };
 
 // 初始化小程序配置
@@ -217,30 +152,10 @@ const initNginx = () => {
   );
 };
 
-const initPort = async () => {
-  let port = 8001;
-  while (true) {
-    const isOpen = await judgeServerOpen(port);
-    if (isOpen) {
-      port++;
-    } else {
-      break;
-    }
-  }
-  console.info("您的服务端口为：", port);
-  return port;
-};
-
 const init = async () => {
-  // const port = await initPort();
   initConfig();
   await initMysql();
-  await installServer();
-  await buildServer();
-  await startServer();
   initAdminConfig();
-  await installAdmin();
-  await buildAdmin();
   initNginx();
   initMiniappConfig();
 };

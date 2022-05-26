@@ -78,8 +78,22 @@ vim config.json
 
 ### 6.部署
 
+一次执行
+
 ```
+# 初始化配置
 npm run start
+# 安装服务依赖
+npm run server-install
+# 构建服务
+npm run server-build
+# 启动服务
+npm run server-start
+
+# 安装后台依赖
+npm run admin-install
+# 构建后台
+npm run admin-build
 ```
 
 - 执行完成后将生成 nginx.conf 配置
