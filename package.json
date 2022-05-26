@@ -13,11 +13,11 @@
   },
   "scripts": {
     "start": "node init.js",
-    "server-install": "cd server && npm install --registry=https://registry.npm.taobao.org --legacy-peer-deps",
-    "server-build": "cd server && npm run build --legacy-peer-deps",
+    "server-install": "cd server && yarn ",
+    "server-build": "cd server && yarn build ",
     "server-start": "NODE_ENV=prod && pm2 restart ./ecosystem.config.js",
-    "admin-install": "cd admin && npm install --registry=https://registry.npm.taobao.org --legacy-peer-deps",
-    "admin-build": "cd admin && npm run build --legacy-peer-deps"
+    "admin-install": "cd admin && yarn",
+    "admin-build": "cd admin && yarn build --legacy-peer-deps"
   },
   "repository": {
     "type": "git",
