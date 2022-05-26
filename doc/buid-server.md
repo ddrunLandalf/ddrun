@@ -92,6 +92,28 @@ yarn start
 
 ```
 
+- 部署失败解决方案
+
+```
+# 如果出现以下情况
+【服务构建】 /bin/sh: midway-bin: command not found
+
+# 手动构建服务
+cd server
+yarn build
+cd ..
+yarn server-start
+```
+
+```
+# 如果出现以下情况
+【后台构建】 /bin/sh: nuxt: command not found
+
+# 手动构建后台
+cd admin
+yarn build
+```
+
 - 执行完成后将生成 nginx.conf 配置
 
 ### 7.nginx 配置
@@ -118,3 +140,14 @@ http{
 如果没有 ssl 文件，请不要执行以下操作
 
 - 重启 nginx
+
+### 8.更新代码
+
+```
+# 到项目更目录
+cd ddrun
+# 拉取更新
+git pull origin master
+# 部署(不会影响数据库和redis)
+yarn start
+```

@@ -61,7 +61,7 @@ cp config.json.bak config.json
 
 ```
 
-- 上传 ssl 文件（测试可忽略此步骤）
+- 上传 ssl 文件（测试可忽略此步骤）必须含有.crt .key 文件
 
 - 保存继续下一步
 
@@ -80,6 +80,28 @@ yarn
 # 开始部署
 yarn start
 
+```
+
+- 部署失败解决方案
+
+```
+# 如果出现以下情况
+【服务构建】 /bin/sh: midway-bin: command not found
+
+# 手动构建服务
+cd server
+yarn build
+cd ..
+yarn server-start
+```
+
+```
+# 如果出现以下情况
+【后台构建】 /bin/sh: nuxt: command not found
+
+# 手动构建后台
+cd admin
+yarn build
 ```
 
 ### 5.nginx 反向代理
@@ -124,4 +146,15 @@ server {
                 proxy_pass http://127.0.0.1:8001/api;
         }
 }
+```
+
+### 6.更新代码
+
+```
+# 到项目更目录
+cd ddrun
+# 拉取更新
+git pull origin master
+# 部署(不会影响数据库和redis)
+yarn start
 ```

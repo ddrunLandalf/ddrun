@@ -16,6 +16,7 @@
 (建议先走通 本地开发流程 再去 服务器部署)
 
 - [服务器部署教程](https://gitee.com/yaozy717/ddrun/blob/master/doc/buid-server.md)
+- [宝塔部署教程](https://gitee.com/landalfyao/ddrun/blob/master/doc/bt-build.md)
 - [本地开发教程](https://gitee.com/yaozy717/ddrun/blob/master/doc/dev.md)
 - [运营参考](https://gitee.com/yaozy717/ddrun/blob/master/doc/op.md)
 
