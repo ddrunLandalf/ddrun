@@ -71,24 +71,15 @@ cp config.json.bak config.json
 # 进入到项目跟目录
 cd /www/wwwroot/ddrun
 
+# 安装yarn 如果已有，忽略此步
+npm i -g yarn
+
 # 安装依赖
-npm i
+yarn
 
-# 初始化配置
-npm run start
-# 初始化配置
-npm run start
-# 安装服务依赖
-npm run server-install
-# 构建服务
-npm run server-build
-# 启动服务
-npm run server-start
+# 开始部署
+yarn start
 
-# 安装后台依赖
-npm run admin-install
-# 构建后台
-npm run admin-build
 ```
 
 ### 5.nginx 反向代理
