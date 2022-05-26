@@ -44,7 +44,7 @@ export class HomeController extends BaseController {
     const { province, city, district, street_number } =
       result.address_component;
     const cityResult = '北京市上海市天津市重庆市'.includes(province)
-      ? await this.cityService.findByCity(province, district)
+      ? await this.cityService.findByCity(province, province)
       : await this.cityService.findByCity(province, city);
     if (!cityResult) {
       return this.responseFail('该城市暂未开通服务', {
