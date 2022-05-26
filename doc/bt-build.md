@@ -9,7 +9,7 @@
 #### 1.1 进入面板->【软件商店】
 
 - 安装 nginx 选择 1.18 版本
-- 安装 mysql 选择 8.0 版本
+- 安装 mysql 选择 8.0 或 5.x 版本
 - 安装 PM2 管理器, 进入管理器 Node 版本选择 v16.x.x, 作者开发是 v16.14.0, 然后点击切换版本
 - 安装 redis 最新即可
 
@@ -47,7 +47,8 @@ cp config.json.bak config.json
     "password": "xxxxxx",
     "database": "ddrunv2",
     "synchronize": true, // 是否同步数据库
-    "logging": false
+    "logging": false,
+    "charset": "utf8mb4" // 数据库编码
   },
   "redis": {
     "client": {

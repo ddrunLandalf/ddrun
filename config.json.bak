@@ -11,7 +11,8 @@
     "password": "xxxxxx",
     "database": "ddrunv2",
     "synchronize": true,
-    "logging": false
+    "logging": false,
+    "charset": "utf8mb4"
   },
   "redis": {
     "client": {

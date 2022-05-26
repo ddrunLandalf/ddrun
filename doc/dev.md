@@ -6,7 +6,7 @@
 
 - nodejs 版本 16.x.x
 - redis 版本 5.x
-- mysql 版本 8.x
+- mysql 版本 8.x 或 5.x
 - git 版本 2.x
 
 ### 2.开发工具

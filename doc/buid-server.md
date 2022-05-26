@@ -5,7 +5,7 @@
 请自行安装以下软件
 
 - 安装 nodejs-v16.x.x
-- 安装 mysql-v8.x
+- 安装 mysql-v8.x 或 5.x
 - 安装 redis-v5.x
 - 安装 nginx-v1.18.x
 
@@ -64,7 +64,8 @@ vim config.json
     "password": "xxxxxx",
     "database": "ddrunv2",
     "synchronize": true, // 是否同步数据库
-    "logging": false
+    "logging": false,
+    "charset": "utf8mb4" // 数据库编码
   },
   "redis": {
     "client": {
