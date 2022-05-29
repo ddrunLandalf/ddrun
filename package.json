@@ -20,7 +20,7 @@
     "server-start": "NODE_ENV=prod && pm2 restart ./ecosystem.config.js",
     "admin-install": "cd admin && yarn",
     "admin-build": "cd admin && yarn build",
-    "server-exec": "cd server && yarn && yarn build && NODE_ENV=prod && pm2 restart ./ecosystem.config.js",
+    "server-exec": "cd server && yarn && yarn build && NODE_ENV=prod && cd .. && pm2 restart ./ecosystem.config.js",
     "admin-exec": "cd admin && yarn && yarn build"
   },
   "repository": {
