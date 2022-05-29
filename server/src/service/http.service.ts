@@ -1,6 +1,7 @@
 import { Provide } from '@midwayjs/decorator';
 import axios from 'axios';
 const queryString = require('query-string');
+const request = require('request');
 const axios_instance = axios.create({
   baseURL: '',
   timeout: 120000,
@@ -40,5 +41,17 @@ export class HttpService {
 
   async post(url: string, params: any) {
     return axios_instance.post(url, params);
+  }
+
+  async request(options) {
+    return new Promise(function (resolve, reject) {
+      request(options, (err, res, body) => {
+        if (res.statusCode == 200) {
+          resolve(body);
+        } else {
+          console.log(res.statusCode);
+        }
+      });
+    });
   }
 }

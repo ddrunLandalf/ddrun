@@ -21,7 +21,7 @@ import { BalanceSheetEntity } from '../entity/balanceSheet.entity';
 import { CitysValuationEntity } from '../entity/citysValuation.entity';
 import { OrderEntity } from '../entity/orders.entity';
 import { DefaultError } from '../error/default.error';
-import { OrderCompleteBy, ServerType } from '../interface';
+import { OrderCompleteBy, OrderType, ServerType } from '../interface';
 import { BaseService } from './base.service';
 import { CitysService } from './citys.service';
 import { ConfigService } from './config.service';
@@ -29,6 +29,7 @@ import { CouponService } from './coupon.service';
 import { MapService } from './map.service';
 import { RiderService } from './rider.service';
 import { WxSubscribeMessageService } from './wx/subscribeMessage.service';
+import { WxappService } from './wxapp.service';
 
 interface OrderParams {
   distance: number;
@@ -75,6 +76,9 @@ export class OrderService extends BaseService {
 
   @InjectEntityModel(BalanceSheetEntity)
   balanceSheetEntity: Repository<BalanceSheetEntity>;
+
+  @Inject()
+  wxappService: WxappService;
 
   /**
    * 取消订单
@@ -222,7 +226,14 @@ export class OrderService extends BaseService {
       }
 
       /** 以下执行退款 */
-      // 退款 refundFee
+      if (refundFee > 0) {
+        await this.wxappService.refund(
+          order.orderNo,
+          order.payAmount,
+          refundFee,
+          order.cancelReason
+        );
+      }
       /** 以上执行退款 */
 
       return refundFee;
@@ -498,10 +509,12 @@ export class OrderService extends BaseService {
       startAddress,
       endAddress,
       goodsDesc,
+      status
     }: {
       startAddress?: Address;
       endAddress: Address;
       goodsDesc: string;
+      status?: OrderType;
     }
   ) {
     const result = await this.orderEntity.manager.transaction(async () => {
@@ -524,9 +537,7 @@ export class OrderService extends BaseService {
         userCouponId: params.userCouponId,
         couponDiscount: params.couponDiscount,
         // 以下参数测试用
-        status: 1,
-        payType: 'wxpay',
-        payTime: new Date(),
+        status: status || 0,
         city: endAddress.city,
         fee: params.fee,
         intergalDiscount: params.intergralPrice,

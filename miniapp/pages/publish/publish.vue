@@ -292,10 +292,8 @@
 						if (result.code !== 200) {
 							return;
 						}
-						uni.redirectTo({
-							url: '/pages/order/detail/detail?orderNo=' + result.data.orderNo
-						})
-						/* 调起支付
+						
+						// 调起支付
 						uni.getProvider({
 							service: 'payment',
 							complete:(res) => {
@@ -304,16 +302,20 @@
 									uni.requestPayment({
 										provider,
 										orderInfo: {},
-										timeStamp: '',
-										nonceStr: '',
-										package: '',
-										signType: '',
-										paySign: ''
+										timeStamp: result.data.timeStamp,
+										nonceStr: result.data.nonce_str,
+										package: 'prepay_id='+result.data.prepay_id,
+										signType: 'MD5',
+										paySign: result.data.paySign,
+										complete:(res) => {
+											uni.redirectTo({
+												url: '/pages/order/detail/detail?orderNo=' + result.data.orderNo
+											})
+										}
 									})
 								}
 							}
 						})
-						*/
 					}
 				})
 			}

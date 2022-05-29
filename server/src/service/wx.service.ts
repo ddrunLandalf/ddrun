@@ -36,7 +36,6 @@ export class WxService extends BaseService {
     const ip = this.ctx.ip;
     const totalPrice = Math.floor(totalFee * 100);
     let bodyData = '<xml>';
-    console.log(des);
     bodyData += '<appid>' + appconfig.wxAppId + '</appid>'; // 小程序ID
     bodyData += '<body>' + des + '</body>'; // 商品描述
     bodyData += '<mch_id>' + config.wxMchId + '</mch_id>'; // 商户号
@@ -72,7 +71,12 @@ export class WxService extends BaseService {
    * @param refundFee
    * @returns
    */
-  async wxpayReund(orderNo: string, totalFee: number, refundFee: number) {
+  async wxpayReund(
+    orderNo: string,
+    totalFee: number,
+    refundFee: number,
+    refundDesc = '无'
+  ) {
     const appconfig = (await this.configService.getConfig(
       CONFIG_APPAUTH_INFO
     )) as AppauthUpsertDTO;
@@ -83,6 +87,7 @@ export class WxService extends BaseService {
     const nonce_str = this.getNonceStr();
     const refundPrice = Math.floor(refundFee * 100);
     const totalPrice = Math.floor(totalFee * 100);
+    const notifyUrl = config.notifyUrl + '/api/order/refund/callback';
     let formData = '<xml>';
     formData += '<appid>' + appconfig.wxAppId + '</appid>'; // 公众账号ID    appid
     formData += '<mch_id>' + config.wxMchId + '</mch_id>'; // 商户号    mch_id
@@ -91,6 +96,8 @@ export class WxService extends BaseService {
     formData += '<out_trade_no>' + orderNo + '</out_trade_no>'; //商户系统内部订单号
     formData += '<refund_fee>' + refundPrice + '</refund_fee>'; // 退款金额
     formData += '<total_fee>' + totalPrice + '</total_fee>'; // 订单金额
+    formData += '<notify_url>' + notifyUrl + '</notify_url>'; // 退款通知
+    formData += '<refund_desc>' + refundDesc + '</refund_desc>';
     formData +=
       '<sign>' +
       this.refundsign(
@@ -101,10 +108,13 @@ export class WxService extends BaseService {
         orderNo,
         refundPrice,
         totalPrice,
-        config.wxMchSecert
+        config.wxMchSecert,
+        notifyUrl,
+        refundDesc
       ) +
       '</sign>'; // 签名    sign
     formData += '</xml>';
+
     return { formData, outRefundNo };
   }
 
@@ -119,6 +129,27 @@ export class WxService extends BaseService {
       pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
     }
     return pwd;
+  }
+
+  paysign2(
+    appId: string,
+    timeStamp: string,
+    nonceStr: string,
+    pack: string,
+    mch_secert: string
+  ) {
+    const ret = {
+      appId,
+      timeStamp,
+      nonceStr,
+      package: pack,
+      signType: 'MD5',
+    };
+    let str = this.raw(ret);
+    str = str + '&key=' + mch_secert;
+    let md5Str = createHash('md5').update(str).digest('hex');
+    md5Str = md5Str.toUpperCase();
+    return md5Str;
   }
 
   // 生成签名
@@ -161,7 +192,9 @@ export class WxService extends BaseService {
     out_trade_no,
     refund_fee,
     total_fee,
-    key
+    key,
+    notifyUrl,
+    refundDesc
   ) {
     const ret = {
       appid: appid,
@@ -171,6 +204,8 @@ export class WxService extends BaseService {
       out_trade_no: out_trade_no,
       refund_fee: refund_fee,
       total_fee: total_fee,
+      notify_url: notifyUrl,
+      refund_desc: refundDesc,
     };
     let string = this.raw(ret);
     string = string + '&key=' + key; //key为在微信商户平台(pay.weixin.qq.com)-->账户设置-->API安全-->密钥设置
@@ -183,7 +218,7 @@ export class WxService extends BaseService {
     keys = keys.sort();
     const newArgs = {};
     keys.forEach(function (key) {
-      newArgs[key.toLowerCase()] = args[key];
+      newArgs[key] = args[key];
     });
 
     let str = '';
@@ -195,7 +230,6 @@ export class WxService extends BaseService {
   }
 
   async xml2JSON(cbdata) {
-    console.log(cbdata);
     return new Promise(function (resolve, reject) {
       parseString(cbdata, function (err, result) {
         if (err) throw new DefaultError(err.message);

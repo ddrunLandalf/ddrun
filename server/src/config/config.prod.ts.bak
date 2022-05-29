@@ -35,6 +35,6 @@ export default {
     port: {server_port},
   },
   security: {
-    csrf: false,
+    csrf: { enable: false },
   },
 } as unknown as MidwayConfig & DefaultConfig & CustomConfig;

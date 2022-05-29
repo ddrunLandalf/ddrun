@@ -10,7 +10,7 @@ import {
 import { InjectEntityModel } from '@midwayjs/orm';
 import { Validate } from '@midwayjs/validate';
 import { Repository } from 'typeorm';
-import { CONFIG_ORDER_CANCEL } from '../../constant';
+import { CONFIG_APPMCH, CONFIG_ORDER_CANCEL } from '../../constant';
 import { SelectCommonDTO } from '../../dto/common.dto';
 import {
   OrderDetailDTO,
@@ -29,6 +29,10 @@ import { RiderService } from '../../service/rider.service';
 import { UserAddressService } from '../../service/userAddress.service';
 import { WxappService } from '../../service/wxapp.service';
 import { BaseController } from '../base.controller';
+import { js2xml } from 'xml-js';
+import { WxService } from '../../service/wx.service';
+import { AppMchDTO } from '../../dto/config.dto';
+import { createHash, createDecipheriv } from 'crypto';
 
 @Controller('/api/order')
 export class UserOrderController extends BaseController {
@@ -53,9 +57,68 @@ export class UserOrderController extends BaseController {
   @Inject()
   configService: ConfigService;
 
-  @Get('/pay/callback')
-  async payCallback() {
-    console.log(233);
+  @Inject()
+  wxService: WxService;
+
+  @Post('/pay/callback')
+  async payCallback(@Body() body) {
+    const data = ((await this.wxService.xml2JSON(body)) as any).xml;
+    if (data.return_code[0] === 'SUCCESS') {
+      const order = await this.orderService.findByNo(data.out_trade_no[0]);
+      if (order.status === 0) {
+        await this.orderService.orderEntity.update(
+          {
+            orderNo: data.out_trade_no[0],
+            status: 0,
+          },
+          {
+            status: 1,
+            payTime: new Date(),
+            payType: 'wxpay',
+          }
+        );
+      }
+    }
+    return js2xml({
+      return_code: 'SUCCESS',
+      return_msg: 'OK',
+    });
+  }
+
+  @Post('/refund/callback')
+  async refundCallback(@Body() body) {
+    const data = ((await this.wxService.xml2JSON(body)) as any).xml;
+
+    if (data.return_code[0] === 'SUCCESS') {
+      const config = (await this.configService.getConfig(
+        CONFIG_APPMCH
+      )) as AppMchDTO;
+      const md5key = createHash('md5')
+        .update(config.wxMchSecert)
+        .digest('hex')
+        .toLowerCase();
+      const decipher = createDecipheriv('aes-256-ecb', md5key, Buffer.alloc(0));
+      decipher.setAutoPadding(true);
+      let str = decipher.update(data.req_info[0], 'base64', 'utf8');
+      str += decipher.final('utf8');
+      const json = ((await this.wxService.xml2JSON(str)) as any).root;
+      await this.orderService.orderEntity.update(
+        {
+          orderNo: json.out_trade_no[0],
+        },
+        {
+          status: -2,
+          refundStatus: 1,
+          refundNo: json.out_refund_no[0],
+          refundTime: new Date(),
+          refundAmount: Math.floor(parseInt(json.refund_fee[0])) / 100,
+        }
+      );
+    }
+    return js2xml({
+      return_code: 'SUCCESS',
+      return_msg: 'OK',
+    });
   }
 
   /**
@@ -94,19 +157,43 @@ export class UserOrderController extends BaseController {
       startAddress: dto.startAddress,
       endAddress: dto.endAddress,
       goodsDesc: dto.goodsDesc,
+      status: 0,
     });
-    /* 调起支付
+    let returnParams = {} as any;
+    // 调起支付
     const pay = await this.wxappService.payUnifiedorder(
       result,
       calculateResult.totalPrice,
       calculateResult.serviceTypeLabel
     );
-    */
+    if (pay.return_code[0] !== 'SUCCESS') {
+      throw new DefaultError(pay.return_msg[0]);
+    }
+    const mch = (await this.configService.getConfig(
+      CONFIG_APPMCH
+    )) as AppMchDTO;
+    const timeStamp = Date.now() + '';
+    const paySign = this.wxService.paysign2(
+      pay.appid[0],
+      timeStamp,
+      pay.nonce_str[0],
+      'prepay_id=' + pay.prepay_id[0],
+      mch.wxMchSecert
+    );
+    returnParams = {
+      orderNo: result,
+      nonce_str: pay.nonce_str[0],
+      sign: pay.sign[0],
+      paySign,
+      timeStamp,
+      prepay_id: pay.prepay_id[0],
+      trade_type: pay.trade_type[0],
+    };
     if (dto.startAddress) {
       this.userAddressService.add(dto.startAddress);
     }
     this.userAddressService.add(dto.endAddress);
-    return this.responseSuccess('ok', { orderNo: result });
+    return this.responseSuccess('ok', returnParams);
   }
 
   /**

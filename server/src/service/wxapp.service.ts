@@ -1,8 +1,10 @@
 import { Inject, Provide } from '@midwayjs/decorator';
 import { InjectEntityModel } from '@midwayjs/orm';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 import { Repository } from 'typeorm';
-import { CONFIG_APPAUTH_INFO, WXAPP_ACCESSTOKEN } from '../constant';
-import { AppauthUpsertDTO } from '../dto/config.dto';
+import { CONFIG_APPAUTH_INFO, CONFIG_APPMCH, WXAPP_ACCESSTOKEN } from '../constant';
+import { AppauthUpsertDTO, AppMchDTO } from '../dto/config.dto';
 import { WxappEntity } from '../entity/wxapp.entity';
 import { DefaultError } from '../error/default.error';
 import { BaseService } from './base.service';
@@ -110,6 +112,40 @@ export class WxappService extends BaseService {
     if (json.return_code[0] === 'FAIL') {
       throw new DefaultError(json.return_msg[0]);
     }
+    return json;
+  }
+
+  async refund(
+    orderNo: string,
+    totalFee: number,
+    refundFee: number,
+    refund_desc: string
+  ) {
+    const { formData, outRefundNo } = await this.wxService.wxpayReund(
+      orderNo,
+      totalFee,
+      refundFee,
+      refund_desc
+    );
+    const config = (await this.configService.getConfig(
+      CONFIG_APPMCH
+    )) as AppMchDTO;
+    const result = await this.http.request({
+      url: 'https://api.mch.weixin.qq.com/secapi/pay/refund',
+      method: 'POST',
+      json: formData,
+      agentOptions: {
+        pfx: readFileSync(
+          join(this.ctx.app.baseDir, 'cert', 'apiclient_cert.p12')
+        ),
+        passphrase: config.wxMchId,
+      },
+    });
+    const json = ((await this.wxService.xml2JSON(result)) as { xml: any }).xml;
+    if (json.return_code[0] === 'FAIL') {
+      throw new DefaultError(json.return_msg[0]);
+    }
+    json.outRefundNo = outRefundNo;
     return json;
   }
 }

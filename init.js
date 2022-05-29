@@ -69,10 +69,12 @@ const initConfig = () => {
   console.info("【初始化配置文件】结束");
 };
 
+
+
 const execRrocess = (script, label) => {
   console.info(`【${label}】......`);
   return new Promise((resolve) => {
-    const spawn = child_process.spawn("yarn", [script]);
+    const spawn = child_process.spawn("yarn", [script], {shell: true});
     spawn.stdout.on("data", (data) => {
       console.info(`【${label}】`, data.toString());
     });
@@ -88,6 +90,15 @@ const execRrocess = (script, label) => {
     });
   });
 };
+
+// 执行服务构建并启动
+const execServer = () => {
+  return execRrocess("server-exec", "服务构建并启动");
+};
+
+const execAdmin = () => {
+  return execRrocess("admin-exec", "后代安装构建");
+}
 
 // 安装
 const installServer = () => {
@@ -217,6 +228,19 @@ const initNginx = () => {
   );
 };
 
+const initCert = () => {
+  console.log("【初始化证书文件】......")
+  const dir = fs.readdirSync(path.join(__dirname, "cert"), { encoding: "utf8" });
+  console.log(dir)
+  for (const item of dir) {
+    const split = item.split(".");
+    if (split[split.length - 1] === "p12" || split[split.length - 1] === "pem") {
+     fs.copyFileSync(path.join(__dirname, "cert", item), path.join(__dirname,"server","src","cert",item))
+    }
+
+  }
+}
+
 const initPort = async () => {
   let port = 8001;
   while (true) {
@@ -232,16 +256,19 @@ const initPort = async () => {
 };
 
 const init = async () => {
-  // const port = await initPort();
   initConfig();
   await initMysql();
-  await installServer();
-  await buildServer();
-  await startServer();
+  await execServer()
   initAdminConfig();
-  await installAdmin();
-  await buildAdmin();
+  await execAdmin()
+  // await installServer();
+  // await buildServer();
+  // await startServer();
+  
+  // await installAdmin();
+  // await buildAdmin();
   initNginx();
   initMiniappConfig();
+  initCert()
 };
 init();

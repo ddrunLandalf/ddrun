@@ -42,6 +42,6 @@ export default {
     expiresIn: '168h', // 过期时间
   },
   security: {
-    csrf: false,
+    csrf: { enable: false },
   },
 } as MidwayConfig & DefaultConfig & CustomConfig;

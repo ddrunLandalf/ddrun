@@ -42,3 +42,6 @@ ssl/*.key
 nuxt.config.js
 
 unpackage/
+
+cert/*.p12
+cert/*.pem
