@@ -5,6 +5,9 @@
       <a-tab-pane key="2" tab="开发设置" force-render>
         <AppauthConfig />
       </a-tab-pane>
+      <a-tab-pane key="3" tab="支付设置" force-render>
+        <AppmchConfig />
+      </a-tab-pane>
       <a-tab-pane key="4" tab="地图设置" force-render>
         <MapConfig />
       </a-tab-pane>
@@ -19,11 +22,13 @@ import Vue from 'vue';
 import AppauthConfig from '@/components/config/AppauthConfig.vue';
 import MapConfig from '@/components/config/MapConfig.vue';
 import AliConfig from '@/components/config/AliConfig.vue';
+import AppmchConfig from '@/components/config/AppMch.vue';
 export default Vue.extend({
   components: {
     AppauthConfig,
     MapConfig,
-    AliConfig
+    AliConfig,
+    AppmchConfig
   },
   layout: 'global'
 });
