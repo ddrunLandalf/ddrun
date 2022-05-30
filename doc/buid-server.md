@@ -81,6 +81,13 @@ vim config.json
 
 - 修改完后保存即可
 
+#### 4.1 上传微信支付 API 证书
+
+- 上传 微信支付 API 证书 到 cert/目录下 必须包含以下文件且命名参考以下文件
+- - apiclient_cert.p12
+- - apiclient_cert.pem
+- - apiclient_key.pem
+
 ### 5.配置 ssl 证书(测试可忽略此步骤)
 
 - 将网站上下载的 ssl 文件.crt,.pem,.csr,.key 复制到 ddrun/ssl/目录下

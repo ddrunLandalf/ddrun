@@ -62,7 +62,16 @@ cp config.json.bak config.json
 
 ```
 
-- 上传 ssl 文件（测试可忽略此步骤）必须含有.crt .key 文件
+#### 3.1 上传微信支付 API 证书
+
+- 上传 微信支付 API 证书 到 cert/目录下 必须包含以下文件且命名参考以下文件
+- - apiclient_cert.p12
+- - apiclient_cert.pem
+- - apiclient_key.pem
+
+#### 3.2 上传 ssl 文件（测试可忽略此步骤）
+
+- 上传 ssl 文件到 ssl/目录下 必须含有.crt .key 文件
 
 - 保存继续下一步
 
