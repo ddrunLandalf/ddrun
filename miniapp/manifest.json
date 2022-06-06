@@ -17,7 +17,9 @@
             "delay" : 0
         },
         /* 模块配置 */
-        "modules" : {},
+        "modules" : {
+            "OAuth" : {}
+        },
         /* 应用发布信息 */
         "distribute" : {
             /* android打包配置 */
@@ -43,7 +45,10 @@
             /* ios打包配置 */
             "ios" : {},
             /* SDK配置 */
-            "sdkConfigs" : {}
+            "sdkConfigs" : {
+                "oauth" : {},
+                "maps" : {}
+            }
         }
     },
     /* 快应用特有相关 */
@@ -63,7 +68,8 @@
         }
     },
     "mp-alipay" : {
-        "usingComponents" : true
+        "usingComponents" : true,
+        "appid" : "2021003127669711"
     },
     "mp-baidu" : {
         "usingComponents" : true
@@ -81,8 +87,15 @@
         }
     },
     "mp-qq" : {
+        "appid" : "1112130851",
         "setting" : {
-            "urlCheck" : true
-        }
+            "minified" : false,
+            "postcss" : true
+        },
+		"permission" : {
+		    "scope.userLocation" : {
+		        "desc" : "需要根据位置获取服务"
+		    }
+		}
     }
 }

@@ -29,6 +29,19 @@
         />
       </a-form-model-item>
 
+      <a-divider></a-divider>
+      <div class="flex flex-between item-center">
+        <div class="bold">QQ小程序配置</div>
+        <a href="https://www.jianshu.com/p/5cc32f592787" target="_blank">帮助</a>
+      </div>
+      <a-form-model-item label="小程序ID">
+        <a-input v-model="formData.qqAppid" placeholder="请输入qq小程序ID" />
+      </a-form-model-item>
+
+      <a-form-model-item label="小程序秘钥">
+        <a-input v-model="formData.qqAppSecret" placeholder="请输入小程序秘钥" />
+      </a-form-model-item>
+
       <a-form-model-item>
         <a-button type="primary" size="large" :loading="loading" @click="submit">提交保存</a-button>
       </a-form-model-item>
@@ -42,7 +55,9 @@ export default Vue.extend({
     return {
       formData: {
         wxAppId: '',
-        wxAppSecret: ''
+        wxAppSecret: '',
+        qqAppid: '',
+        qqAppSecret: ''
       },
       rules: {
         wxAppId: [{ required: true, message: '输入小程序ID', trigger: 'blur' }],
@@ -58,7 +73,7 @@ export default Vue.extend({
     async getauth() {
       const result = await (this as any).$api.adminAppauthGet();
       if (result.code === 200) {
-        this.formData = result.data;
+        this.formData = Object.assign(this.formData, result.data);
       }
     },
     submit() {

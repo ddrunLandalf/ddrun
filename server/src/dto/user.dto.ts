@@ -1,14 +1,14 @@
 import { PickDto, Rule, RuleType } from '@midwayjs/validate';
 import { SelectCommonDTO } from './common.dto';
-
-export class UserMobileVerifyDTO {
+export class MobileNumberDTO {
   @Rule(
     RuleType.string()
       .required()
       .pattern(/^1[3-9]\d{9}$/)
   )
   mobileNumber: string;
-
+}
+export class UserMobileVerifyDTO extends MobileNumberDTO {
   @Rule(RuleType.string().required().length(6))
   verifyCode: string;
 }

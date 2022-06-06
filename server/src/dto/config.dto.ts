@@ -6,6 +6,12 @@ export class AppauthUpsertDTO {
 
   @Rule(RuleType.string().required())
   wxAppSecret: string;
+
+  @Rule(RuleType.string())
+  qqAppid?: string;
+
+  @Rule(RuleType.string())
+  qqAppSecret?: string;
 }
 
 export class MapKeyDTO {
@@ -28,6 +34,12 @@ export class AliDTO {
 
   @Rule(RuleType.string().required())
   ossBucket: string;
+
+  @Rule(RuleType.string().required())
+  smsSignName: string; // 短信签名
+
+  @Rule(RuleType.string().required())
+  smsTemplateCode: string;
 }
 
 // 概率获得的接口

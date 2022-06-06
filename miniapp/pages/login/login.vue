@@ -6,9 +6,9 @@
 			</view>
 			<!-- <ClassicBtn label="一键登录" width="690rpx"  /> -->
 			<button class="login-btn" open-type="getPhoneNumber" @getphonenumber="getPhoneNumber" >一键登录/注册</button>
-			<!-- <view class="mt-24 text-center fo-28 login-text">
+			<view v-if="provider !== 'qq'" class="mt-24 text-center fo-28 login-text" @click="redrictToPhone">
 				手机号码登录/注册
-			</view> -->
+			</view>
 		</view>
 	</view>
 </template>
@@ -22,22 +22,41 @@
 		},
 		data() {
 			return {
-				
+				provider: uni.getStorageSync('provider')
 			};
 		},
 		methods: {
+			redrictToPhone(){
+				uni.redirectTo({
+					url: '/pages/login/phone/phone'
+				})
+			},
 			async getPhoneNumber(event){
-				console.log(event)
+				const provider = uni.getStorageSync('provider')
 				if(event.detail.errMsg === 'getPhoneNumber:ok'){
-					const {code} = event.detail;
-					const result = await post('wxapp/register',{
-						code
-					});
-					if(result.code === 200){
-						uni.setStorageSync('userInfo', result.data)
-						uni.navigateBack({
-							delta: 1
-						})
+					if(provider === 'weixin'){
+						const {code} = event.detail;
+						const result = await post('wxapp/register',{
+							code
+						});
+						if(result.code === 200){
+							uni.setStorageSync('userInfo', result.data);
+							uni.navigateBack({
+								delta: 1
+							})
+						}
+					} else if(provider === 'alipay'){
+						const {encryptedData,sign} = event.detail;
+						const result = await post('alipay/register', {
+							encryptedData,
+							sign
+						});
+						if(result.code === 200){
+							uni.setStorageSync('userInfo', result.data);
+							uni.navigateBack({
+								delta: 1
+							})
+						}
 					}
 				}
 			}

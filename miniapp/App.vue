@@ -1,7 +1,14 @@
 <script>
 	export default {
 		onLaunch() {
-			this.$store.dispatch('home/getNoticeConfig')
+			uni.getProvider({
+				service: 'oauth',
+				complete(res) {
+					uni.setStorageSync('provider', res.provider[0])
+				}
+			})
+			this.$store.dispatch('home/getNoticeConfig');
+			
 		},
 		onShow() {},
 		onHide() {}
@@ -168,7 +175,9 @@
 	.mt-8 {
 		margin-top: 8rpx;
 	}
-
+	.mt-12{
+		margin-top: 12rpx;
+	}
 	.mt-16 {
 		margin-top: 16rpx;
 	}
@@ -224,7 +233,9 @@
 	.p-30 {
 		padding: 30rpx;
 	}
-
+	.pb-30{
+		padding-bottom: 30rpx;
+	}
 	.py-30 {
 		padding-top: 30rpx;
 		padding-bottom: 30rpx;

@@ -69,6 +69,35 @@
         />
       </a-form-model-item>
 
+      <div class="flex flex-between item-center">
+        <div class="bold">阿里云短信验证码</div>
+        <a href="https://dysms.console.aliyun.com/overview" target="_blank">帮助</a>
+      </div>
+
+      <a-form-model-item ref="smsSignName" label="签名名称" prop="smsSignName">
+        <a-input
+          v-model="formData.smsSignName"
+          placeholder="请输入签名名称"
+          @blur="
+            () => {
+              $refs.smsSignName.onFieldBlur();
+            }
+          "
+        />
+      </a-form-model-item>
+
+      <a-form-model-item ref="smsTemplateCode" label="模板CODE" prop="smsTemplateCode">
+        <a-input
+          v-model="formData.smsTemplateCode"
+          placeholder="请输入模板CODE"
+          @blur="
+            () => {
+              $refs.smsTemplateCode.onFieldBlur();
+            }
+          "
+        />
+      </a-form-model-item>
+
       <a-form-model-item>
         <a-button type="primary" size="large" :loading="loading" @click="submit">提交保存</a-button>
       </a-form-model-item>
@@ -85,14 +114,18 @@ export default Vue.extend({
         accessKeySecret: '',
         arn: '',
         ossRegion: '',
-        ossBucket: ''
+        ossBucket: '',
+        smsSignName: '',
+        smsTemplateCode: ''
       },
       rules: {
         accessKeyId: [{ required: true, message: '请输入AccessKey ID', trigger: 'blur' }],
         accessKeySecret: [{ required: true, message: '请输入秘钥 Secret', trigger: 'blur' }],
         arn: [{ required: true, message: '请输入ARN', trigger: 'blur' }],
         ossRegion: [{ required: true, message: '请输入Region', trigger: 'blur' }],
-        ossBucket: [{ required: true, message: '请输入Bucket', trigger: 'blur' }]
+        ossBucket: [{ required: true, message: '请输入Bucket', trigger: 'blur' }],
+        smsSignName: [{ required: true, message: '请输入签名名称', trigger: 'blur' }],
+        smsTemplateCode: [{ required: true, message: '请输入模板CODE', trigger: 'blur' }]
       },
       loading: false
     };
@@ -104,7 +137,7 @@ export default Vue.extend({
     async getauth() {
       const result = await (this as any).$api.adminAliGet();
       if (result.code === 200) {
-        this.formData = result.data;
+        this.formData = Object.assign(this.formData, result.data);
       }
     },
     submit() {

@@ -6,7 +6,7 @@
 				<view class="avatar" >
 					<view v-if="!userInfo.avatarUrl" class="iconfont icon-avatar fo-9">
 					</view>
-					<image v-else :src="userInfo.avatarUrl" mode="aspectFill"></image>
+					<image v-else :src="userInfo.avatarUrl" mode="aspectFill" @click="getUserProfile"></image>
 				</view>
 				<view class="ml-24">
 					<view class="ell fo-32 fo-w">
@@ -71,7 +71,7 @@
 				<view class="iconfont icon-arrow-right fo-28 fo-9">
 				</view>
 			</navigator>
-			<navigator class="p-30 flex flex-between item-center" url="/pages/login/login">
+			<navigator class="p-30 flex flex-between item-center" :url="provider === 'qq' ? '/pages/login/phone/phone':'/pages/login/login'">
 				<view class="flex flex-start item-center">
 					<view class="iconfont icon-change-user fo-28">
 					</view>
@@ -112,7 +112,7 @@
 </template>
 
 <script>
-	import {$get} from '@/util/request.js'
+	import {$get,post,info} from '@/util/request.js'
 	export default {
 		data() {
 			return {
@@ -120,7 +120,8 @@
 				userVersion: uni.getStorageSync('userVersion'),
 				isRider: false,
 				coupon: 0,
-				intergral: 0
+				intergral: 0,
+				provider: uni.getStorageSync('provider')
 			}
 		},
 		onLoad() {
@@ -149,6 +150,27 @@
 			},
 			getUserInfo(){
 				this.userInfo = uni.getStorageSync('userInfo') || {}
+			},
+			getUserProfile(){
+				uni.getUserProfile({
+					lang: 'zh_CN',
+					desc: '展示用户头像',
+					complete: async (up) => {
+						if(up.userInfo){
+							const res = await post('user/update', {
+								avatarUrl: up.userInfo.avatarUrl, 
+								city:up.userInfo.city, 
+								province: up.userInfo.province, 
+								gender: up.userInfo.gender, 
+								nickName: up.userInfo.nickName
+							})
+							if(res.code === 200){
+								await info()
+								this.getUserInfo()
+							}
+						}
+					}
+				})
 			},
 			changeVersion(){
 				const isRider = uni.getStorageSync('userVersion') === 'rider'

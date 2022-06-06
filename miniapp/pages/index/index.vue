@@ -8,7 +8,7 @@
 
 <script>
 import DClassic from "../../components/classic/index.vue";
-import { $get, login } from "../../util/request.js";
+import { $get, login, getProviderSync } from "../../util/request.js";
 import CouponModal from "../../components/modal/CouponModal.vue";
 export default {
   components: {
@@ -67,6 +67,7 @@ export default {
     return obj;
   },
   async onLoad() {
+	  
     // 是否是骑手版
     const isRiderVersion = uni.getStorageSync("userVersion") === "rider";
     if (isRiderVersion) {
@@ -76,6 +77,7 @@ export default {
       return;
     }
     await login();
+	// const provider = uni.getStorageSync('provider');
     uni.getLocation({
       type: "gcj02",
       complete: async (res) => {

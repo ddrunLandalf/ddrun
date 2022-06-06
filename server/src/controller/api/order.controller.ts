@@ -157,38 +157,44 @@ export class UserOrderController extends BaseController {
       startAddress: dto.startAddress,
       endAddress: dto.endAddress,
       goodsDesc: dto.goodsDesc,
-      status: 0,
+      status: this.ctx.userInfo.userType === 'weixin' ? 0 : 1,
     });
     let returnParams = {} as any;
-    // 调起支付
-    const pay = await this.wxappService.payUnifiedorder(
-      result,
-      calculateResult.totalPrice,
-      calculateResult.serviceTypeLabel
-    );
-    if (pay.return_code[0] !== 'SUCCESS') {
-      throw new DefaultError(pay.return_msg[0]);
+    if (this.ctx.userInfo.userType === 'weixin') {
+      // 调起支付
+      const pay = await this.wxappService.payUnifiedorder(
+        result,
+        calculateResult.totalPrice,
+        calculateResult.serviceTypeLabel
+      );
+      if (pay.return_code[0] !== 'SUCCESS') {
+        throw new DefaultError(pay.return_msg[0]);
+      }
+      const mch = (await this.configService.getConfig(
+        CONFIG_APPMCH
+      )) as AppMchDTO;
+      const timeStamp = Date.now() + '';
+      const paySign = this.wxService.paysign2(
+        pay.appid[0],
+        timeStamp,
+        pay.nonce_str[0],
+        'prepay_id=' + pay.prepay_id[0],
+        mch.wxMchSecert
+      );
+      returnParams = {
+        orderNo: result,
+        nonce_str: pay.nonce_str[0],
+        sign: pay.sign[0],
+        paySign,
+        timeStamp,
+        prepay_id: pay.prepay_id[0],
+        trade_type: pay.trade_type[0],
+      };
+    } else {
+      returnParams = {
+        orderNo: result,
+      };
     }
-    const mch = (await this.configService.getConfig(
-      CONFIG_APPMCH
-    )) as AppMchDTO;
-    const timeStamp = Date.now() + '';
-    const paySign = this.wxService.paysign2(
-      pay.appid[0],
-      timeStamp,
-      pay.nonce_str[0],
-      'prepay_id=' + pay.prepay_id[0],
-      mch.wxMchSecert
-    );
-    returnParams = {
-      orderNo: result,
-      nonce_str: pay.nonce_str[0],
-      sign: pay.sign[0],
-      paySign,
-      timeStamp,
-      prepay_id: pay.prepay_id[0],
-      trade_type: pay.trade_type[0],
-    };
     if (dto.startAddress) {
       this.userAddressService.add(dto.startAddress);
     }

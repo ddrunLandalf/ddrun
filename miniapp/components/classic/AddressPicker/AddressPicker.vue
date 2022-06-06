@@ -42,6 +42,7 @@
 				HELP_DELIVER,
 				HELP_BUY,
 				HELP_GET,
+				provider: uni.getStorageSync('provider')
 			};
 		},
 		computed: {
@@ -74,7 +75,7 @@
 			navTo(type) {
 				if (!uni.getStorageSync('userInfo')) {
 					wx.navigateTo({
-						url: '/pages/login/login'
+						url: this.provider === 'qq' ? '/pages/login/phone/phone':'/pages/login/login'
 					})
 					return
 				}

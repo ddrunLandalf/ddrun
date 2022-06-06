@@ -102,9 +102,12 @@
 				if(res.code === 200){
 					uni.showToast({
 						title: res.msg,
-						icon: 'success'
+						icon: 'success',
+						duration: 800
 					})
-					this.getBlance()
+					uni.redirectTo({
+						url: '/pages/rider/cash/record/record'
+					})
 				}
 			}
 		}

@@ -73,8 +73,10 @@
 			this.getList()
 		},
 		methods: {
-			async getToRiderList() {
-				const res = await $get('order/list/byrider');
+			async getToRiderList(latitude,longitude) {
+				const res = await $get('order/list/byrider', {
+					latitude,longitude
+				});
 				if(res.code === 200){
 					this.byList = res.data
 				}
@@ -86,22 +88,33 @@
 				}else{
 					this.query.current = 1
 				}
-				uni.showLoading({
-				})
-				if(this.query.status === 'wait'){
-					await this.getToRiderList()
-				}
-				const res = await $get('order/list/rider', this.query);
-				if(res.code === 200){
-					if(isBottom){
-						this.list = this.list.concat(res.data.data)
-					}else{
-						this.list = res.data.data;
+				
+				uni.getLocation({
+					type: "gcj02",
+					complete: async (loc) => {
+					  if (loc.errMsg === "getLocation:ok") {
+						uni.showLoading({
+						})
+						if(this.query.status === 'wait'){
+							await this.getToRiderList(loc.latitude,loc.longitude)
+						}
+						const res = await $get('order/list/rider', Object.assign(this.query,{
+							latitude: loc.latitude,
+							longitude: loc.longitude,
+						}));
+						if(res.code === 200){
+							if(isBottom){
+								this.list = this.list.concat(res.data.data)
+							}else{
+								this.list = res.data.data;
+							}
+							this.count = res.data.count;
+						}
+						uni.hideLoading();
+						uni.stopPullDownRefresh();
+					  }
 					}
-					this.count = res.data.count;
-				}
-				uni.hideLoading();
-				uni.stopPullDownRefresh();
+				})
 			},
 			tabChange(e){
 				this.active = e;

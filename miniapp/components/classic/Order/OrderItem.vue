@@ -44,21 +44,26 @@
 				{{options.endAddress.province}}{{options.endAddress.city}}{{options.endAddress.district}}{{options.endAddress.addressDetail}}
 			</view>
 		</view>
-		<view v-if="isRider" class="flex flex-end item-center mt-24">
-			<view v-if="options.status === 1" class="order-btn order-btn--none mr-16" >
-				取消接单
+		<view class="flex flex-between item-center mt-24">
+			<view class="fo-28 fo-9">
+				{{options.distanceText || ''}}
 			</view>
-			<view v-if="options.status === 1" class="order-btn order-btn--info" @click.stop="orderReceive(options.orderNo)">
-				立即接单
-			</view>
-			<view v-if="options.status === 2" class="order-btn order-btn--none mr-16" @click="cancelOrder" >
-				取消配送
-			</view>
-			<view v-if="options.status === 2" class="order-btn order-btn--info" @click.stop="orderDeliver(options.orderNo)">
-				确认送达
-			</view>
-			<view v-if="options.status === 3" class="order-btn order-btn--info" @click.stop="orderComplete(options.orderNo)">
-				确认完成
+			<view v-if="isRider" class="flex flex-end item-center ">
+				<view v-if="options.status === 1" class="order-btn order-btn--none mr-16" >
+					取消接单
+				</view>
+				<view v-if="options.status === 1" class="order-btn order-btn--info" @click.stop="orderReceive(options.orderNo)">
+					立即接单
+				</view>
+				<view v-if="options.status === 2" class="order-btn order-btn--none mr-16" @click="cancelOrder" >
+					取消配送
+				</view>
+				<view v-if="options.status === 2" class="order-btn order-btn--info" @click.stop="orderDeliver(options.orderNo)">
+					确认送达
+				</view>
+				<view v-if="options.status === 3" class="order-btn order-btn--info" @click.stop="orderComplete(options.orderNo)">
+					确认完成
+				</view>
 			</view>
 		</view>
 	</view>

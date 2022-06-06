@@ -156,6 +156,12 @@
         "navigationBarTitleText": "提现记录",
         "enablePullDownRefresh": true
       }
+    },{
+        "path" : "pages/login/phone/phone",
+        "style" : {
+          "navigationBarTitleText": "手机号登录",
+          "enablePullDownRefresh": false
+        }     
     }
   ],
   "globalStyle": {
