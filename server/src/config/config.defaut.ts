@@ -29,5 +29,13 @@ export default (appInfo: MidwayAppInfo) => {
       textLimit: '1mb',
       xmlLimit: '1mb',
     },
+    staticFile: {
+      dirs: {
+        default: {
+          prefix: '/public',
+          dir: '/',
+        },
+      },
+    },
   } as MidwayConfig;
 };

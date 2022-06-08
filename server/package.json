@@ -13,6 +13,7 @@
     "@midwayjs/mock": "^3.0.0",
     "@midwayjs/orm": "^3.1.1",
     "@midwayjs/redis": "3",
+    "@midwayjs/static-file": "^3.3.9",
     "@midwayjs/upload": "^3.3.4",
     "@midwayjs/validate": "^3.1.2",
     "@midwayjs/web": "^3.0.0",
@@ -46,6 +47,7 @@
     "node": ">=12.0.0"
   },
   "scripts": {
+    "deploy-prod": "NODE_ENV=prod && node bootstrap.js",
     "start": "node bootstrap.js",
     "local": "cross-env ets && cross-env NODE_ENV=local midway-bin dev --ts",
     "prod": "cross-env ets && cross-env NODE_ENV=prod midway-bin dev --ts",

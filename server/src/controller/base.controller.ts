@@ -1,4 +1,4 @@
-import { Inject, Controller } from '@midwayjs/decorator';
+import { Inject, Controller, Get, Redirect } from '@midwayjs/decorator';
 import { Context } from 'egg';
 import { ResultResponse } from '../interface';
 import { nanoid } from 'nanoid';
@@ -7,6 +7,10 @@ import { nanoid } from 'nanoid';
 export class BaseController {
   @Inject()
   ctx: Context;
+
+  @Get('/')
+  @Redirect('/public/dist/index.html')
+  async() {}
 
   nanoid(len = 13) {
     return nanoid(len);

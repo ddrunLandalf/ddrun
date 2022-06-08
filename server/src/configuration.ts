@@ -8,9 +8,10 @@ import * as validate from '@midwayjs/validate';
 import { AllErrorFilter } from './filter/all.filter';
 import * as orm from '@midwayjs/orm';
 import * as upload from '@midwayjs/upload';
+import * as staticFile from '@midwayjs/static-file';
 
 @Configuration({
-  imports: [egg, redis, validate, orm, upload],
+  imports: [egg, redis, validate, orm, upload, staticFile],
   importConfigs: [join(__dirname, './config')],
 })
 export class ContainerLifeCycle implements ILifeCycle {
