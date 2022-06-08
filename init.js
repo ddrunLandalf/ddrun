@@ -69,12 +69,10 @@ const initConfig = () => {
   console.info("【初始化配置文件】结束");
 };
 
-
-
 const execRrocess = (script, label) => {
   console.info(`【${label}】......`);
   return new Promise((resolve) => {
-    const spawn = child_process.spawn("yarn", [script], {shell: true});
+    const spawn = child_process.spawn("yarn", [script], { shell: true });
     spawn.stdout.on("data", (data) => {
       console.info(`【${label}】`, data.toString());
     });
@@ -98,7 +96,7 @@ const execServer = () => {
 
 const execAdmin = () => {
   return execRrocess("admin-exec", "后代安装构建");
-}
+};
 
 // 安装
 const installServer = () => {
@@ -203,9 +201,11 @@ const initNginx = () => {
     .replace(/{root_path}/g, path.join(__dirname, "admin", "dist"));
 
   const dir = fs.readdirSync(path.join(__dirname, "ssl"), { encoding: "utf8" });
+  let isHasKey = false;
   for (const item of dir) {
     const split = item.split(".");
     if (split[split.length - 1] === "key") {
+      isHasKey = true;
       wirteStr = wirteStr.replace(
         "{ssl_certificate_key}",
         path.join(__dirname, "ssl", item)
@@ -217,7 +217,19 @@ const initNginx = () => {
         "{ssl_certificate}",
         path.join(__dirname, "ssl", item)
       );
+    } else if (split[split.length - 1] === "pem") {
+      wirteStr = wirteStr.replace(
+        "{ssl_certificate}",
+        path.join(__dirname, "ssl", item)
+      );
     }
+  }
+
+  if (!isHasKey) {
+    wirteStr = wirteStr.substring(
+      wirteStr.indexOf("# ssl config"),
+      wirteStr.length
+    );
   }
 
   fs.writeFileSync(path.join(__dirname, "nginx.conf"), wirteStr);
@@ -229,17 +241,24 @@ const initNginx = () => {
 };
 
 const initCert = () => {
-  console.log("【初始化证书文件】......")
-  const dir = fs.readdirSync(path.join(__dirname, "cert"), { encoding: "utf8" });
-  console.log(dir)
+  console.log("【初始化证书文件】......");
+  const dir = fs.readdirSync(path.join(__dirname, "cert"), {
+    encoding: "utf8",
+  });
+  console.log(dir);
   for (const item of dir) {
     const split = item.split(".");
-    if (split[split.length - 1] === "p12" || split[split.length - 1] === "pem") {
-     fs.copyFileSync(path.join(__dirname, "cert", item), path.join(__dirname,"server","src","cert",item))
+    if (
+      split[split.length - 1] === "p12" ||
+      split[split.length - 1] === "pem"
+    ) {
+      fs.copyFileSync(
+        path.join(__dirname, "cert", item),
+        path.join(__dirname, "server", "src", "cert", item)
+      );
     }
-
   }
-}
+};
 
 const initPort = async () => {
   let port = 8001;
@@ -257,18 +276,12 @@ const initPort = async () => {
 
 const init = async () => {
   initConfig();
-  await initMysql();
-  await execServer()
-  initAdminConfig();
-  await execAdmin()
-  // await installServer();
-  // await buildServer();
-  // await startServer();
-  
-  // await installAdmin();
-  // await buildAdmin();
+  // await initMysql();
+  // await execServer();
+  // initAdminConfig();
+  // await execAdmin();
   initNginx();
-  initMiniappConfig();
-  initCert()
+  // initMiniappConfig();
+  // initCert();
 };
 init();
