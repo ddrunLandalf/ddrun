@@ -46,6 +46,27 @@ export default {
     }
     this.city = city;
   },
+    onShareTimeline(res) {
+  	 //分享到朋友圈 by cckk263 
+   const obj = {
+      title: "叮点跑腿",
+      path: "/pages/index/index",
+    };
+    const share = this.$store.state.home.share;
+    if (share.title) {
+      obj.title = share.title;
+    }
+    if (share.desc) {
+      obj.desc = share.desc;
+    }
+    if (share.path) {
+      obj.path = share.path;
+    }
+    if (share.imageUrl) {
+      obj.imageUrl = share.imageUrl;
+    }
+    return obj;
+  },
   onShareAppMessage() {
     const obj = {
       title: "叮点跑腿",
