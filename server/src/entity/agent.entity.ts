@@ -25,6 +25,6 @@ export class AgentEntity extends Base {
   @Column({ type: 'varchar', length: 6, nullable: true, comment: '默认密码' })
   defaultPwd: string;
 
-  @Column({ type: 'char', length: 16, unique: true, comment: '管理员编号' })
+  @Column({ type: 'char', length: 16, comment: '管理员编号' })
   updatedBy: string;
 }
