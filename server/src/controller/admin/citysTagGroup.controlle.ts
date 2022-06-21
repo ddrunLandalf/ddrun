@@ -77,7 +77,7 @@ export class CitysTagGroupController extends BaseController {
     if (listDTO.id) wheres += ` and id = ${listDTO.id}`;
 
     const result = await this.queryService.select(this.citysTagEntity, {
-      tables: 'citysTagGroup',
+      tables: 'citys_tag_group',
       wheres,
       current: listDTO.current,
       pageSize: listDTO.pageSize,

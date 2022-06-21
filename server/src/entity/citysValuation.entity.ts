@@ -3,7 +3,7 @@ import { Column } from 'typeorm';
 import { ValuationRule } from '../interface';
 import { CommonBase } from './Base';
 
-@EntityModel('citysValuation')
+@EntityModel('citys_valuation')
 export class CitysValuationEntity extends CommonBase {
   @Column({ type: 'varchar', length: 45, comment: '规则名称' })
   ruleName: string;

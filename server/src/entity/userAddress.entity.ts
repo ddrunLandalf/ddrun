@@ -2,7 +2,7 @@ import { EntityModel } from '@midwayjs/orm';
 import { Column } from 'typeorm';
 import { CommonBase } from './Base';
 
-@EntityModel('usersAddress')
+@EntityModel('users_address')
 export class UserAddressEntity extends CommonBase {
   @Column({ type: 'char', length: 16, unique: true })
   addressNo: string;

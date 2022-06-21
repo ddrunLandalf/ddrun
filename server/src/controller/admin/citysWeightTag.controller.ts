@@ -76,7 +76,7 @@ export class CitysWeightTagController extends BaseController {
     if (listDTO.id) wheres += ` and id = ${listDTO.id}`;
 
     const result = await this.queryService.select(this.citysWeightTagEntity, {
-      tables: 'citysWeightTag',
+      tables: 'citys_weight_tag',
       wheres,
       current: listDTO.current,
       pageSize: listDTO.pageSize,

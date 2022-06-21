@@ -73,7 +73,7 @@ export class UserCouponController extends BaseController {
     const result = await this.queryService.select(
       this.couponService.couponEntity,
       {
-        tables: 'userCoupon uc , coupons co',
+        tables: 'user_coupon uc , coupons co',
         wheres: `uc.isLook = 0 and uc.userNo='${this.ctx.userInfo.userNo}' and uc.couponNo = co.couponNo`,
         fields:
           'uc.*,co.couponName,co.discountAmount,co.conditionsAmount,co.conditionService',
@@ -101,7 +101,7 @@ export class UserCouponController extends BaseController {
   @Validate()
   async postReadCoupon(@Body('ids') ids: number[]) {
     await this.couponService.userCouponEntity.query(
-      `update userCoupon set isLook=1 where id in (${ids.toString()})`
+      `update user_coupon set isLook=1 where id in (${ids.toString()})`
     );
 
     return this.responseSuccess('ok');

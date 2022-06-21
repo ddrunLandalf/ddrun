@@ -18,7 +18,7 @@ export class CashService extends BaseService {
   async canICash(amount: number, userNo: string) {
     const rider = await this.riderService.forIsRider();
     const totalIncomeQuery = await this.cashEntity.query(
-      `select sum(riderIncome) as total from balanceSheet where riderNo='${rider.riderNo}'`
+      `select sum(riderIncome) as total from balance_sheet where riderNo='${rider.riderNo}'`
     );
     const totalIncome = parseFloat(totalIncomeQuery[0].total || 0);
     const totalCashQuery = await this.cashEntity.query(

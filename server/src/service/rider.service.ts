@@ -68,7 +68,7 @@ export class RiderService extends BaseService {
    */
   async getCapital(riderNo: string) {
     const bs = await this.bsEntity.query(
-      `select sum(riderIncome) as income from balanceSheet where riderNo='${riderNo}'`
+      `select sum(riderIncome) as income from balance_sheet where riderNo='${riderNo}'`
     );
     if (bs.length === 0) {
       throw new DefaultError('获取骑手收入失败');

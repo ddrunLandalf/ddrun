@@ -2,7 +2,7 @@ import { EntityModel } from '@midwayjs/orm';
 import { Column } from 'typeorm';
 import { Base } from './Base';
 
-@EntityModel('riderRegister')
+@EntityModel('rider_register')
 export class RiderRegisterEntity extends Base {
   @Column({ type: 'varchar', length: 45, comment: '真实姓名' })
   realname: string;

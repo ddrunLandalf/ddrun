@@ -8,7 +8,7 @@ export interface WeightTag {
   value: number | number[];
 }
 
-@EntityModel('citysWeightTag')
+@EntityModel('citys_weight_tag')
 export class CitysWeightTagEntity extends CommonBase {
   @Column({ type: 'varchar', length: 45, comment: '规则名称' })
   tagName: string;

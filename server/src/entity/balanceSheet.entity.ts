@@ -5,7 +5,7 @@ import { Base } from './Base';
 /**
  * 资产分割表
  */
-@EntityModel('balanceSheet')
+@EntityModel('balance_sheet')
 export class BalanceSheetEntity extends Base {
   @Column({ type: 'char', length: 16, comment: '城市编号' })
   cityNo: string;

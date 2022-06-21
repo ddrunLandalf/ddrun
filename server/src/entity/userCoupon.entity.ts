@@ -2,7 +2,7 @@ import { EntityModel } from '@midwayjs/orm';
 import { Column } from 'typeorm';
 import { CommonBase } from './Base';
 
-@EntityModel('userCoupon')
+@EntityModel('user_coupon')
 export class UserCouponEntity extends CommonBase {
   @Column({ type: 'char', length: 16, comment: '优惠券编号' })
   couponNo: string;

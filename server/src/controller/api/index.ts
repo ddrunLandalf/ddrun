@@ -123,7 +123,7 @@ export class HomeController extends BaseController {
 
   async getUserIntegral() {
     const integralQuery = await this.couponService.userCouponEntity.query(
-      `SELECT sum(integral) as total FROM balanceSheet where userNo='${this.ctx.userInfo.userNo}'`
+      `SELECT sum(integral) as total FROM balance_sheet where userNo='${this.ctx.userInfo.userNo}'`
     );
     const intergralSum = integralQuery[0].total || 0;
     const integralReduceQuery = await this.couponService.userCouponEntity.query(

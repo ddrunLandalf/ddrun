@@ -126,7 +126,7 @@ export class AdminOrderController extends BaseController {
     const result = await this.queryService.select(
       this.orderReceive.orderEntity,
       {
-        tables: 'balanceSheet bs',
+        tables: 'balance_sheet bs',
         wheres,
         order: 'bs.createTime desc',
         current: dto.current,

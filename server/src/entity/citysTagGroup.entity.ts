@@ -2,7 +2,7 @@ import { EntityModel } from '@midwayjs/orm';
 import { Column } from 'typeorm';
 import { CommonBase } from './Base';
 
-@EntityModel('citysTagGroup')
+@EntityModel('citys_tag_group')
 export class CitysTagGroupEntity extends CommonBase {
   @Column({ type: 'varchar', length: 45, comment: '组名' })
   groupName: string;

@@ -57,7 +57,7 @@ export class AnalysisController extends BaseController {
     );
 
     // 昨日盈利
-    const yesterdayIncomeTotalSql = `select sum(platformIncome) as value from balanceSheet where DATE_FORMAT(createTime, '%Y%c%e') = '${dateStr}'`;
+    const yesterdayIncomeTotalSql = `select sum(platformIncome) as value from balance_sheet where DATE_FORMAT(createTime, '%Y%c%e') = '${dateStr}'`;
     const yesterdayIncomeTotalResult =
       await this.orderService.orderEntity.query(yesterdayIncomeTotalSql);
     const yesterdayIncomeTotal = yesterdayIncomeTotalResult[0].value;

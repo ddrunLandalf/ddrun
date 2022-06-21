@@ -82,7 +82,7 @@ export class CityValuationController extends BaseController {
     if (listDTO.id) wheres += ` and id = ${listDTO.id}`;
 
     const result = await this.queryService.select(this.citysValuationEntity, {
-      tables: 'citysValuation',
+      tables: 'citys_valuation',
       wheres,
       current: listDTO.current,
       pageSize: listDTO.pageSize,

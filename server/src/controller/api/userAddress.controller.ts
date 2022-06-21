@@ -78,7 +78,7 @@ export class UserAddressController extends BaseController {
   async list(@Query() dto: SelectCommonDTO) {
     const user = await this.userService.findByNo(this.ctx.userInfo.userNo);
     const result = await this.queryService.select(this.userAddressEntity, {
-      tables: 'usersAddress',
+      tables: 'users_address',
       wheres: `isDelete=0 and userNo="${this.ctx.userInfo.userNo}" and addressNo != "${user.companyAddressNo}" and addressNo != "${user.homeAddressNo}"`,
       order: 'updateTime desc',
       current: dto.current,

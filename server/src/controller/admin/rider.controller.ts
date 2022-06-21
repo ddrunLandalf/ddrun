@@ -155,7 +155,7 @@ export class AdminRiderController extends BaseController {
     const result = await this.queryService.select(
       this.riderService.riderRegisterEntity,
       {
-        tables: 'riderRegister',
+        tables: 'rider_register',
         wheres,
         current: dto.current,
         pageSize: dto.pageSize,
@@ -167,7 +167,7 @@ export class AdminRiderController extends BaseController {
   @Get('/list')
   @Validate()
   async list(@Query() dto: RiderListDTO) {
-    const tables = 'riders rs, riderRegister rr, users u';
+    const tables = 'riders rs, rider_register rr, users u';
     const fields = 'rs.*,rr.realname,u.mobileNumber,u.avatarUrl,u.nickName';
     let wheres = 'rr.userNo = u.userNo and rs.userNo = u.userNo';
     if (dto.idCardNo) {

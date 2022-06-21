@@ -261,7 +261,7 @@ export class UserOrderController extends BaseController {
   @Validate()
   async getRiderInfo(@Query() dto: OrderDetailRiderDTO) {
     const result = await this.orderService.orderEntity.query(
-      `SELECT d.realname,u.mobileNumber,u.avatarUrl,u.nickName FROM users u, riders r,riderRegister d where d.userNo=u.userNo and u.userNo=r.userNo and r.riderNo='${dto.riderNo}'`
+      `SELECT d.realname,u.mobileNumber,u.avatarUrl,u.nickName FROM users u, riders r,rider_register d where d.userNo=u.userNo and u.userNo=r.userNo and r.riderNo='${dto.riderNo}'`
     );
     if (result.length === 0) {
       throw new DefaultError('骑手不存在');
