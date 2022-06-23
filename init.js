@@ -276,12 +276,12 @@ const initPort = async () => {
 
 const init = async () => {
   initConfig();
-  // await initMysql();
-  // await execServer();
-  // initAdminConfig();
-  // await execAdmin();
+  await initMysql();
+  await execServer();
+  initAdminConfig();
+  await execAdmin();
   initNginx();
-  // initMiniappConfig();
-  // initCert();
+  initMiniappConfig();
+  initCert();
 };
 init();
