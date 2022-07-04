@@ -97,8 +97,9 @@
       </template>
       <template slot="afterSale" slot-scope="text">
         <div v-if="text.refundStatus === 0">无</div>
+        <div v-if="text.cancelReason" class="fo-9 fo-12 mt-8">{{ text.cancelReason }}</div>
         <div v-else class="fo-12">
-          <div>已退款 {{ text.refundAmount }}</div>
+          <div>已退款 {{ text.refundAmount }}元</div>
           <div class="fo-9">No: {{ text.refundNo }}</div>
           <div class="fo-9">{{ dayjs(parseInt(text.refundTime)).format('YYYY/MM/DD HH:mm') }}</div>
         </div>
