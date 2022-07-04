@@ -33,6 +33,13 @@ import { js2xml } from 'xml-js';
 import { WxService } from '../../service/wx.service';
 import { AppMchDTO } from '../../dto/config.dto';
 import { createHash, createDecipheriv } from 'crypto';
+import { QueueService } from '@midwayjs/task';
+import {
+  OrderAutoCancelTask,
+  OrderWaitPayToCloseTask,
+  ORDER_CANCEL_DELAY,
+  ORDER_CLOSE_DELAY,
+} from '../../task/order.task';
 
 @Controller('/api/order')
 export class UserOrderController extends BaseController {
@@ -60,6 +67,9 @@ export class UserOrderController extends BaseController {
   @Inject()
   wxService: WxService;
 
+  @Inject()
+  queueService: QueueService;
+
   @Post('/pay/callback')
   async payCallback(@Body() body) {
     const data = ((await this.wxService.xml2JSON(body)) as any).xml;
@@ -76,6 +86,11 @@ export class UserOrderController extends BaseController {
             payTime: new Date(),
             payType: 'wxpay',
           }
+        );
+        await this.queueService.execute(
+          OrderAutoCancelTask,
+          { orderNo: data.out_trade_no[0] },
+          { delay: ORDER_CANCEL_DELAY }
         );
       }
     }
@@ -159,6 +174,12 @@ export class UserOrderController extends BaseController {
       goodsDesc: dto.goodsDesc,
       status: this.ctx.userInfo.userType === 'weixin' ? 0 : 1,
     });
+    // 发起任务调度
+    await this.queueService.execute(
+      OrderWaitPayToCloseTask,
+      { orderNo: result },
+      { delay: ORDER_CLOSE_DELAY }
+    );
     let returnParams = {} as any;
     if (this.ctx.userInfo.userType === 'weixin') {
       // 调起支付

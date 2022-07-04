@@ -14,6 +14,7 @@
     "@midwayjs/orm": "^3.1.1",
     "@midwayjs/redis": "3",
     "@midwayjs/static-file": "^3.3.9",
+    "@midwayjs/task": "3",
     "@midwayjs/upload": "^3.3.4",
     "@midwayjs/validate": "^3.1.2",
     "@midwayjs/web": "^3.0.0",

@@ -60,6 +60,9 @@ const initConfig = () => {
     .replace("{redis_port}", config.redis.client.port)
     .replace("{redis_host}", config.redis.client.host)
     .replace("{redis_password}", config.redis.client.password)
+    .replace("{redis_port}", config.redis.client.port)
+    .replace("{redis_host}", config.redis.client.host)
+    .replace("{redis_password}", config.redis.client.password)
     .replace("{server_port}", config.serverPort);
 
   fs.writeFileSync(

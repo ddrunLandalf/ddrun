@@ -1,5 +1,6 @@
 import { Inject, Provide } from '@midwayjs/decorator';
 import { InjectEntityModel } from '@midwayjs/orm';
+import { QueueService } from '@midwayjs/task';
 import { EntityManager, Repository } from 'typeorm';
 import {
   CONFIG_INTEGRAL,
@@ -22,6 +23,10 @@ import { CitysValuationEntity } from '../entity/citysValuation.entity';
 import { OrderEntity } from '../entity/orders.entity';
 import { DefaultError } from '../error/default.error';
 import { OrderCompleteBy, OrderType, ServerType } from '../interface';
+import {
+  OrderAutoToCompleteTask,
+  ORDER_COMPLETE_DELAY,
+} from '../task/order.task';
 import { BaseService } from './base.service';
 import { CitysService } from './citys.service';
 import { ConfigService } from './config.service';
@@ -79,6 +84,9 @@ export class OrderService extends BaseService {
 
   @Inject()
   wxappService: WxappService;
+
+  @Inject()
+  queueService: QueueService;
 
   /**
    * 取消订单
@@ -242,6 +250,27 @@ export class OrderService extends BaseService {
   }
 
   /**
+   * 关闭订单
+   * @param orderNo
+   */
+  async orderClose(orderNo: string) {
+    const update = await this.orderEntity.update(
+      {
+        orderNo,
+        status: 0,
+      },
+      {
+        status: -1,
+        closeTime: new Date(),
+      }
+    );
+    if (update.affected === 0) {
+      return false;
+    }
+    return true;
+  }
+
+  /**
    * 接单
    * @param param0
    */
@@ -342,7 +371,13 @@ export class OrderService extends BaseService {
     if (update.affected === 0) {
       throw new DefaultError('配送完成失败');
     }
+    await this.queueService.execute(
+      OrderAutoToCompleteTask,
+      { orderNo },
+      { delay: ORDER_COMPLETE_DELAY }
+    );
     order.status = 3;
+
     /**
      * 发送订阅消息通知
      */
@@ -509,7 +544,7 @@ export class OrderService extends BaseService {
       startAddress,
       endAddress,
       goodsDesc,
-      status
+      status,
     }: {
       startAddress?: Address;
       endAddress: Address;
