@@ -29,7 +29,7 @@ export class AnalysisController extends BaseController {
 
     // 总盈利
     const incomeTotalSql =
-      'select sum(platformIncome) as value from balanceSheet';
+      'select sum(platformIncome) as value from balance_sheet';
     const incomeTotalResult = await this.orderService.orderEntity.query(
       incomeTotalSql
     );
