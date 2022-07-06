@@ -114,7 +114,7 @@ export class CouponService extends BaseService {
    * @returns
    */
   async getUserCoupons(isUse: boolean, overdue: number, userNo: string) {
-    const sql = `select uc.*,co.couponName,co.discountAmount,co.conditionsAmount,co.conditionService from userCoupon uc,coupons co 
+    const sql = `select uc.*,co.couponName,co.discountAmount,co.conditionsAmount,co.conditionService from user_coupon uc,coupons co 
     where uc.userNo='${userNo}' and uc.isDelete=0 and uc.couponNo = co.couponNo and uc.isUse=${
       isUse ? 1 : 0
     } and (${
@@ -135,7 +135,7 @@ export class CouponService extends BaseService {
    * @returns
    */
   async getAbleCouponCount(userNo: string, price: number) {
-    const sql = `select count(*) as num from userCoupon uc,coupons co
+    const sql = `select count(*) as num from user_coupon uc,coupons co
      where uc.userNo='${userNo}' and uc.isDelete=0 and uc.couponNo = co.couponNo and uc.isUse=0 
      and (uc.deadlineTime=-1 or uc.deadlineTime-${Date.now()}>0) and co.discountAmount <= ${price} and (co.conditionsAmount=0 or co.conditionsAmount <= ${price})`;
     return await this.userCouponEntity.query(sql);
@@ -148,7 +148,7 @@ export class CouponService extends BaseService {
    * @returns
    */
   async userCouponFindById(id: number, userNo: string) {
-    const sql = `select uc.*,co.couponName,co.discountAmount,co.conditionsAmount,co.conditionService from userCoupon uc,coupons co 
+    const sql = `select uc.*,co.couponName,co.discountAmount,co.conditionsAmount,co.conditionService from user_coupon uc,coupons co 
     where uc.couponNo = co.couponNo and uc.id = ${id} and uc.isDelete=0 and uc.userNo = '${userNo}'`;
     const result = await this.userCouponEntity.query(sql);
     if (result.length === 0) {
