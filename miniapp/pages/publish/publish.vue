@@ -320,7 +320,7 @@
 									if(res.errMsg === 'requestPayment:fail cancel'){
 										uni.showToast({
 											title: '支付取消',
-											icon: 'success',
+											icon: 'none',
 											duration: 800
 										})
 									}else{

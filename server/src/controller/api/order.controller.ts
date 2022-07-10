@@ -40,6 +40,7 @@ import {
   ORDER_CANCEL_DELAY,
   ORDER_CLOSE_DELAY,
 } from '../../task/order.task';
+import { ServerType } from '../../interface';
 
 @Controller('/api/order')
 export class UserOrderController extends BaseController {
@@ -180,13 +181,40 @@ export class UserOrderController extends BaseController {
       { orderNo: result },
       { delay: ORDER_CLOSE_DELAY }
     );
+    const returnParams = await this.doPay(
+      result,
+      dto.serviceType,
+      calculateResult.totalPrice
+    );
+    if (dto.startAddress) {
+      this.userAddressService.add(dto.startAddress);
+    }
+    this.userAddressService.add(dto.endAddress);
+    return this.responseSuccess('ok', returnParams);
+  }
+
+  @Post('/payagain', { middleware: [AppMiddleware] })
+  @Validate()
+  async payAgent(@Body() dto: OrderDetailDTO) {
+    const order = await this.orderEntity.findOne({ where: dto });
+    if (!order) {
+      throw new DefaultError('订单不存在');
+    }
+
+    return this.responseSuccess(
+      'ok',
+      await this.doPay(dto.orderNo, order.serviceType, order.payAmount)
+    );
+  }
+
+  async doPay(orderNo: string, serviceType: string, totalPrice: number) {
     let returnParams = {} as any;
     if (this.ctx.userInfo.userType === 'weixin') {
       // 调起支付
       const pay = await this.wxappService.payUnifiedorder(
-        result,
-        calculateResult.totalPrice,
-        calculateResult.serviceTypeLabel
+        orderNo,
+        totalPrice,
+        this.orderService.getServiceTypeLabel(serviceType as ServerType)
       );
       if (pay.return_code[0] !== 'SUCCESS') {
         throw new DefaultError(pay.return_msg[0]);
@@ -203,7 +231,7 @@ export class UserOrderController extends BaseController {
         mch.wxMchSecert
       );
       returnParams = {
-        orderNo: result,
+        orderNo: orderNo,
         nonce_str: pay.nonce_str[0],
         sign: pay.sign[0],
         paySign,
@@ -213,14 +241,10 @@ export class UserOrderController extends BaseController {
       };
     } else {
       returnParams = {
-        orderNo: result,
+        orderNo,
       };
     }
-    if (dto.startAddress) {
-      this.userAddressService.add(dto.startAddress);
-    }
-    this.userAddressService.add(dto.endAddress);
-    return this.responseSuccess('ok', returnParams);
+    return returnParams;
   }
 
   /**

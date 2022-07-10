@@ -8,6 +8,9 @@
 				{{order.payAmount}} <text class="fo-28"> 元</text>
 			</view>
 		</view>
+		<view v-if="tempTime > 0" class="time-bar fo-28 fo-6">
+		 	<text>剩余</text>  <text class="fo-3 bold ml-12 mr-12">{{mins}}:{{second}}</text>  订单自动关闭 
+		</view>
 		<AddressShow :type="order.serviceLabel" :start="order.startAddress" :end="order.endAddress" :isRider="isRider" />
 		<dd-card padding="30rpx" width="630rpx" margin="30rpx 0 0 0">
 			<view class="flex flex-between item-center">
@@ -188,6 +191,7 @@
 		formatDate,
 		formatDateUTC
 	} from '../../../util/date.js'
+	import { AUTOCANCELTIME } from '@/util/constant.js'
 	export default {
 		components: {
 			AddressShow,
@@ -200,8 +204,35 @@
 				rider: {},
 				isRider: false,
 				isLoad: false,
-				orderNo: ''
+				orderNo: '',
+				tempTime: 0,
+				intv: null
 			};
+		},
+		computed:{
+			mins(){
+				if(this.tempTime >= 60 ){
+					const m = parseInt(this.tempTime/60);
+					if(m > 9){
+						return m+''
+					}else{
+						return '0'+m
+					}
+				} else{
+					return '00'
+				}
+			},
+			second(){
+				const s = this.tempTime%60;
+				if(s> 9){
+					return s + ''
+				}else{
+					return '0' +s
+				}
+			}
+		},
+		onHide(){
+			this.clearIntv()
 		},
 		onLoad(options) {
 			if(options.isRider){
@@ -216,6 +247,20 @@
 			}
 		},
 		methods: {
+			clearIntv(){
+				clearInterval(this.intv);
+				this.tempTime = 0;
+				
+			},
+			setIntv(){
+				this.intv = setInterval(()=> {
+					this.tempTime -= 1;
+					if(this.tempTime <=0){
+						this.clearIntv();
+						this.getDetail();
+					}
+				}, 1000)
+			},
 			phoneClick() {
 				uni.makePhoneCall({
 					phoneNumber: this.rider.mobileNumber
@@ -232,6 +277,14 @@
 
 				if (order.code === 200) {
 					this.order = order.data;
+					if(this.order.status === 0){
+						const date = new Date(this.order.createTime);
+						this.tempTime = parseInt((date.valueOf() + AUTOCANCELTIME - Date.now()) /1000);
+						if(this.tempTime < 0){
+							this.tempTime = 0;
+						}
+						this.setIntv()
+					}
 					if (this.order.riderNo) {
 						await this.getRider(this.order.riderNo)
 					}
@@ -284,5 +337,11 @@
 		height: 120rpx;
 		background-color: #ffffff;
 		box-shadow: 1rpx 0 10rpx 5rpx rgba($color: #000000, $alpha: 0.05);
+	}
+	.time-bar{
+		padding: 20rpx;
+		background-color: #f3f3f3;
+		margin-bottom: 30rpx;
+		border-radius: 8rpx;
 	}
 </style>
