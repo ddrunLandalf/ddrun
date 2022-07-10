@@ -58,7 +58,7 @@
 
 <script>
 	import {
-		post
+		post,$get
 	} from '../../../../util/request.js'
 	import ClassicBtn from '../../../../components/classic/Button/ClassicButton.vue'
 	export default {
@@ -120,8 +120,33 @@
 		},
 		methods: {
 			navToSearch() {
-				uni.navigateTo({
-					url: '/pages/mine/address/search/search'
+				
+				uni.chooseLocation({
+					complete: async (res) => {
+						if(res.errMsg==="chooseLocation:ok"){
+							uni.showLoading({
+								title: '获取中'
+							})
+							const map = await $get('map/location',{
+								latitude: res.latitude,
+								longitude: res.longitude
+							});
+							uni.hideLoading();
+							if(map.code === 200){
+								this.formData.province = map.data.province;
+								this.formData.city = map.data.city;
+								this.formData.district = map.data.district;
+								this.formData.streetNumber = map.data.street_number;
+								this.formData.latitude = map.data.latitude;
+								this.formData.longitude = map.data.longitude;
+								this.formData.addressDetail = map.data.street_number
+							}
+						} else{
+							uni.navigateTo({
+								url: '/pages/mine/address/search/search'
+							})
+						}
+					}
 				})
 			},
 			async doParse() {
