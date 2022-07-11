@@ -171,7 +171,6 @@ export class OrderService extends BaseService {
         // 用户取消退款
         // 已过去的时间
         const overtime = (Date.now() - order.sendTime.valueOf()) / 1000;
-        console.log(overtime, cancelConfig.userCancelRules);
         for (const item of cancelConfig.userCancelRules) {
           if (overtime > item.timeRange[0] && overtime <= item.timeRange[1]) {
             const platformIncome = this.filterNumber(
