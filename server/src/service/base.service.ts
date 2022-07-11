@@ -24,4 +24,8 @@ export class BaseService {
   config(): CustomConfig {
     return config.default as CustomConfig;
   }
+
+  filterNumber(num: number) {
+    return Math.floor(Math.round(num * 100)) / 100;
+  }
 }

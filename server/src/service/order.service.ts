@@ -155,6 +155,57 @@ export class OrderService extends BaseService {
   }
 
   /**
+   * 获取取消提示文本
+   * @param order
+   * @param cancelBy
+   * @returns
+   */
+  async getCancelText(order: OrderEntity, cancelBy: OrderCompleteBy) {
+    const cancelConfig = (await this.configService.getConfig(
+      CONFIG_ORDER_CANCEL,
+      false
+    )) as ConfigCancelOrderDTO;
+    let desc = '';
+    if (cancelConfig) {
+      if (order.status === 2 && cancelBy === 'user') {
+        // 用户取消退款
+        // 已过去的时间
+        const overtime = (Date.now() - order.sendTime.valueOf()) / 1000;
+        console.log(overtime, cancelConfig.userCancelRules);
+        for (const item of cancelConfig.userCancelRules) {
+          if (overtime > item.timeRange[0] && overtime <= item.timeRange[1]) {
+            const platformIncome = this.filterNumber(
+              (order.payAmount - order.fee) * item.price
+            );
+            desc += `取消时间在${item.timeRange[0]}~${
+              item.timeRange[1]
+            }分钟范围内，需承担${Math.floor(
+              item.price * 100
+            )}%的费用,即${platformIncome}元`;
+            break;
+          }
+        }
+      } else if (order.status === 2 && cancelBy === 'rider') {
+        const overtime = (Date.now() - order.sendTime.valueOf()) / 1000;
+        for (const item of cancelConfig.riderCancelRules) {
+          if (overtime > item.timeRange[0] && overtime <= item.timeRange[1]) {
+            const riderReduce = Math.floor(
+              Math.round((order.payAmount - order.fee) * item.price)
+            );
+            desc += `取消时间在${item.timeRange[0]}~${
+              item.timeRange[1]
+            }分钟范围内，全额退款，并承担${Math.floor(
+              item.price * 100
+            )}%的违约费用,即${riderReduce}元`;
+            break;
+          }
+        }
+      }
+    }
+    return desc;
+  }
+
+  /**
    * 退款
    */
   async orderRefund(order: OrderEntity, cancelBy: OrderCompleteBy) {

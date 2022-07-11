@@ -417,6 +417,20 @@ export class UserOrderController extends BaseController {
     return this.responseSuccess('ok');
   }
 
+  @Get('/cancel/text', { middleware: [AppMiddleware] })
+  async cancelText(@Query() dto: RiderOptOrderDTO) {
+    const order = await this.orderEntity.findOne({ where: dto });
+    const text = await this.orderService.getCancelText(order, 'user');
+    return this.responseSuccess('ok', text);
+  }
+
+  @Get('/cancel/text/rider', { middleware: [AppMiddleware] })
+  async cancelTextRider(@Query() dto: RiderOptOrderDTO) {
+    const order = await this.orderEntity.findOne({ where: dto });
+    const text = await this.orderService.getCancelText(order, 'rider');
+    return this.responseSuccess('ok', text);
+  }
+
   @Put('/cancel/rider', { middleware: [AppMiddleware] })
   async cancelByRider(@Body() dto: RiderOptOrderCancelDTO) {
     const rider = await this.riderService.forIsRider();
